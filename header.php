@@ -22,7 +22,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="index.php">Página Inicial</a></li>
                     <li><a href="#">Projetos Propostos</a></li>
-                    <li><a href="#">Projetos Aprovados</a></li> 
+                    <li><a href="projetosAprovados.php">Projetos Aprovados</a></li> 
                     <li><a href="sobre.php">Sobre</a></li> 
                     <li><a href="contato.php">Contato</a></li> 
                 </ul>
