@@ -38,18 +38,18 @@
                                                     <img src='imagens/img01.jpg' class="img-thumbnail" height="200" width="200">
                                                     <br> <br>
                                                     Total Arrecadado: 
-                                                    <br> 100.000,00
-                                                    <br> <br>
-                                                    Objetivo:
-                                                    <br> 200.000,00
+                                                    <br> 100.000,00 de 200.000,00
                                                     <br> <br>
                                                     Total Cumprido: 
                                                     <br> 50% 
                                                     <br> <br>
+                                                    Apoiado por:
+                                                    <br> 25.000 pessoas
+                                                    <br> <br>
                                                     Dias Restantes: 
                                                     <br> 25 dias
                                                     <br/><br/>
-                                                    <button type="submit" class="btn btn-default">Apoiar Este Projeto</button>
+                                                    <button type="submit" class="btn btn-primary">Apoiar Este Projeto</button>
                                                 </div>
                                             </td>
                                         </tr>

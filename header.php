@@ -24,7 +24,7 @@
                     <li><a href="#">Projetos Propostos</a></li>
                     <li><a href="#">Projetos Concluídos</a></li> 
                     <li><a href="#">Sobre</a></li> 
-                    <li><a href="#">Contato</a></li> 
+                    <li><a href="contato.php">Contato</a></li> 
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="cadastrarUsuario.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>

@@ -45,7 +45,7 @@
                                                 <br/> <br/>
                                                 <!-- Aqui o usuário será redirecionado para uma página onde 
                                                     será mostrado mais informações do projeto -->
-                                                <a href="infoProjetosAprovados.php.php">Ver Mais</a>
+                                                <a href="infoProjetosAprovados.php">Ver Mais</a>
                                                 <br/> <br/> 
                                             </div>
                                         </td>
