@@ -1,4 +1,4 @@
-<?php include("header.php") ?>
+<?php include("header.php");?>
 
 <section id="infoProjetosAprovados" class="container">
     <div class="container">
@@ -58,9 +58,11 @@
                                                 <div style="text-align: center; border-top-width: 100px">
                                                     <div style='margin-left:30px;'>
                                                         <!-- Caso exista, o sistema de recompensas será demonstrado aqui -->
-                                                        <label class="lbl"><b>RECOMPENSAS</b></label>
+                                                        <label class="lbl"><b>RELATÓRIO</b></label>
                                                         <br>
-                                                        .......
+                                                        << ESTE BLOCO SÓ ESTARÁ DISPONÍVEL PARA O DONO DO PROJETO >>
+                                                        <br>
+                                                        <a href="relatorioDoacoes.php">Exibir Relatório</a>
                                                     </div>
                                                 </div>
                                             </td>
