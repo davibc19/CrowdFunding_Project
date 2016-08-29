@@ -20,11 +20,9 @@
                     <img src="imagens/logotipo.png" height="50" width="100">
                 </div>
                 <ul class="nav navbar-nav">
-                    <li><a href="projetosAprovados.php">Página Inicial</a></li>
-                    <li><a href="#">Projetos Propostos</a></li>
-                    <li><a href="#">Projetos Concluídos</a></li> 
-                    <li><a href="#">Sobre</a></li> 
-                    <li><a href="#">Contato</a></li> 
+                    <li><a href="projetosAprovados.php">Projetos Atuais</a></li>
+                    <li><a href="projetosConcluidos.php">Projetos Concluídos</a></li> 
+                    <li><a href="contato.php">Contato</a></li> 
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="cadastrarUsuario.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>

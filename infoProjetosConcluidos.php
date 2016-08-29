@@ -1,6 +1,6 @@
 <?php include("header.php");?>
 
-<section id="infoProjetosAprovados" class="container">
+<section id="infoProjetosConcluidos" class="container">
     <div class="container">
 
         <div class='row'>
@@ -46,10 +46,8 @@
                                                     Apoiado por:
                                                     <br> 25.000 pessoas
                                                     <br> <br>
-                                                    Dias Restantes: 
+                                                    Duração: 
                                                     <br> 25 dias
-                                                    <br/><br/>
-                                                    <button type="submit" class="btn btn-primary">Apoiar Este Projeto</button>
                                                 </div>
                                             </td>
                                         </tr>
