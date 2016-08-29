@@ -8,12 +8,11 @@
             <ul class="nav navbar-nav">
                 <li><a href="projetosAprovados.php">Projetos Atuais</a></li>
                 <li><a href="projetosConcluidos.php">Projetos Concluídos</a></li> 
-                <li><a href="#">Edital de Orçamento</a></li> 
-                <li><a href="#">Distribuição de Montante</a></li> 
-                <li><a href="contato.php">Contato</a></li>
+                <li><a href="contato.php">Contato</a></li> 
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="sair.php"><span class="glyphicon glyphicon-log-out"></span> Sair</a></li>
+                <li><a href="cadastrarUsuario.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li><a href="login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </ul>
         </div>
     </nav>
