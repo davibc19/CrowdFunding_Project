@@ -4,7 +4,7 @@ session_start();
 // Valida o tipo de usuário que iniciou a sessão, ou se é um usuário não-logado
 function validateHeader()
 {
-    // Usuário Deslogado
+    // Usuário não está logado no sistema
     if (!isset($_SESSION["tipoUsr"]))
     {
         include("headerOF.php");
