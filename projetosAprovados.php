@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<?php include ("header.php"); ?>
+<?php 
+    require_once './validateSessionFunctions.php';
+    validateHeader();
+?>
 
 <div class="container">
     <div class='row'>

@@ -1,4 +1,7 @@
-<?php include("header.php"); ?>
+<?php 
+    require_once './validateSessionFunctions.php';
+    validateHeader();
+?>
 
 
 <div class="container">
@@ -7,9 +10,9 @@
             <label for="tipoUsr">Tipo de Usuário</label>
             <br/>
             <select class="selectpicker" id="tipoUsr">
-                <option value="1">Gestor de Projetos</option>
-                <option value="2">Financiador Técnico</option>
-                <option value="3" selected>Financiador Aluno</option>
+                <option value="3">Gestor de Projetos</option>
+                <option value="4">Financiador Técnico</option>
+                <option value="5" selected>Financiador Aluno</option>
             </select>
         </div>
         <div class="form-group">

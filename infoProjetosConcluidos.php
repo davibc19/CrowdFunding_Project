@@ -1,4 +1,7 @@
-<?php include("header.php");?>
+<?php 
+    require_once './validateSessionFunctions.php';
+    validateHeader();
+?>
 
 <section id="infoProjetosConcluidos" class="container">
     <div class="container">

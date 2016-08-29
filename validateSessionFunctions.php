@@ -13,6 +13,26 @@ function validateHeader()
     {
         include("headerGO.php");
     }
+    // Usuário Avaliador de Pró Reitoria XYZ
+    else if (strcmp ($_SESSION["tipoUsr"], "2") == 0)
+    {
+        include("headerGO.php");
+    }
+    // Usuário Gestor de Projetos
+    else if (strcmp ($_SESSION["tipoUsr"], "3") == 0)
+    {
+        include("headerGO.php");
+    }
+    // Usuário Financiador Técnico
+    else if (strcmp ($_SESSION["tipoUsr"], "4") == 0)
+    {
+        include("headerGO.php");
+    }
+    // Usuário Financiador Aluno
+    else if (strcmp ($_SESSION["tipoUsr"], "5") == 0)
+    {
+        include("headerGO.php");
+    }
 }
 
 ?>

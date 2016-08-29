@@ -1,4 +1,7 @@
-<?php include("header.php"); ?>
+<?php 
+    require_once './validateSessionFunctions.php';
+    validateHeader();
+?>
 
 <section id="contato" class="container">
     <h2 class="page-header">Contato</h2>
