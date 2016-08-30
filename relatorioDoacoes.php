@@ -1,9 +1,10 @@
-<?php 
-    require_once './validateSessionFunctions.php';
-    validateHeader();
+<?php
+
+require_once './validateSessionFunctions.php';
+validateHeader();
 ?>
 
-<section id="infoProjetosAprovados" class="container">
+<section id="relatorioDoacoes" class="container">
     <div class="container">
 
         <div class='row'>
@@ -17,61 +18,56 @@
                         <div class='row'>
                             <div align=center>
                                 <center>
-                                    <table class="table table-bordered" border=1 cellpadding=10 cellspacing=0 style='border-collapse: collapse' bordercolor=#F0F0F0 width=90% id="Tabela_InfoProjetosAprovado">
-                                        <th align=center width='50%' >
-                                        <div style='margin-left:30px;'>
-                                            <br/> <br/>
-                                            <!-- Nome do Usuário -->
-                                            <div style="text-align: center;">
-                                                <b>TOTAL DE DOADORES</b>
-                                                <br/><br/>
-                                            </div>
+                                    <div class="row placeholders">
+                                        <div class="col-xs-6 col-sm-6 placeholder">
+                                            <img src="plotFunctions/geradorGrafico.php?id=1" width="500" height="500" class="img-responsive" alt="Grafico de Valores por Tempo">
                                         </div>
-                                        </th>
-                                        <th align=center width='50%'>
-                                        <div style='margin-left:30px;'>
-                                            <br/> <br/>
-                                            <!-- Quantidade Doada por ele -->
-                                            <div style="text-align: center;">
-                                                $100.000,00
-                                                <br/><br/>
-                                            </div>
+                                        <div class="col-xs-6 col-sm-6 placeholder">
+                                            <img src="plotFunctions/geradorGraficoPizza.php?id=1" width="500" height="500" class="img-responsive" alt="Grafico de Pizza">
                                         </div>
-                                        </th>
-                                        <!-- Esta estrutura estará em LOOP, permitindo com que 
-                                             haja repetições para listar todos os usuários -->
-                                        <tr>
-                                            <td align=center width='50%'>
-                                                <div style='margin-left:30px;'>
-                                                    <br/> <br/>
-                                                    <!-- Nome do Usuário -->
-                                                    <div style="text-align: center;">
-                                                        USUÁRIO 1
-                                                        <br/><br/>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td align=center width='50%'>
-                                                <div style='margin-left:30px;'>
-                                                    <br/> <br/>
-                                                    <!-- Quantidade Doada por ele -->
-                                                    <div style="text-align: center;">
-                                                        $30.000,00
-                                                        <br/><br/>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td align="center" width="100%" colspan="2">
-                                                <br/>
-                                                <!-- Chama a página que exibe o gráfico. Será passado, como parâmetro
-                                                     o identificador do projeto em questão. -->
-                                                <img src="plotFunctions/geradorGrafico.php?id=1">
-                                                <br/>
-                                            </td>
-                                        </tr>
-                                    </table>
+                                    </div>
+
+                                    <h2 class="sub-header">Usuários Doadores</h2>
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Nome do Usuário</th>
+                                                    <th>Tipo do Usuário</th>
+                                                    <th>Valor Doado</th>
+                                                    <th>Data de Doação</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>Davi Braga da Cruz</td>
+                                                    <td>Financiador Aluno</td>
+                                                    <td>R$20.000,00</td>
+                                                    <td>22 mar 2016</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2</td>
+                                                    <td>Cristopher Pablo Gueroni</td>
+                                                    <td>Financiador Aluno</td>
+                                                    <td>R$30.000,00</td>
+                                                    <td>29 abr 2016</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>3</td>
+                                                    <td>Adler Diniz de Souza</td>
+                                                    <td>Gerenciador de Projetos</td>
+                                                    <td>R$50.000,00</td>
+                                                    <td>30 jan 2016</td>
+                                                </tr>
+                                                <tr>
+                                                    <th colspan="4">TOTAL</th>
+                                                    <th>$100.000,00</th>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </center>
                             </div>
                         </div>

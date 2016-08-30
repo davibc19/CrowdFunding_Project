@@ -11,6 +11,8 @@
     );
 
     $plot = new PHPlot();
+    $plot->SetDataColors('black');
+    $plot->SetLineWidths(5);
     $plot->SetDataValues($data);
     $plot->SetTitle('Grafico dos Valores Doados De Acordo com os Meses');
     $plot->SetXTitle('Tempo');
