@@ -26,7 +26,6 @@ validateHeader();
                                             <img src="plotFunctions/geradorGraficoPizza.php?id=1" width="500" height="500" class="img-responsive" alt="Grafico de Pizza">
                                         </div>
                                     </div>
-
                                     <h2 class="sub-header">Usuários Doadores</h2>
                                     <div class="table-responsive">
                                         <table class="table table-striped">

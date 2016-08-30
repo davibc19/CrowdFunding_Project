@@ -1,6 +1,6 @@
-<?php 
-    require_once './validateSessionFunctions.php';
-    validateHeader();
+<?php
+require_once './validateSessionFunctions.php';
+validateHeader();
 ?>
 
 <section id="infoProjetosAprovados" class="container">
@@ -17,8 +17,32 @@
                         <div class='row'>
                             <div align=center>
                                 <center>
-                                    <table class="table table-bordered" border=1 cellpadding=10 cellspacing=0 style='border-collapse: collapse' bordercolor=#F0F0F0 width=90% id="Tabela_InfoProjetosAprovado">
+                                    <table class="table" border=0 cellpadding=0q cellspacing=0 style='border-collapse: collapse' bordercolor=#F0F0F0 width=100% id="Tabela_InfoProjetosAprovado">
                                         <tr>
+                                            <td align=center width='15%'>
+                                                <div style="text-align: center; border-top-width: 100px">
+                                                    <!-- Resumão dos dados do crowdfunding -->
+                                                    <img src='imagens/img0<?php echo $_GET['id'] ?>.jpg' class="img-thumbnail" height="200" width="200">
+                                                    <br> <br>
+                                                    <div class="progress">
+                                                        <div class="progress-bar" role="progressbar"
+                                                             aria-valuemin="0" aria-valuemax="100"  style="width:50%">
+                                                            <span class="sr-only">50% Complete</span>
+                                                            50%
+                                                        </div>
+                                                    </div>
+                                                    <big><b>R$ 100.000,00</b></big>
+                                                    <br>
+                                                    <small>Apoiado por <b>25.232 pessoas</b></small>
+                                                    <br> <br>
+                                                    Dias Restantes: 
+                                                    <br> 25 dias
+                                                    <br> <br>
+                                                    Meta R$ 200.000,00
+                                                    <br> <br>
+                                                    <button type="submit" class="btn btn-primary">Apoiar Este Projeto</button>
+                                                </div>
+                                            </td>
                                             <td align=center width='75%'>
                                                 <div style='margin-left:30px;'>
                                                     <br/> <br/>
@@ -31,45 +55,38 @@
                                                         Etiam posuere quam ac quam. Maecenas aliquet accumsan leo. Nullam dapibus fermentum ipsum. Etiam quis quam. Integer lacinia. Nulla est. Nulla turpis magna, cursus sit amet, suscipit a, interdum id, felis. Integer vulputate sem a nibh rutrum consequat. Maecenas lorem. Pellentesque pretium lectus id turpis. Etiam sapien elit, consequat eget, tristique non, venenatis quis, ante. Fusce wisi. Phasellus faucibus molestie nisl. Fusce eget urna. Curabitur vitae diam non enim vestibulum interdum. Nulla quis diam. Ut tempus purus at lorem.
 
                                                         Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nullam feugiat, turpis at pulvinar vulputate, erat libero tristique tellus, nec bibendum odio risus sit amet ante. Aliquam erat volutpat. Nunc auctor. Mauris pretium quam et urna. Fusce nibh. Duis risus. Curabitur sagittis hendrerit ante. Aliquam erat volutpat. Vestibulum erat nulla, ullamcorper nec, rutrum non, nonummy ac, erat. Duis condimentum augue id magna semper rutrum. Nullam justo enim, consectetuer nec, ullamcorper ac, vestibulum in, elit. Proin pede metus, vulputate nec, fermentum fringilla, vehicula vitae, justo. Fusce consectetuer risus a nunc. Aliquam ornare wisi eu metus. Integer pellentesque quam vel velit. Duis pulvinar.
+                                                        
+                                                        <br/><br/>
+                                                        <b>Módulo 1</b>
+                                                        <br/><br/>
+                                                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nullam feugiat, turpis at pulvinar vulputate, erat libero tristique tellus, nec bibendum odio risus sit amet ante. Aliquam erat volutpat. Nunc auctor. Mauris pretium quam et urna. Fusce nibh. Duis risus. Curabitur sagittis hendrerit ante. Aliquam erat volutpat. Vestibulum erat nulla, ullamcorper nec, rutrum non, nonummy ac, erat. Duis condimentum augue id magna semper rutrum. Nullam justo enim, consectetuer nec, ullamcorper ac, vestibulum in, elit. Proin pede metus, vulputate nec, fermentum fringilla, vehicula vitae, justo. Fusce consectetuer risus a nunc. Aliquam ornare wisi eu metus. Integer pellentesque quam vel velit. Duis pulvinar.
+                                                        
                                                         <br/><br/>
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td align=center width='30%'>
-                                                <div style="text-align: center; border-top-width: 100px">
-                                                    <!-- Resumão dos dados do crowdfunding -->
-                                                    <img src='imagens/img0<?php echo $_GET['id']?>.jpg' class="img-thumbnail" height="200" width="200">
-                                                    <br> <br>
-                                                    Total Arrecadado: 
-                                                    <br> 100.000,00 de 200.000,00
-                                                    <br> <br>
-                                                    Total Cumprido: 
-                                                    <br> 50% 
-                                                    <br> <br>
-                                                    Apoiado por:
-                                                    <br> 25.000 pessoas
-                                                    <br> <br>
-                                                    Dias Restantes: 
-                                                    <br> 25 dias
-                                                    <br/><br/>
-                                                    <button type="submit" class="btn btn-primary">Apoiar Este Projeto</button>
-                                                </div>
-                                            </td>
                                         </tr>
-                                        <tr>
-                                            <td align=center width='100%' colspan="2">
-                                                <div style="text-align: center; border-top-width: 100px">
-                                                    <div style='margin-left:30px;'>
-                                                        <!-- Caso exista, o sistema de recompensas será demonstrado aqui -->
-                                                        <label class="lbl"><b>RELATÓRIO</b></label>
-                                                        <br>
-                                                        << ESTE BLOCO SÓ ESTARÁ DISPONÍVEL PARA O DONO DO PROJETO >>
-                                                        <br>
-                                                        <a href="relatorioDoacoes.php">Exibir Relatório</a>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                        <?php
+                                        if (isset($_SESSION["tipoUsr"]) && (strcmp($_SESSION["tipoUsr"], "1") == 0))
+                                        {
+                                            echo " 
+                                                    <tr>
+                                                        <td align=center width='70%' colspan='2'>
+                                                            <div style='text-align: center; border-top-width: 100px'>
+                                                                <div style='margin-left:30px;'>
+                                                                    <!-- Caso exista, o sistema de recompensas será demonstrado aqui -->
+                                                                    <label class='lbl'><b>RELATÓRIO</b></label>
+                                                                    <br>
+                                                                    << ESTE BLOCO SÓ ESTARÁ DISPONÍVEL PARA O DONO DO PROJETO >>
+                                                                    <br>
+                                                                    <a href='relatorioDoacoes.php'>Exibir Relatório</a>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                ";
+                                        }
+                                        ?>
                                     </table>
                                 </center>
                             </div>
