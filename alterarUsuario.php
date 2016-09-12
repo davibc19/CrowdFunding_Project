@@ -11,7 +11,7 @@
 
 
 <div class="container">
-    <form action="alterarUsuario.php?cod=<?php echo $_SESSION['id'] ?>" method="post" name="CadastrarUsuario">
+    <form action="alterarUsuario.php?cod=<?php echo $_SESSION['id'] ?>" method="post" name="AlterarUsuario">
         <div class="form-group">
             <label for="nome">Nome Completo:</label>
             <input type="text" name="nome" class="form-control" id="nome">

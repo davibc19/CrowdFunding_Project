@@ -20,6 +20,23 @@
             . " window.location='cadastrarUsuario.php';</script>";
         }
     }
+    
+     function cadastrarEditalOrcamento($nome, $valTotal)
+    {
+        // ATUALIZAR FUNÇÃO
+        $res = "INSERT INTO editalorcamento (ano, valTotal) VALUES ('$nome', '$valTotal)";
+
+        if (mysql_query($res))
+        {
+            echo "<script> alert('Edital de Orçamento cadastrado com sucesso!'); "
+            . "window.location='projetosAprovados.php';</script>";
+        } 
+        else
+        {
+            echo "<script> alert('Erro no cadastro do Edital de Orçamento!');"
+            . " window.location='cadastrarEditalOrcamento.php';</script>";
+        }
+    }
      
    
     
