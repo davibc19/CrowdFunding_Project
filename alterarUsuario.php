@@ -25,8 +25,8 @@
             <input type="password" name="senha" class="form-control" id="pwd">
         </div>
 
-        <button type="submit" name="enviar" class="btn btn-default">Alterar</button>
-        <button type="reset" class="btn btn-default">Limpar</button>
+        <button type="submit" name="enviar" class="btn btn-success">Alterar</button>
+        <button type="reset" class="btn btn-warning">Limpar</button>
     </form>
 </div>
 

@@ -1,5 +1,4 @@
 <?php
-
 require_once './validateSessionFunctions.php';
 validateHeader();
 ?>
@@ -11,7 +10,6 @@ validateHeader();
         <div class="table-responsive">
 
             <!-- CRIAÇÃO DA TABELA DINÂMICA -->
-
             <script>$(document).ready(function ()
                 {
                     $('#listarEditalOrcamento').DataTable();
@@ -43,18 +41,18 @@ validateHeader();
             </table>
         </div>
     </div>
-
     <hr/>
-    <?php if (isset($_SESSION["tipoUsr"]) && (strcmp($_SESSION["tipoUsr"], "1") == 0))
+    <?php
+    if (isset($_SESSION["tipoUsr"]) && (strcmp($_SESSION["tipoUsr"], "1") == 0))
     {
-    echo " 
+        echo " 
         <br/><br/>
         <div style='text-align: center; border-top-width: 100px'>
             <div style='margin-left:30px;'>
                 <!-- Caso exista, o sistema de recompensas será demonstrado aqui -->
                 <label class='lbl'><b>CADASTRAR NOVO EDITAL</b></label>
                 <br/><br/>
-                <a href='cadastrarEditalOrcamento.php'>Cadastrar Novo Edital de Orçamento</a>
+                <a href='cadastrarEditalCota.php'>Cadastrar Novo Edital de Orçamento</a>
             </div>
         </div>
     ";

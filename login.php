@@ -11,7 +11,7 @@
             <input type="password" required="" class="form-control" id="pwd">
         </div>
         
-        <button type="submit" class="btn btn-default">Submit</button>
+        <button type="submit" class="btn btn-success">Submit</button>
     </form>
 </div>
 

@@ -21,10 +21,10 @@
         }
     }
     
-     function cadastrarEditalOrcamento($nome, $valTotal)
+     function cadastrarEditalOrcamento($ano, $valTotal)
     {
         // ATUALIZAR FUNÇÃO
-        $res = "INSERT INTO editalorcamento (ano, valTotal) VALUES ('$nome', '$valTotal)";
+        $res = "INSERT INTO editalorcamento (ano, valTotal) VALUES ('$ano', '$valTotal)";
 
         if (mysql_query($res))
         {
@@ -34,11 +34,27 @@
         else
         {
             echo "<script> alert('Erro no cadastro do Edital de Orçamento!');"
-            . " window.location='cadastrarEditalOrcamento.php';</script>";
+            . " window.location='cadastrarEditalCota.php';</script>";
         }
     }
-     
-   
+    
+    function cadastrarCotaFinanciamento($ano, $valTotal, $cotaAluno, $cotaProf, $cotaServ)
+    {
+        // ATUALIZAR FUNÇÃO
+        $res = "INSERT INTO cotafinanciamento (ano, valTotal) VALUES ('$ano', '$valTotal', "
+                . "'$cotaAluno, '$cotaProf', '$cotaServ')";
+
+        if (mysql_query($res))
+        {
+            echo "<script> alert('Cota de Financiamento cadastrado com sucesso!'); "
+            . "window.location='projetosAprovados.php';</script>";
+        } 
+        else
+        {
+            echo "<script> alert('Erro no cadastro da Cota de Financiamento!');"
+            . " window.location='cadastrarEditalCota.php';</script>";
+        }
+    }
     
     /* ----------------------------------------------------------------------
      *                    FUNÇÕES DE ATUALIZAÇÃO

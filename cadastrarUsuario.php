@@ -40,8 +40,8 @@
         </div>
         
 
-        <button type="submit" name="enviar" class="btn btn-default">Cadastrar</button>
-        <button type="reset" class="btn btn-default">Limpar</button>
+        <button type="submit" name="enviar" class="btn btn-success">Cadastrar</button>
+        <button type="reset" class="btn btn-warning">Limpar</button>
     </form>
 </div>
 
