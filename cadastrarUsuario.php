@@ -17,9 +17,9 @@
             <label for="tipoUsr">Tipo de Usuário</label>
             <br/>
             <select class="selectpicker" id="tipoUsr" name="tipoUsr">
-                <option value="3">Gestor de Projetos</option>
-                <option value="4">Financiador Técnico</option>
-                <option value="5" selected>Financiador Aluno</option>
+                <option value="gestorProjeto">Gestor de Projetos</option>
+                <option value="tecnico">Financiador Técnico</option>
+                <option value="aluno" selected>Financiador Aluno</option>
             </select>
         </div>
         <div class="form-group">

@@ -3,6 +3,7 @@
 require_once './validateSessionFunctions.php';
 require_once './functionsBd.php';
 validateHeader();
+validateGO();
 
 if (isset($_POST['enviar']))
 {

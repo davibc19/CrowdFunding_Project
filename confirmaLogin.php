@@ -59,7 +59,7 @@ else
 
 session_start();
 // Atualizar com TIPO DO USUARIO DO BD!!
-$_SESSION["tipoUsr"]=1;
+$_SESSION["tipoUsr"]="gestorProjeto";
 // Atualizar com ID DO USUARIO DO BD!!
 $_SESSION["id"]=1;
 

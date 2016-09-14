@@ -11,27 +11,27 @@ function validateHeader()
         include("headerOF.php");
     }
     // Usuário Gestor Orçamentário
-    else if (strcmp($_SESSION["tipoUsr"], "1") == 0)
+    else if (strcmp($_SESSION["tipoUsr"], "gestorOrcamentario") == 0)
     {
         include("headerGO.php");
     }
     // Usuário Avaliador de Pró Reitoria XYZ
-    else if (strcmp($_SESSION["tipoUsr"], "2") == 0)
+    else if (strcmp($_SESSION["tipoUsr"], "avaliadorPR") == 0)
     {
         include("headerAV.php");
     }
     // Usuário Gestor de Projetos
-    else if (strcmp($_SESSION["tipoUsr"], "3") == 0)
+    else if (strcmp($_SESSION["tipoUsr"], "gestorProjeto") == 0)
     {
         include("headerGP.php");
     }
     // Usuário Financiador Técnico
-    else if (strcmp($_SESSION["tipoUsr"], "4") == 0)
+    else if (strcmp($_SESSION["tipoUsr"], "tecnico") == 0)
     {
         include("headerFI.php");
     }
     // Usuário Financiador Aluno
-    else if (strcmp($_SESSION["tipoUsr"], "5") == 0)
+    else if (strcmp($_SESSION["tipoUsr"], "aluno") == 0)
     {
         include("headerFI.php");
     }
@@ -40,7 +40,16 @@ function validateHeader()
 // Permite acesso apenas ao Gestor de Projetos e ao Avaliador de Pró Reitoria
 function validateGP_AV()
 {
-    if ((strcmp($_SESSION['tipoUsr'], "3") != 0) && (strcmp($_SESSION['tipoUsr'], "2") != 0) )
+    if ((strcmp($_SESSION['tipoUsr'], "gestorProjeto") != 0) && (strcmp($_SESSION['tipoUsr'], "avaliadorPR") != 0) )
+    {
+        echo "<script>alert('Você não possui permissão para acessar esta página!');"
+        . "window.location='projetosAprovados.php';</script>";
+    }
+}
+
+function validateGO()
+{
+    if ((strcmp($_SESSION['tipoUsr'], "gestorOrcamentario") != 0))
     {
         echo "<script>alert('Você não possui permissão para acessar esta página!');"
         . "window.location='projetosAprovados.php';</script>";
