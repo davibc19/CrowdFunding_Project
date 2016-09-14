@@ -62,6 +62,8 @@
 
     function alterarUsuario($id, $nome, $email, $senha)
     {
+        $res = null;
+        
         if($nome != null && $email != null && $senha!=null)
         // ATUALIZAR FUNÇÃO
         $res="UPDATE usuario SET nome = '".$nome."', email = '".$email."', senha = '".$senha."' "
