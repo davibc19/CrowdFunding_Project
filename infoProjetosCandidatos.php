@@ -2,9 +2,6 @@
 require_once './validateSessionFunctions.php';
 validateHeader();
 validateGP_AV();
-
-
-
 ?>
 
 <section id="infoProjetosCandidatos" class="container">
@@ -34,12 +31,13 @@ validateGP_AV();
                 </thead>
                 <tbody>
                     <tr>
+                        <!-- LISTAR APENAS PROJETOS DO PRÓPRIO USUÁRIO (pega da sessão para fazer pesquisa no BD) -->
                         <td>Integral</td>
                         <td>Titulo 1</td>
                         <td>Autor 1</td>
                         <td>R$ 20.000,00</td>
                         <td>50 dias</td>
-                        <?php if($_SESSION['tipoUsr'] == 2) echo "<td style='text-align: center'><a href='teste.php'><input type='button' value='Avaliar' class='btn-success'></a></td>";?>
+                        <?php if($_SESSION['tipoUsr'] == 2) echo "<td style='text-align: center'><a href='avaliarProjetoCandidato.php'><input type='button' value='Avaliar' class='btn-success'></a></td>";?>
                     </tr>
                     <tr>
                         <td>Modular</td>
@@ -47,7 +45,7 @@ validateGP_AV();
                         <td>Autor 2</td>
                         <td>R$ 30.000,00</td>
                         <td>70 dias</td>
-                        <?php if($_SESSION['tipoUsr'] == 2) echo "<td style='text-align: center'><a href='teste.php'><input type='button' value='Avaliar' class='btn-success'></a></td>";?>
+                        <?php if($_SESSION['tipoUsr'] == 2) echo "<td style='text-align: center'><a href='avaliarProjetoCandidato.php'><input type='button' value='Avaliar' class='btn-success'></a></td>";?>
                     </tr>
                     <tr>
                         <td>Integral</td>
@@ -55,7 +53,7 @@ validateGP_AV();
                         <td>Autor 3</td>
                         <td>R$ 60.000,00</td>
                         <td>100 dias</td>
-                        <?php if($_SESSION['tipoUsr'] == 2) echo "<td style='text-align: center'><a href='teste.php'><input type='button' value='Avaliar' class='btn-success'></a></td>";?>
+                        <?php if($_SESSION['tipoUsr'] == 2) echo "<td style='text-align: center'><a href='avaliarProjetoCandidato.php'><input type='button' value='Avaliar' class='btn-success'></a></td>";?>
                     </tr>
                 </tbody>
             </table>
@@ -70,9 +68,7 @@ validateGP_AV();
         <div style='text-align: center; border-top-width: 100px'>
             <div style='margin-left:30px;'>
                 <!-- Caso exista, o sistema de recompensas será demonstrado aqui -->
-                <label class='lbl'><b>CADASTRAR NOVO EDITAL</b></label>
-                <br/><br/>
-                <a href='cadastrarEditalCota.php'>Cadastrar Novo Edital de Orçamento</a>
+                <a href='cadastrarEditalCota.php'><input type='button' class='btn-primary' value='Cadastrar Novo Projeto Candidato'></a>
             </div>
         </div>
     ";

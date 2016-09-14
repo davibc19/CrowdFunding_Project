@@ -48,7 +48,7 @@
                                                 <br/> <br/>
                                                 <!-- Aqui o usuário será redirecionado para uma página onde 
                                                     será mostrado mais informações do projeto -->
-                                                <a href="infoProjetosAprovados.php?id=1">Ver Mais</a>
+                                                <a href="infoProjetosAprovados.php?id=1"><input type="button" class="btn-primary" value="Ver Mais"></a>
                                                 <br/> <br/> 
                                             </div>
                                         </td>
@@ -82,7 +82,7 @@
                                                 <br/> <br/>
                                                 <!-- Aqui o usuário será redirecionado para uma página onde 
                                                     será mostrado mais informações do projeto -->
-                                                <a href="infoProjetosAprovados.php?id=2">Ver Mais</a>
+                                                <a href="infoProjetosAprovados.php?id=2"><input type="button" class="btn-primary" value="Ver Mais"></a>
                                                 <br/> <br/> 
                                             </div>
                                         </td>

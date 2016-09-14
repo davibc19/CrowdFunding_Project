@@ -50,9 +50,7 @@ validateHeader();
         <div style='text-align: center; border-top-width: 100px'>
             <div style='margin-left:30px;'>
                 <!-- Caso exista, o sistema de recompensas será demonstrado aqui -->
-                <label class='lbl'><b>CADASTRAR NOVO EDITAL</b></label>
-                <br/><br/>
-                <a href='cadastrarEditalCota.php'>Cadastrar Novo Edital de Orçamento</a>
+                <a href='cadastrarEditalCota.php'><input type='button' class='btn-primary' value='Cadastrar Novo Edital de Orçamento'></a>
             </div>
         </div>
     ";
