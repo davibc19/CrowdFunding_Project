@@ -1,7 +1,7 @@
 <?php
 /*
 // Conexão com o banco de dados 
-require "comum.php";
+require "conexao.php";
 
 // Inicia sessões 
 session_start();
@@ -23,7 +23,7 @@ if (!$login || !$senha)
  * Caso o número de linhas retornadas seja 1 o login é válido, 
  * caso 0, inválido. 
  
-$SQL = "SELECT nome, senha, tipoUsr FROM aut_usuarios WHERE email = ".$login;
+$SQL = "SELECT nome, senha, tipoUsr FROM usuarios WHERE email = ".$login;
 $result_id = @mysql_query($SQL) or die("Erro no banco de dados!");
 $total = @mysql_num_rows($result_id);
 
@@ -38,7 +38,7 @@ if ($total)
     {
 // TUDO OK! Agora, passa os dados para a sessão e redireciona o usuário 
         $_SESSION["tipoUsr"] = $dados["tipoUsr"];
-        $_SESSION["nome"] = $dados["nome"];
+        $_SESSION["id"] = $dados["id"];
         header("Location: projetosAprovados.php");
         exit;
     }
