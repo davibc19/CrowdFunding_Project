@@ -7,14 +7,22 @@ validateGP_AV();
 
 if (isset($_POST['enviar']))
 {
-    cadastrarProjetoCandidato($_POST['ano'], $_POST['valTotal']);
+    cadastrarProjetoCandidato(
+            $_POST['tipoFinanciamento'],
+            $_POST['categoria'],
+            $_POST['titulo'],
+            $_POST['imagem'],
+            $_POST['descricao'],
+            $_POST['duracao'],
+            $_POST['interVal'],
+            $_POST['dataInicio'],
+            $_POST['status']);
 }
 ?>
 
 <script>
     function Submeter()
     {
-        alert('ERRO');
         with (document.cadastroEditalCota)
         {
             var option = confirm("Deseja realmente realizar o cadastro do Projeto Candidato?");
@@ -22,7 +30,7 @@ if (isset($_POST['enviar']))
             {
                 method = "POST";
                 action = "cadastrarProjetoCandidato.php";
-                x = "Projeto Submetido com Sucesso";
+                x = "Projeto Submetido com Sucesso. Assim que possível, seu projeto será avaliado!";
                 submit();
             }
         }
@@ -36,8 +44,8 @@ if (isset($_POST['enviar']))
             <label for="tipoFinanciamento">Tipo de Financiamento</label>
             <br/>
             <select class="selectpicker" id="tipoFinanciamento" name="tipoFinanciamento">
-                <option value="1" selected>Integral</option>
-                <option value="2">Por Módulos</option>
+                <option value="integral" selected>Integral</option>
+                <option value="modular">Modular</option>
             </select>
         </div>
         
