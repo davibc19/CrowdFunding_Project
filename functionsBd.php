@@ -187,4 +187,30 @@ function consultaCotaFinanciameno()
     RETURN mysql_query("SELECT * FROM editalorcamento");
 }
 
+function consultaCriterios()
+{
+    RETURN mysql_query("SELECT * FROM criterios");
+}
+
+/* ----------------------------------------------------------------------
+ *                    AVALIAR PROJETO
+ * ---------------------------------------------------------------------- */
+
+function avaliarProjetoCandidato($id, $aval, $desc, $crit1, $crit2, $crit3)
+{
+    $res = "UPDATE projeto SET status = '".$aval."', descricaoAval = '".$desc."', "
+            . "criterio1 = '".$crit1."', criterio2 = '".$crit2."', criterio3 = '".$crit3."' "
+            . "WHERE id = '".$id."'";
+
+    if (mysql_query($res))
+    {
+        echo "<script> alert('Projeto Avaliado Com Sucesso!'); "
+        . "window.location='projetosAprovados.php';</script>";
+    } else
+    {
+        echo "<script> alert('Erro na avaliaçao!'); "
+        . "window.location='avaliarProjetoCandidato.php';</script>";
+    }
+}
+
 ?>

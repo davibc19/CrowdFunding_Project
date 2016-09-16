@@ -26,7 +26,7 @@ validateGP_AV();
                         <th>Autor</th>
                         <th>Valor</th>
                         <th>Duração (em dias)</th>
-                        <?php if($_SESSION['tipoUsr'] == 2) echo "<th></th>" ?>
+                        <?php if($_SESSION['tipoUsr'] == 'avaliadorPR') echo "<th></th>" ?>
                     </tr>
                 </thead>
                 <tbody>
@@ -37,7 +37,7 @@ validateGP_AV();
                         <td>Autor 1</td>
                         <td>R$ 20.000,00</td>
                         <td>50 dias</td>
-                        <?php if($_SESSION['tipoUsr'] == "avaliadorPR") echo "<td style='text-align: center'><a href='avaliarProjetoCandidato.php'><input type='button' value='Avaliar' class='btn-success'></a></td>";?>
+                        <?php if($_SESSION['tipoUsr'] == "avaliadorPR") echo "<td style='text-align: center'><a href='avaliarProjetoCandidato?cod=dados['id'].php'><input type='button' value='Avaliar' class='btn-success'></a></td>";?>
                     </tr>
                     <tr>
                         <td>Modular</td>
