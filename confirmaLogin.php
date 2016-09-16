@@ -1,13 +1,13 @@
 <?php
-/*
+
 // Conexão com o banco de dados 
-require "conexao.php";
+require "conexaoBd.php";
 
 // Inicia sessões 
 session_start();
 
 // Recupera o login 
-$login = $_POST["login"];
+$login = $_POST["email"];
 // Recupera a senha, a criptografando em MD5 
 $senha = $_POST["senha"];
 
@@ -22,8 +22,8 @@ if (!$login || !$senha)
  * Executa a consulta no banco de dados. 
  * Caso o número de linhas retornadas seja 1 o login é válido, 
  * caso 0, inválido. 
- 
-$SQL = "SELECT nome, senha, tipoUsr FROM usuarios WHERE email = ".$login;
+ */
+$SQL = "SELECT * FROM usuario WHERE email = '".$login."'";
 $result_id = @mysql_query($SQL) or die("Erro no banco de dados!");
 $total = @mysql_num_rows($result_id);
 
@@ -37,8 +37,8 @@ if ($total)
     if (!strcmp($senha, $dados["senha"]))
     {
 // TUDO OK! Agora, passa os dados para a sessão e redireciona o usuário 
-        $_SESSION["tipoUsr"] = $dados["tipoUsr"];
-        $_SESSION["id"] = $dados["id"];
+        $_SESSION["tipoUsr"] = $dados["tipo"];
+        $_SESSION["cpf"] = $dados["cpf"];
         header("Location: projetosAprovados.php");
         exit;
     }
@@ -55,13 +55,13 @@ else
     echo "O login fornecido por você é inexistente!";
     exit;
 }
-*/
 
+/*
 session_start();
 // Atualizar com TIPO DO USUARIO DO BD!!
 $_SESSION["tipoUsr"]="gestorProjeto";
 // Atualizar com ID DO USUARIO DO BD!!
 $_SESSION["id"]=1;
-
+*/
 header('Location: projetosAprovados.php');
 ?> 

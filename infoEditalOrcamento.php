@@ -1,5 +1,6 @@
 <?php
 require_once './validateSessionFunctions.php';
+require_once './functionsBd.php';
 validateHeader();
 ?>
 
@@ -26,16 +27,14 @@ validateHeader();
                 </thead>
                 <tbody>
                     <tr>
-                        <td>2014</td>
-                        <td>R$20.000,00</td>
-                    </tr>
-                    <tr>
-                        <td>2015</td>
-                        <td>R$30.000,00</td>
-                    </tr>
-                    <tr>
-                        <td>2016</td>
-                        <td>R$50.000,00</td>
+                        <?php
+                        $query = consultaEditalOrcamento();
+                        while ($dados = mysql_fetch_array(($query)))
+                        {
+                            echo "<td> " . $dados['ano'] . "</td>
+                                  <td> R$ " . number_format($dados['valTotal'], 2, ',', '.') . "</td>";
+                        }
+                        ?>
                     </tr>
                 </tbody>
             </table>
@@ -43,7 +42,7 @@ validateHeader();
     </div>
     <hr/>
     <?php
-    if (isset($_SESSION["tipoUsr"]) && (strcmp($_SESSION["tipoUsr"], "1") == 0))
+    if (isset($_SESSION["tipoUsr"]) && (strcmp($_SESSION["tipoUsr"], "gestorOrcamentario") == 0))
     {
         echo " 
         <br/><br/>
