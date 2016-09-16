@@ -26,16 +26,16 @@ validateHeader();
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <?php
-                        $query = consultaEditalOrcamento();
-                        while ($dados = mysql_fetch_array(($query)))
-                        {
-                            echo "<td> " . $dados['ano'] . "</td>
-                                  <td> R$ " . number_format($dados['valTotal'], 2, ',', '.') . "</td>";
-                        }
-                        ?>
-                    </tr>
+                    <?php
+                    $query = consultaEditalOrcamento();
+                    while ($dados = mysql_fetch_array(($query)))
+                    {
+                        echo "<tr>"
+                        . "<td> " . $dados['ano'] . "</td>
+                                       <td> R$ " . number_format($dados['valTotal'], 2, ',', '.') . "</td>"
+                        . "</tr>";
+                    }
+                    ?>
                 </tbody>
             </table>
         </div>

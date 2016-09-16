@@ -32,23 +32,22 @@ validateHeader();
                     </tr>
                 </thead>
                 <tbody>
-                    <tr style="text-align: center">
-                        <?php
-                        $query = consultaCotaFinanciameno();
-                        while ($dados = mysql_fetch_array(($query)))
-                        {
-                            echo "<td> " . $dados['ano'] . "</td>
-                                  <td width='15%'> R$ " . number_format($dados['valTotal'], 2, ',', '.') . "</td>
-                                  <td> " . $dados['cotaAluno'] . "</td>
-                                  <td> " . $dados['cotaProfessor'] . "</td>
-                                  <td> " . $dados['cotaServ']. "</td>
-                                  <td> R$ " . number_format($dados['valTotalAluno'], 2, ',', '.') . "</td>
-                                  <td> R$ " . number_format($dados['valTotalProfessor'], 2, ',', '.') . "</td>
-                                  <td> R$ " . number_format($dados['valTotalServ'], 2, ',', '.') . "</td>
-                                ";
-                        }
-                        ?>
-                    </tr>
+                    <?php
+                    $query = consultaCotaFinanciameno();
+                    while ($dados = mysql_fetch_array(($query)))
+                    {
+                        echo "<tr style='text-align: center'>"
+                        . "<td> " . $dados['ano'] . "</td>
+                                      <td width='15%'> R$ " . number_format($dados['valTotal'], 2, ',', '.') . "</td>
+                                      <td> " . $dados['cotaAluno'] . "</td>
+                                      <td> " . $dados['cotaProfessor'] . "</td>
+                                      <td> " . $dados['cotaServ'] . "</td>
+                                      <td> R$ " . number_format($dados['valTotalAluno'], 2, ',', '.') . "</td>
+                                      <td> R$ " . number_format($dados['valTotalProfessor'], 2, ',', '.') . "</td>
+                                      <td> R$ " . number_format($dados['valTotalServ'], 2, ',', '.') . "</td>"
+                        . "</tr>";
+                    }
+                    ?>
                 </tbody>
             </table>
         </div>

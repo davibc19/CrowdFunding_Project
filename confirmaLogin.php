@@ -7,7 +7,7 @@ require "conexaoBd.php";
 session_start();
 
 // Recupera o login 
-$login = $_POST["email"];
+$login = $_POST["cpf"];
 // Recupera a senha, a criptografando em MD5 
 $senha = $_POST["senha"];
 
@@ -23,7 +23,7 @@ if (!$login || !$senha)
  * Caso o número de linhas retornadas seja 1 o login é válido, 
  * caso 0, inválido. 
  */
-$SQL = "SELECT * FROM usuario WHERE email = '".$login."'";
+$SQL = "SELECT * FROM usuario WHERE cpf = '".$login."'";
 $result_id = @mysql_query($SQL) or die("Erro no banco de dados!");
 $total = @mysql_num_rows($result_id);
 
