@@ -47,6 +47,15 @@ function validateGP_AV()
     }
 }
 
+function validateGP()
+{
+     if ((isset($_SESSION['tipoUsr'])) && (strcmp($_SESSION['tipoUsr'], "gestorProjeto") != 0))
+    {
+        echo "<script>alert('Você não possui permissão para acessar esta página!');"
+        . "window.location='projetosAprovados.php';</script>";
+    }
+}
+
 function validateGO()
 {
     if ((isset($_SESSION['tipoUsr'])) && (strcmp($_SESSION['tipoUsr'], "gestorOrcamentario") != 0))

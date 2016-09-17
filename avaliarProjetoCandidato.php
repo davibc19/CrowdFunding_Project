@@ -5,7 +5,7 @@ validateHeader();
 
 if (isset($_POST['enviar']))
 {
-    avaliarProjetoCandidato($_GET['id'], $_POST['enviar'], $_POST['descricao'], $_POST['criterio1'], $_POST['criterio2'], $_POST['criterio3']);
+    avaliarProjetoCandidato($_SESSION['id'], $_POST['enviar'], $_POST['descricao'], $_POST['criterio1'], $_POST['criterio2'], $_POST['criterio3']);
 }
 ?>
 
@@ -96,8 +96,8 @@ if (isset($_POST['enviar']))
                     <textarea  name='descricao' required class='form-control' rows='6' id='descricao'></textarea>
                     <br/><br/>";
             ?>
-            <button type="submit" name="enviar" value="aprovar" class="btn btn-success">Aprovar</button>
-            <button type="submit" name="enviar" value="reprovar" class="btn btn-danger">Reprovar</button>
+            <button type="submit" name="enviar" value="aprovado" class="btn btn-success">Aprovar</button>
+            <button type="submit" name="enviar" value="reprovado" class="btn btn-danger">Reprovar</button>
             <button type="reset" class="btn btn-warning">Limpar</button>
     </form>
 </div>

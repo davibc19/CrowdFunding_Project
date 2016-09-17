@@ -33,7 +33,7 @@ function cadastrarEditalOrcamento($ano, $valTotal, $cotaAluno, $cotaProf, $cotaS
         // Pega QTD de usuários
         $SQL = mysql_query("SELECT COUNT(*) FROM usuario WHERE tipo = 'aluno'");
         $qtdAluno = mysql_result($SQL, 0);
-        $SQL = mysql_query("SELECT COUNT(*) FROM usuario WHERE tipo = 'professor'");
+        $SQL = mysql_query("SELECT COUNT(*) FROM usuario WHERE tipo = 'gestorProjeto'");
         $qtdProfessor = mysql_fetch_array($SQL);
         $SQL = mysql_query("SELECT COUNT(*) FROM usuario WHERE tipo = 'tecnico'");
         $qtdServ = mysql_fetch_array($SQL);
@@ -80,7 +80,7 @@ function cadastrarEditalOrcamento($ano, $valTotal, $cotaAluno, $cotaProf, $cotaS
     }
 }
 
-function cadastrarProjetoCandidato($tipoFinanciamento, $categoria, $titulo, $imagem, $descricao, $duracao, $interVal, $dataInicio, $status)
+function cadastrarProjetoCandidato($tipoFinanciamento, $categoria, $titulo, $imagem, $descricao, $duracao, $interValores, $dataInicio, $status, $valTotal, $autor, $resumo)
 {
     $res = null;
 
@@ -88,30 +88,30 @@ function cadastrarProjetoCandidato($tipoFinanciamento, $categoria, $titulo, $ima
     // Há Imagem, e há interVal!
     if ($imagem != null && $tipoFinanciamento == "modular")
     {
-        $res = "INSERT INTO projetocandidato (tipo, categoria, titulo, imagem, descricao, duracao, interVal, dataInicio, status)"
+        $res = "INSERT INTO projeto (tipo, categoria, titulo, imagem, descricao, duracao, interValores, dataInicio, status, valorTotal, autor, resumo)"
                 . " VALUES ('$tipoFinanciamento', '$categoria', '$titulo', '$imagem', '$descricao',"
-                . "'$duracao', '$interVal', '$dataInicio', '$status')";
+                . "'$duracao', '$interValores', '$dataInicio', '$status', '$valTotal', '$autor', '$resumo')";
     }
     // Há Imagem, e NÃO há interVal!
     else if ($imagem != null && $tipoFinanciamento == "integral")
     {
-        $res = "INSERT INTO projetocandidato (tipo, categoria, titulo, imagem, descricao, duracao, dataInicio, status)"
+        $res = "INSERT INTO projeto (tipo, categoria, titulo, imagem, descricao, duracao, dataInicio, status, valorTotal, autor, resumo)"
                 . " VALUES ('$tipoFinanciamento', '$categoria', '$titulo', '$imagem', '$descricao',"
-                . "'$duracao', '$dataInicio', '$status')";
+                . "'$duracao', '$dataInicio', '$status', '$valTotal', '$autor', '$resumo')";
     }
     // NÃO há Imagem, e há interVal!
     else if ($imagem == null && $tipoFinanciamento == "modular")
     {
-        $res = "INSERT INTO projetocandidato (tipo, categoria, titulo, descricao, duracao, interVal, dataInicio, status)"
+        $res = "INSERT INTO projeto (tipo, categoria, titulo, descricao, duracao, interValores, dataInicio, status, valorTotal, autor, resumo)"
                 . " VALUES ('$tipoFinanciamento', '$categoria', '$titulo', '$descricao',"
-                . "'$duracao', '$interVal', '$dataInicio', '$status')";
+                . "'$duracao', '$interValores', '$dataInicio', '$status', '$valTotal', '$autor', '$resumo')";
     }
     // NÃO há Imagem, e NÃO há interVal!
     else if ($imagem == null && $tipoFinanciamento == "integral")
     {
-        $res = "INSERT INTO projetocandidato (tipo, categoria, titulo, descricao, duracao, dataInicio, status)"
+        $res = "INSERT INTO projeto (tipo, categoria, titulo, descricao, duracao, dataInicio, status, valorTotal, autor, resumo)"
                 . " VALUES ('$tipoFinanciamento', '$categoria', '$titulo', '$descricao',"
-                . "'$duracao', '$dataInicio', '$status')";
+                . "'$duracao', '$dataInicio', '$status', '$valTotal', '$autor', '$resumo')";
     }
 
     if (mysql_query($res))
@@ -192,15 +192,63 @@ function consultaCriterios()
     RETURN mysql_query("SELECT * FROM criterios");
 }
 
+function consultaProjeto($status)
+{
+    RETURN mysql_query("SELECT * FROM projeto WHERE status = '" . $status . "'");
+}
+
+function consultaProjetoPorId($id)
+{
+    RETURN mysql_query("SELECT * FROM projeto WHERE id = '" . $id . "'");
+}
+
+function consultaProjetoPorAutor($status, $autor)
+{
+    RETURN mysql_query(("SELECT * FROM projeto WHERE status = '" . $status . "' AND autor = '" . $autor . "'"));
+}
+
+function procuraAutor($autor)
+{
+    RETURN mysql_query("SELECT * FROM usuario WHERE cpf = '" . $autor . "'");
+}
+
 /* ----------------------------------------------------------------------
- *                    AVALIAR PROJETO
+ *                            AVALIAR PROJETO
  * ---------------------------------------------------------------------- */
 
 function avaliarProjetoCandidato($id, $aval, $desc, $crit1, $crit2, $crit3)
 {
-    $res = "UPDATE projeto SET status = '".$aval."', descricaoAval = '".$desc."', "
-            . "criterio1 = '".$crit1."', criterio2 = '".$crit2."', criterio3 = '".$crit3."' "
-            . "WHERE id = '".$id."'";
+    if ($aval == 'aprovado')
+    {
+        $query = consultaProjetoPorId($id);
+        $dados = mysql_fetch_array($query);
+        date_default_timezone_set('America/Sao_Paulo');
+        $dataInicio = date('Y-m-d');
+        $duracao = $dados['duracao'];
+        $dataFim = new DateTime($dataInicio);
+        $dataFim->add(new DateInterval('P' . $duracao . 'D'));
+        $dataFinal = $dataFim->format('Y-m-d');
+
+
+        /*
+            PARA UTILIZAR DIF DE DATAS teste
+          Convert your dates to unix timestamps, then substract one from the another. That will give you the difference in seconds, which you divide by 86400 (amount of seconds in a day) to give you an approximate amount of days in that range.
+
+          If your dates are in format 25.1.2010, 01/25/2010 or 2010-01-25, you can use the strtotime function:
+
+          $start = strtotime('2010-01-25');
+          $end = strtotime('2010-02-20');
+
+          $days_between = ceil(abs($end - $start) / 86400); */
+
+        $res = "UPDATE projeto SET status = '" . $aval . "', descricaoAval = '" . $desc . "', "
+                . "criterio1 = '" . $crit1 . "', criterio2 = '" . $crit2 . "', criterio3 = '" . $crit3 . "', "
+                . "dataInicio = '" . $dataInicio . "', dataFim = '" . $dataFinal . "' "
+                . "WHERE id = '" . $id . "'";
+    } else
+        $res = "UPDATE projeto SET status = '" . $aval . "', descricaoAval = '" . $desc . "', "
+                . "criterio1 = '" . $crit1 . "', criterio2 = '" . $crit2 . "', criterio3 = '" . $crit3 . "' "
+                . "WHERE id = '" . $id . "'";
 
     if (mysql_query($res))
     {

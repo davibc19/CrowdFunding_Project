@@ -2,12 +2,15 @@
 require_once './validateSessionFunctions.php';
 require_once './functionsBd.php';
 validateHeader();
-validateGP_AV();
+validateGP();
 
 if (isset($_POST['enviar']))
 {
     cadastrarProjetoCandidato(
-            $_POST['tipoFinanciamento'], $_POST['categoria'], $_POST['titulo'], $_POST['imagem'], $_POST['descricao'], $_POST['duracao'], $_POST['interVal'], $_POST['dataInicio'], $_POST['status']);
+            $_POST['tipoFinanciamento'], $_POST['categoria'], $_POST['titulo'], 
+            $_POST['imagem'], $_POST['descricao'], $_POST['duracao'], $_POST['interVal'], 
+            $_POST['dataInicio'], $_POST['status'], $_POST['valorTotal'], $_SESSION['cpf'], 
+            $_POST['resumo']);
 }
 ?>
 
@@ -38,6 +41,33 @@ if (isset($_POST['enviar']))
             document.getElementById("interVal").style.display = "none";
             document.getElementById("interValTitle").style.display = "none";
         }
+    }
+
+    function mascara(o, f) {
+        v_obj = o
+        v_fun = f
+        setTimeout("execmascara()", 1)
+    }
+
+    function execmascara() {
+        v_obj.value = v_fun(v_obj.value)
+    }
+
+    function mnum(v)
+    {
+        v = v.replace(/\D/g, "") //Remove tudo o que não é dígito
+        return v
+    }
+
+    function mmoney(v)
+    {
+        v = v.replace(/\D/g, "");//Remove tudo o que não é dígito
+        /*v = v.replace(/(\d)(\d{11})$/, "$1$2");//coloca o ponto dos trilhões
+         v = v.replace(/(\d)(\d{8})$/, "$1.$2");//coloca o ponto dos bilhões
+         v = v.replace(/(\d)(\d{5})$/, "$1.$2");//coloca o ponto dos milhões
+         */
+        v = v.replace(/(\d)(\d{2})$/, "$1.$2");//coloca a virgula antes dos 2 últimos dígitos
+        return v;
     }
 </script>
 
@@ -76,34 +106,45 @@ if (isset($_POST['enviar']))
         </div>
 
         <div class="form-group">
+            <label for="valorTotal">Valor Total:</label>
+            <input type="text" name="valorTotal" required class="form-control" id="valorTotal" onkeypress="mascara(this, mmoney);">
+        </div>
+
+        <div class="form-group">
             <label for="imagem">Imagem:</label>
             <input type="file" name="imagem" class="form-control" id="imagem">
         </div>
 
         <div class="form-group">
-            <label for="descricao">Descrição:</label>
+            <label for="resumo">Resumo:</label>
+            <textarea name=resumo required class="form-control" cols=8 rows=3></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="descricao">Descrição Completa:</label>
             <textarea name=descricao required class="form-control" cols=8 rows=3></textarea>
         </div>
 
         <div class="form-group">
             <label for="duracao">Duração (em dias):</label>
-            <input type="text" name="duracao" required class="form-control" id="duracao">
+            <input type="text" name="duracao" required class="form-control" id="duracao"  onkeypress="mascara(this, mnum);">
         </div>
 
         <!-- Exibida SE for selecionada a opção "Por Módulos -->
         <div class="form-group">
             <label for="interVal" id="interValTitle">Intervalo de Valores:</label>
-            <textarea name=interVal required class="form-control" cols=8 rows=3 id="interVal"></textarea>
+            <textarea name=interVal class="form-control" cols=8 rows=3 id="interVal" maxlength="100"></textarea>
         </div>
 
         <!-- Data de Inicio -->
         <div class="form-group">
             <input type="hidden" name="dataInicio" required class="form-control" id="dataInicio" 
                    value="<?php
-                   date_default_timezone_set('America/Sao_Paulo');
-                   $date = date('Y-m-d H:i');
-                   echo $date;
-                   ?>  ">
+                            date_default_timezone_set('America/Sao_Paulo');
+                            $date = date('Y-m-d');
+                            echo $date;
+                            ?>  
+                   ">
         </div>
 
         <!-- Status -->
