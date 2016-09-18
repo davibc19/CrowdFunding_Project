@@ -3,7 +3,7 @@
     <nav class="navbar navbar">
         <div class="container-fluid">
             <div class="navbar-header">
-                <img src="imagens/logotipo.png" height="100" width="100">
+                <img src="imagens/logotipo.png" height="50" width="50">
             </div>
             <ul class="nav navbar-nav">
                 <li><a href="projetosAprovados.php">Projetos Atuais</a></li>

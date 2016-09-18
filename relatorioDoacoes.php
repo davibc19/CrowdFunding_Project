@@ -9,7 +9,7 @@ $dadosAutor = mysql_fetch_array($queryAutor);
 $queryProjeto = consultaProjetoPorId($_GET['id']);
 $dadosProjeto = mysql_fetch_array($queryProjeto);
 
-if (($dadosProjeto['autor'] == $_SESSION['cpf']))
+if (($dadosProjeto['autor'] != $_SESSION['cpf']))
 {
     echo "<script>alert('Você não pode visualizar este relatório!');"
     . "window.location='projetosAprovados.php';</script>";
