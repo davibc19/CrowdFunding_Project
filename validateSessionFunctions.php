@@ -67,8 +67,8 @@ function validateGO()
 
 function validateDonation()
 {
-    if ((!isset($_SESSION['tipoUsr'])) || (strcmp($_SESSION['tipoUsr'], "gestorProjeto") != 0) 
-            || (strcmp($_SESSION['tipoUsr'], "tecnico") != 0) || (strcmp($_SESSION['tipoUsr'], "aluno") != 0))
+    if ((!isset($_SESSION['tipoUsr'])) || (strcmp($_SESSION['tipoUsr'], "gestorOrcamentario") == 0) 
+            || (strcmp($_SESSION['tipoUsr'], "avaliadorPR") == 0))
     {
         echo "<script>alert('Você não possui permissão para acessar esta página!');"
         . "window.location='projetosAprovados.php';</script>";
