@@ -62,7 +62,7 @@ validateHeader();
                                                     . "<h3>" . $dados['titulo'] . "</h3>"
                                                     . "<small>" . $autor['nome'] . "</small>"
                                                     . "<br/><br/>"
-                                                    . "<img src = 'imagens/img02.jpg' class = 'img-thumbnail' height = '200' width = '200'>"
+                                                    . "<img src = '".$dados['imagem']."' class = 'img-thumbnail' height = '200' width = '200'>"
                                                     . "<br/><br/>"
                                                     . "<label class='lbl'><b>RESUMO</b></label>"
                                                     . "<br/>"

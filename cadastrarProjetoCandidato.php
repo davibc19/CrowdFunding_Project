@@ -13,8 +13,8 @@ if (isset($_POST['enviar']))
         $location = "Imagens/$name";
     } else
     {
-        $tmp_name = "img02";
-        $location = "Imagens/img02.jpg";
+        $tmp_name = "SemImagem";
+        $location = "Imagens/NoImage.jpg";
     }
     
     print_r($_FILES['imagem']['error']);
