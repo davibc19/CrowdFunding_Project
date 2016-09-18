@@ -26,11 +26,12 @@ validateHeader();
                                     <table class="table" border=0 cellpadding=0q cellspacing=0 style='border-collapse: collapse' bordercolor=#F0F0F0 width=100% id="Tabela_InfoProjetosAprovado">
                                         <?php
                                         $query = consultaProjetoPorId($_GET['id']);
-                                        while ($dados = mysql_fetch_array(($query)))
+                                        if ($dados = mysql_fetch_array(($query)))
                                         {
-                                            
                                             $progress = ceil(($dados['valArrecadado'] / $dados['valorTotal']) * 100);
                                             $progress = substr($progress, 0, 4);
+                                            $queryConsulta = consultaQtdApoiadores($dados['id']);
+                                            $pessoasApoio = mysql_result($queryConsulta, 0);
                                         
                                             $start = strtotime($dados['dataInicio']);
                                             $end = strtotime($dados['dataFim']);
@@ -48,16 +49,16 @@ validateHeader();
                                                                          " . $progress . "%
                                                                     </div>"
                                                             . "</div>"
-                                                        . "<big><b>R$ ".$dados['valArrecadado']."</big></b>"
+                                                        . "<big><b>R$ ".number_format($dados['valArrecadado'], 2, ',', '.')."</big></b>"
                                                         . "<br/>"
-                                                        . "<small>Apoiado por 25.232 <b>pessoas</b></small>"
+                                                        . "<small>Apoiado por <b>".$pessoasApoio." pessoas</b></small>"
                                                         . "<br/><br/>"
                                                         . "Dias Restantes:"
                                                         ."<br> ".$days_between.""
                                                         ."<br> <br>"
-                                                        ."Meta R$ ".$dados['valorTotal'].""
+                                                        ."Meta R$ ".number_format($dados['valorTotal'], 2, ',', '.').""
                                                         ."<br> <br>"
-                                                        . "<button type = 'submit' class = 'btn btn-primary'>Apoiar Este Projeto</button>"
+                                                        . "<a href = doacao.php?id=".$_GET['id']."><input type = 'button' class = 'btn btn-primary' value = 'Apoiar Este Projeto'></input></a>"
                                                     . "</div>"
                                                 . "</td>"
                                                 . "<td align = center width = '75%'>"
@@ -95,7 +96,7 @@ validateHeader();
                                                                     <!-- Caso exista, o sistema de recompensas será demonstrado aqui -->
                                                                     <label class='lbl'><b>RELATÓRIO</b></label>
                                                                     <br>
-                                                                    <a href='relatorioDoacoes.php'><input type='button' class='btn-success' value ='Exibir Relatório'></input></a>
+                                                                    <a href='relatorioDoacoes.php?id=".$_GET['id']."'><input type='button' class='btn-success' value ='Exibir Relatório'></input></a>
                                                                 </div>
                                                             </div>
                                                         </td>

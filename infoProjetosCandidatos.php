@@ -11,7 +11,7 @@ validateGP_AV();
 <section id="infoProjetosCandidatos" class="container">
     <div class="container">
 
-        <h2 class="sub-header">Projetos Candidatos</h2>
+        <h2 class="sub-header">Projetos</h2>
         <div class="table-responsive">
 
             <!-- CRIAÇÃO DA TABELA DINÂMICA -->
@@ -31,6 +31,7 @@ validateGP_AV();
                         <th>Valor</th>
                         <th>Duração (em dias)</th>
                         <?php if($_SESSION['tipoUsr'] == 'avaliadorPR') echo "<th></th>" ?>
+                        <?php if($_SESSION['tipoUsr'] == 'gestorProjeto') echo "<th></th>" ?>
                     </tr>
                 </thead>
                 <tbody>
@@ -53,6 +54,27 @@ validateGP_AV();
                                  echo "<td style='text-align: center'><a href='avaliarProjetoCandidato.php'>"
                                  . "<input type='button' value='Avaliar' class='btn-success' onclick=(".$_SESSION['id'] = $dados['id'].")></a></td>";
                         echo "</tr>";
+                    }
+                    ?>
+                    
+                    <?php
+                    if($_SESSION['tipoUsr'] == 'gestorProjeto')
+                    {
+                        $query = consultaProjetoPorAutor("aprovado", $_SESSION['cpf']);
+                        while ($dados = mysql_fetch_array(($query)))
+                        {
+                            $autorQuery = procuraAutor($dados['autor']);
+                            $autor = mysql_fetch_array($autorQuery);
+                            echo "<tr>"
+                                . "<td> " . $dados['tipo'] . "</td>"
+                                . "<td> " . $dados['titulo'] . "</td>"
+                                . "<td> " . $autor['nome'] . "</td>"
+                                . "<td> R$ " . number_format($dados['valorTotal'], 2, ',', '.') . "</td>"
+                                . "<td> " . $dados['duracao'] . "</td>"
+                                . "<td style='text-align: center'><a href='infoProjetosAprovados.php?id=".$dados['id']."'>"
+                                 . "<input type='button' value='Consultar' class='btn-success'></a></td>";
+                            echo "</tr>";
+                        }
                     }
                     ?>
                 </tbody>

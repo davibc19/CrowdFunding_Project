@@ -152,11 +152,10 @@ if (isset($_POST['enviar']))
         <div class="form-group">
             <input type="hidden" name="dataInicio" required class="form-control" id="dataInicio" 
                    value="<?php
-date_default_timezone_set('America/Sao_Paulo');
-$date = date('Y-m-d');
-echo $date;
-?>  
-                   ">
+                   date_default_timezone_set('America/Sao_Paulo');
+                   $date = date('Y-m-d');
+                   echo $date;
+                   ?>">
         </div>
 
         <!-- Status -->
