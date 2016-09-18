@@ -6,11 +6,23 @@ validateGP();
 
 if (isset($_POST['enviar']))
 {
+    if ( isset($_FILES['imagem']['name']) && ($_FILES['imagem']['error'] == 0) )
+    {
+        $name = $_FILES['imagem']['name'];
+        $tmp_name = $_FILES['imagem']['tmp_name'];
+        $location = "Imagens/$name";
+    } else
+    {
+        $tmp_name = "img02";
+        $location = "Imagens/img02.jpg";
+    }
+    
+    print_r($_FILES['imagem']['error']);
+    
     cadastrarProjetoCandidato(
-            $_POST['tipoFinanciamento'], $_POST['categoria'], $_POST['titulo'], 
-            $_POST['imagem'], $_POST['descricao'], $_POST['duracao'], $_POST['interVal'], 
-            $_POST['dataInicio'], $_POST['status'], $_POST['valorTotal'], $_SESSION['cpf'], 
-            $_POST['resumo']);
+            $_POST['tipoFinanciamento'], $_POST['categoria'], $_POST['titulo'], $location, $_POST['descricao'],
+            $_POST['duracao'], $_POST['interVal'], $_POST['dataInicio'], $_POST['status'], $_POST['valorTotal'], 
+            $_SESSION['cpf'], $_POST['resumo'], $tmp_name);
 }
 ?>
 
@@ -80,7 +92,7 @@ if (isset($_POST['enviar']))
 
 
 <div class="container">
-    <form name="cadastroEditalCota" onSubmit="Submeter();">
+    <form name="cadastroEditalCota" enctype="multipart/form-data" onSubmit="Submeter();">
         <div class="form-group">
             <label for="tipoFinanciamento">Tipo de Financiamento</label>
             <br/>
@@ -111,15 +123,15 @@ if (isset($_POST['enviar']))
         </div>
 
         <div class="form-group">
-            <label for="imagem">Imagem:</label>
-            <input type="file" name="imagem" class="form-control" id="imagem">
+            <label for="imagem">Arquivo</label>
+            <input type="file" name="imagem" id="uploadedfile"/><br />
         </div>
 
         <div class="form-group">
             <label for="resumo">Resumo:</label>
             <textarea name=resumo required class="form-control" cols=8 rows=3 maxlength="100"></textarea>
         </div>
-        
+
         <div class="form-group">
             <label for="descricao">Descrição Completa:</label>
             <textarea name=descricao required class="form-control" cols=8 rows=3></textarea>
@@ -140,10 +152,10 @@ if (isset($_POST['enviar']))
         <div class="form-group">
             <input type="hidden" name="dataInicio" required class="form-control" id="dataInicio" 
                    value="<?php
-                            date_default_timezone_set('America/Sao_Paulo');
-                            $date = date('Y-m-d');
-                            echo $date;
-                            ?>  
+date_default_timezone_set('America/Sao_Paulo');
+$date = date('Y-m-d');
+echo $date;
+?>  
                    ">
         </div>
 

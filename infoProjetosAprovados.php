@@ -40,7 +40,7 @@ validateHeader();
                                             . "<tr>"
                                                 . "<td align = center width = '15%'>"
                                                     . "<div style = 'text-align: center; border-top-width: 100px'>"
-                                                            . "<img src = 'imagens/img01.jpg' class = 'img-thumbnail' height = '200' width = '200'>"
+                                                            . "<img src = '".$dados['imagem']."' class = 'img-thumbnail' height = '200' width = '200'>"
                                                             . "<br/><br/>"
                                                             . " <div class = 'progress'>
                                                                     <div class = 'progress-bar' role = 'rogressbar' aria-valuemin = '0' 
