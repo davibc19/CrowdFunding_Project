@@ -1,4 +1,4 @@
-<?php include("headerOF.php"); ?>
+<?php include("../template/headerOF.php"); ?>
 
 <script type="text/javascript">
     function mascara(o, f) {
@@ -35,4 +35,4 @@
     </form>
 </div>
 
-<?php include("footer.php"); ?>
+<?php include("../template/footer.php") ?>

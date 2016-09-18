@@ -8,32 +8,32 @@ function validateHeader()
     // Usuário não está logado no sistema
     if (!isset($_SESSION["tipoUsr"]))
     {
-        include("headerOF.php");
+        include("../template/headerOF.php");
     }
     // Usuário Gestor Orçamentário
     else if (strcmp($_SESSION["tipoUsr"], "gestorOrcamentario") == 0)
     {
-        include("headerGO.php");
+        include("../template/headerGO.php");
     }
     // Usuário Avaliador de Pró Reitoria XYZ
     else if (strcmp($_SESSION["tipoUsr"], "avaliadorPR") == 0)
     {
-        include("headerAV.php");
+        include("../template/headerAV.php");
     }
     // Usuário Gestor de Projetos
     else if (strcmp($_SESSION["tipoUsr"], "gestorProjeto") == 0)
     {
-        include("headerGP.php");
+        include("../template/headerGP.php");
     }
     // Usuário Financiador Técnico
     else if (strcmp($_SESSION["tipoUsr"], "tecnico") == 0)
     {
-        include("headerFI.php");
+        include("../template/headerFI.php");
     }
     // Usuário Financiador Aluno
     else if (strcmp($_SESSION["tipoUsr"], "aluno") == 0)
     {
-        include("headerFI.php");
+        include("../template/headerFI.php");
     }
 }
 

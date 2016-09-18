@@ -1,6 +1,6 @@
 <?php
 
-include '/conexaoBd.php';
+include './conexaoBd.php';
 
 /* ----------------------------------------------------------------------
  *                    FUNÇÕES DE INSERÇÃO

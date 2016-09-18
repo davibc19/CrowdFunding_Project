@@ -1,5 +1,5 @@
 <?php 
-    require_once './validateSessionFunctions.php';
+    require_once '../../functions/validateSessionFunctions.php';
     validateHeader();
 ?>
 
@@ -65,5 +65,5 @@
 <script type="text/javascript">$("#contact_phone").mask("(00) 0000-00009");</script>
 
 <?php
-include("footer.php");
+include("../template/footer.php");
 ?>

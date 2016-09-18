@@ -1,7 +1,7 @@
 <?php
 
 // Conexão com o banco de dados 
-require "conexaoBd.php";
+require "./conexaoBd.php";
 
 // Inicia sessões 
 session_start();
@@ -63,5 +63,5 @@ $_SESSION["tipoUsr"]="gestorProjeto";
 // Atualizar com ID DO USUARIO DO BD!!
 $_SESSION["id"]=1;
 */
-header('Location: projetosAprovados.php');
+header('Location: pages/projetoAprovado/projetosAprovados.php');
 ?> 

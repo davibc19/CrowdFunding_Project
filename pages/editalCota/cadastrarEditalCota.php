@@ -1,7 +1,7 @@
 <?php
 
-require_once './validateSessionFunctions.php';
-require_once './functionsBd.php';
+require_once '../../functions/validateSessionFunctions.php';
+require_once '../../functions/functionsBd.php';
 validateHeader();
 validateGO();
 
@@ -89,5 +89,4 @@ if (isset($_POST['enviar']))
         <button type="reset" class="btn btn-warning">Limpar</button>
     </form>
 </div>
-
-<?php include("footer.php"); ?>
+<?php include("../template/footer.php") ?>

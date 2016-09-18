@@ -1,6 +1,6 @@
 <?php
-require_once './validateSessionFunctions.php';
-require_once './functionsBd.php';
+require_once '../../functions/validateSessionFunctions.php';
+require_once '../../functions/functionsBd.php';
 validateHeader();
 validateDonation();
 
@@ -80,4 +80,4 @@ if (isset($_POST['enviar']))
     </form>
 </div>
 
-<?php include("footer.php"); ?>
+<?php include("../template/footer.php") ?>

@@ -1,6 +1,6 @@
 <?php
-require_once './validateSessionFunctions.php';
-require_once './functionsBd.php';
+require_once '../../functions/validateSessionFunctions.php';
+require_once '../../functions/functionsBd.php';
 validateHeader();
 validateGP_AV();
 
@@ -79,4 +79,4 @@ if (($dadosProjeto['autor'] == $_SESSION['cpf']))
         </div>
     </div>
 </section>
-<?php include("footer.php") ?>
+<?php include("../template/footer.php") ?>
