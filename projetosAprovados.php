@@ -24,6 +24,7 @@ validateHeader();
                                         $autor = mysql_fetch_array($autorQuery);
                                         $progress = ceil(($dados['valArrecadado'] / $dados['valorTotal']) * 100);
                                         $progress = substr($progress, 0, 4);
+                                        
                                         echo ""
                                         . "<tr>"
                                         . "<td align = center width = '50%'>"
@@ -83,12 +84,6 @@ validateHeader();
                                         }
                                         echo "</tr>";
                                     }
-                                    ?>
-                                    <!--Aqui o usuário será redirecionado para uma página onde
-                                    será mostrado mais informações do projeto -->
-
-                                    <?php
-                                    
                                     ?>
                                     </tr>
                                 </table>

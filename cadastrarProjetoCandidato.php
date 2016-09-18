@@ -117,7 +117,7 @@ if (isset($_POST['enviar']))
 
         <div class="form-group">
             <label for="resumo">Resumo:</label>
-            <textarea name=resumo required class="form-control" cols=8 rows=3></textarea>
+            <textarea name=resumo required class="form-control" cols=8 rows=3 maxlength="100"></textarea>
         </div>
         
         <div class="form-group">

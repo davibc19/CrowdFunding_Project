@@ -228,28 +228,7 @@ function avaliarProjetoCandidato($id, $aval, $desc, $crit1, $crit2, $crit3)
         $dataFim = new DateTime($dataInicio);
         $dataFim->add(new DateInterval('P' . $duracao . 'D'));
         $dataFinal = $dataFim->format('Y-m-d');
-
-
-        /*
-            PARA UTILIZAR DIF DE DATAS teste
-          Convert your dates to unix timestamps, then substract one from the another. That will give you the difference in seconds, which you divide by 86400 (amount of seconds in a day) to give you an approximate amount of days in that range.
-
-          If your dates are in format 25.1.2010, 01/25/2010 or 2010-01-25, you can use the strtotime function:
-
-          $start = strtotime('2010-01-25');
-          $end = strtotime('2010-02-20');
-
-          $days_between = ceil(abs($end - $start) / 86400); */
-
-        $res = "UPDATE projeto SET status = '" . $aval . "', descricaoAval = '" . $desc . "', "
-                . "criterio1 = '" . $crit1 . "', criterio2 = '" . $crit2 . "', criterio3 = '" . $crit3 . "', "
-                . "dataInicio = '" . $dataInicio . "', dataFim = '" . $dataFinal . "' "
-                . "WHERE id = '" . $id . "'";
-    } else
-        $res = "UPDATE projeto SET status = '" . $aval . "', descricaoAval = '" . $desc . "', "
-                . "criterio1 = '" . $crit1 . "', criterio2 = '" . $crit2 . "', criterio3 = '" . $crit3 . "' "
-                . "WHERE id = '" . $id . "'";
-
+    }
     if (mysql_query($res))
     {
         echo "<script> alert('Projeto Avaliado Com Sucesso!'); "
