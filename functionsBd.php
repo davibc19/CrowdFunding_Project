@@ -233,6 +233,21 @@ function procuraAutor($autor)
     RETURN mysql_query("SELECT * FROM usuario WHERE cpf = '" . $autor . "'");
 }
 
+function consultaDoacaoPorIdProjeto($id)
+{
+    RETURN mysql_query("SELECT * FROM doacoes WHERE idProjeto = '".$id."'");
+}
+
+function traduzTipoAutor($tipo)
+{
+    if($tipo == 'gestorProjeto')
+        RETURN "Gestor de Projetos";
+    else if($tipo == 'aluno')
+        RETURN "Aluno";
+    else if($tipo == 'tecnico')
+        RETURN "Técnico Administrativo";
+}
+
 /* ----------------------------------------------------------------------
  *                            AVALIAR PROJETO
  * ---------------------------------------------------------------------- */

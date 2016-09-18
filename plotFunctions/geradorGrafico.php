@@ -1,21 +1,44 @@
 <?php
-    require './phplot.php';
-    
-    // $_GET["id"] -> Permite utilizar o identificador do projeto/doações para plotar o gráfico
-    
-    $data = array(
-        array('Janeiro', 50000),
-        array('Fevereiro', 0),
-        array('Marco', 20000),
-        array('Abril', 30000),
-    );
 
-    $plot = new PHPlot();
-    $plot->SetDataColors('black');
-    $plot->SetLineWidths(5);
-    $plot->SetDataValues($data);
-    $plot->SetTitle('Grafico dos Valores Doados De Acordo com os Meses');
-    $plot->SetXTitle('Tempo');
-    $plot->SetYTitle('Valores');
-    $plot->DrawGraph();
+require './phplot.php';
+require '../functionsBd.php';
+
+function pickcolor($img, $ignore, $row, $col)
+{
+    return $row;
+}
+
+$queryDoacoes = consultaDoacaoPorIdProjeto($_GET['id']);
+
+$totalAluno = 0;
+$totalGestorProjeto = 0;
+$totalTecnico = 0;
+
+while ($dadosDoacoes = mysql_fetch_array($queryDoacoes))
+{
+    $queryAutorDoacao = procuraAutor($dadosDoacoes['idUsr']);
+    $dadosAutorDoacao = mysql_fetch_array($queryAutorDoacao);
+
+    if ($dadosAutorDoacao['tipo'] == "aluno")
+        $totalAluno += $dadosDoacoes['valor'];
+    if ($dadosAutorDoacao['tipo'] == "gestorProjeto")
+        $totalGestorProjeto += $dadosDoacoes['valor'];
+    if ($dadosAutorDoacao['tipo'] == "tecnico")
+        $totalTecnico += $dadosDoacoes['valor'];
+}
+
+$data = array(
+    array('Aluno', $totalAluno),
+    array('Gestor de Projetos', $totalGestorProjeto),
+    array('Tecnico Administrativo', $totalTecnico)
+);
+$plot = new PHPlot();
+$plot->SetDataType('text-data');
+$plot->SetDataValues($data);
+$plot->SetPlotType("bars");
+$plot->SetCallback('data_color', 'pickcolor');
+$plot->SetDataColors(array('red', 'green', 'blue'));
+$plot->SetTitle('Grafico de Doacoes por Financiador');
+
+$plot->DrawGraph();
 ?>

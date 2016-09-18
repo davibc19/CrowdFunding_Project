@@ -2,6 +2,7 @@
 require_once './validateSessionFunctions.php';
 require_once './functionsBd.php';
 validateHeader();
+validateDonation();
 
 $queryAutor = procuraAutor($_SESSION['cpf']);
 $dadosAutor = mysql_fetch_array($queryAutor);

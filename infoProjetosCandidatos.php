@@ -5,9 +5,6 @@ validateHeader();
 validateGP_AV();
 ?>
 
-<script>
-</script>
-
 <section id="infoProjetosCandidatos" class="container">
     <div class="container">
 

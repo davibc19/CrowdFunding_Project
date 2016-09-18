@@ -1,18 +1,37 @@
 <?php
     require './phplot.php';
+    require '../functionsBd.php';
     
     // $_GET["id"] -> Permite utilizar o identificador do projeto/doações para plotar o gráfico
+    $queryDoacoes = consultaDoacaoPorIdProjeto($_GET['id']);
+    
+    $totalAluno = 0;
+    $totalGestorProjeto = 0;
+    $totalTecnico = 0;
+    
+    while($dadosDoacoes = mysql_fetch_array($queryDoacoes))
+    {
+        $queryAutorDoacao = procuraAutor($dadosDoacoes['idUsr']);
+        $dadosAutorDoacao = mysql_fetch_array($queryAutorDoacao);
+        
+        if($dadosAutorDoacao['tipo'] == "aluno")
+            $totalAluno += $dadosDoacoes['valor'];
+        if($dadosAutorDoacao['tipo'] == "gestorProjeto")
+            $totalGestorProjeto += $dadosDoacoes['valor'];
+        if($dadosAutorDoacao['tipo'] == "tecnico")
+            $totalTecnico += $dadosDoacoes['valor'];
+        
+    }
     
     $data = array(
-        array('Gerente de Projeto', 50000),
-        array('Financiador Tecnico', 30000),
-        array('Financiador Aluno', 20000),
-    );
-
+        array('Aluno', $totalAluno),
+        array('Gestor de Projetos', $totalGestorProjeto),
+        array('Tecnico Administrativo', $totalTecnico)
+        );
     $plot = new PHPlot();
-    $plot->SetPlotType("pie");
     $plot->SetDataType('text-data-single');
     $plot->SetDataValues($data);
+    $plot->SetPlotType("pie");
     $plot->SetDataColors(array('red', 'green', 'blue'));
     $plot->SetTitle('Grafico de Doacoes por Financiador');
     

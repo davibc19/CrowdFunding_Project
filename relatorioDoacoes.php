@@ -1,7 +1,19 @@
 <?php
-
 require_once './validateSessionFunctions.php';
+require_once './functionsBd.php';
 validateHeader();
+validateGP_AV();
+
+$queryAutor = procuraAutor($_SESSION['cpf']);
+$dadosAutor = mysql_fetch_array($queryAutor);
+$queryProjeto = consultaProjetoPorId($_GET['id']);
+$dadosProjeto = mysql_fetch_array($queryProjeto);
+
+if (($dadosProjeto['autor'] == $_SESSION['cpf']))
+{
+    echo "<script>alert('Você não pode visualizar este relatório!');"
+    . "window.location='projetosAprovados.php';</script>";
+}
 ?>
 
 <section id="relatorioDoacoes" class="container">
@@ -9,16 +21,16 @@ validateHeader();
 
         <div class='row'>
             <!-- Título do Projeto -->
-            <h2><center>TÍTULO DO PROJETO</center></h2>
+            <h2><center><?php echo $dadosProjeto['titulo'] ?></center></h2>
             <!-- Nome do Autor -->
-            <h4><center>Autor</center></h4>
+            <h4><center><?php echo $dadosAutor['nome'] ?></center></h4>
             <div class='row' align="center">
                 <div class="row placeholders">
                     <div class="col-xs-6 col-sm-6 placeholder">
-                        <img src="plotFunctions/geradorGrafico.php?id=1" width="500" height="500" class="img-responsive" alt="Grafico de Valores por Tempo">
+                        <img src="plotFunctions/geradorGrafico.php?id=<?php echo $_GET['id']?>" width="500" height="500" class="img-responsive" alt="Grafico de Valores por Tempo">
                     </div>
                     <div class="col-xs-6 col-sm-6 placeholder">
-                        <img src="plotFunctions/geradorGraficoPizza.php?id=1" width="500" height="500" class="img-responsive" alt="Grafico de Pizza">
+                        <img src="plotFunctions/geradorGraficoPizza.php?id=<?php echo $_GET['id']?>" width="500" height="500" class="img-responsive" alt="Grafico de Pizza">
                     </div>
                 </div>
                 <h2 class="sub-header">Usuários Doadores</h2>
@@ -26,7 +38,7 @@ validateHeader();
 
                     <!-- CRIAÇÃO DA TABELA DINÂMICA -->
 
-                    <script>$(document).ready(function () 
+                    <script>$(document).ready(function ()
                         {
                             $('#relatorioProjeto').DataTable();
                         });
@@ -44,27 +56,22 @@ validateHeader();
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Davi Braga da Cruz</td>
-                                <td>Financiador Aluno</td>
-                                <td>R$20.000,00</td>
-                                <td>22 mar 2016</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Cristopher Pablo Gueroni</td>
-                                <td>Financiador Aluno</td>
-                                <td>R$30.000,00</td>
-                                <td>29 abr 2016</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Adler Diniz de Souza</td>
-                                <td>Gerenciador de Projetos</td>
-                                <td>R$50.000,00</td>
-                                <td>30 jan 2016</td>
-                            </tr>
+                            <?php
+                            $queryDoacoes = consultaDoacaoPorIdProjeto($dadosProjeto['id']);
+                            while ($dadosDoacoes = mysql_fetch_array($queryDoacoes))
+                            {
+                                $queryAutorDoacao = procuraAutor($dadosDoacoes['idUsr']);
+                                $dadosAutorDoacao = mysql_fetch_array($queryAutorDoacao);
+                                echo""
+                                . "<tr>"
+                                    . "<td>" . $dadosDoacoes['idDoacao'] . "</td>"
+                                    . "<td>" . $dadosAutorDoacao['nome'] . "</td>"
+                                    . "<td>" . traduzTipoAutor($dadosAutorDoacao['tipo']) . "</td>"
+                                    . "<td> R$ " . number_format($dadosDoacoes['valor'], 2, ',', '.') . "</td>"
+                                    . "<td>" . $dadosDoacoes['data'] . "</td>"
+                                . "</tr>";
+                            }
+                            ?>
                         </tbody>
                     </table>
                 </div>
