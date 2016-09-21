@@ -43,7 +43,7 @@ function validateGP_AV()
     if ((isset($_SESSION['tipoUsr'])) && (strcmp($_SESSION['tipoUsr'], "gestorProjeto") != 0) && (strcmp($_SESSION['tipoUsr'], "avaliadorPR") != 0))
     {
         echo "<script>alert('Você não possui permissão para acessar esta página!');"
-        . "window.location='projetosAprovados.php';</script>";
+        . "window.location='../projetoAprovado/projetosAprovados.php';</script>";
     }
 }
 
@@ -52,7 +52,7 @@ function validateGP()
      if ((isset($_SESSION['tipoUsr'])) && (strcmp($_SESSION['tipoUsr'], "gestorProjeto") != 0))
     {
         echo "<script>alert('Você não possui permissão para acessar esta página!');"
-        . "window.location='projetosAprovados.php';</script>";
+        . "window.location='../projetoAprovado/projetosAprovados.php';</script>";
     }
 }
 
@@ -61,7 +61,7 @@ function validateGO()
     if ((isset($_SESSION['tipoUsr'])) && (strcmp($_SESSION['tipoUsr'], "gestorOrcamentario") != 0))
     {
         echo "<script>alert('Você não possui permissão para acessar esta página!');"
-        . "window.location='projetosAprovados.php';</script>";
+        . "window.location='../projetoAprovado/projetosAprovados.php';</script>";
     }
 }
 
@@ -71,7 +71,7 @@ function validateDonation()
             || (strcmp($_SESSION['tipoUsr'], "tecnico") != 0) || (strcmp($_SESSION['tipoUsr'], "aluno") != 0))
     {
         echo "<script>alert('Você não possui permissão para acessar esta página!');"
-        . "window.location='projetosAprovados.php';</script>";
+        . "window.location='../projetoAprovado/projetosAprovados.php';</script>";
     }
 }
 

@@ -68,7 +68,7 @@ validateGP_AV();
                                 . "<td> " . $autor['nome'] . "</td>"
                                 . "<td> R$ " . number_format($dados['valorTotal'], 2, ',', '.') . "</td>"
                                 . "<td> " . $dados['duracao'] . "</td>"
-                                . "<td style='text-align: center'><a href='infoProjetosAprovados.php?id=".$dados['id']."'>"
+                                . "<td style='text-align: center'><a href='../projetoAprovado/infoProjetosAprovados.php?id=".$dados['id']."'>"
                                  . "<input type='button' value='Consultar' class='btn-success'></a></td>";
                             echo "</tr>";
                         }

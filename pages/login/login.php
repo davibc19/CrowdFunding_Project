@@ -21,7 +21,7 @@
 </script>
 
 <div class="container">
-    <form id="formLogin" name="formLogin" action="confirmaLogin.php" method="POST">
+    <form id="formLogin" name="formLogin" action="../../functions/confirmaLogin.php" method="POST">
         <div class="form-group">
             <label for="cpf">CPF:</label>
             <input type="text" required class="form-control" name="cpf" onkeypress="mascara(this, mcpf);" maxlength="14">

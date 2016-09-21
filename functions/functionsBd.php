@@ -1,6 +1,6 @@
 <?php
 
-include './conexaoBd.php';
+include '../../functions/conexaoBd.php';
 
 /* ----------------------------------------------------------------------
  *                    FUNÇÕES DE INSERÇÃO
@@ -105,11 +105,11 @@ function cadastrarProjetoCandidato($tipoFinanciamento, $categoria, $titulo, $loc
     if (mysql_query($res) and move_uploaded_file($tmp_name, $location))
     {
         echo "<script> alert('Projeto Candidato cadastrado com sucesso!'); "
-        . "window.location='projetosAprovados.php';</script>";
+        . "window.location='../../pages/projetoAprovado/projetosAprovados.php';</script>";
     } else
     {
         echo "<script> alert('Erro no cadastro da Cota de Financiamento!');"
-        . " window.location='cadastrarProjetoCandidato.php';</script>";
+        . " window.location='../../pages/projetoCandidato/cadastrarProjetoCandidato.php';</script>";
     }
 }
 
@@ -133,11 +133,11 @@ function cadastraDoacao($idProjeto, $idAutor, $valor, $data)
     if (mysql_query($regDoacao) && (mysql_query($atualizaSaldoProjeto)) && (mysql_query($atualizaSaldoUsr)))
     {
         echo "<script> alert('Doação realizada com sucesso!'); "
-        . "window.location='projetosAprovados.php';</script>";
+        . "window.location='../../pages/projetoAprovado/projetosAprovados.php';</script>";
     } else
     {
         echo "<script> alert('Erro na doação!'); "
-        . "window.location='projetosAprovados.php';</script>";
+        . "window.location='../../pages/projetoAprovado/projetosAprovados.php';</script>";
     }
 }
 
@@ -181,11 +181,11 @@ function alterarUsuario($cpf, $nome, $email, $senha)
     if (mysql_query($res))
     {
         echo "<script> alert('Usuario atualizada com sucesso!'); "
-        . "window.location='projetosAprovados.php';</script>";
+        . "window.location='../../pages/projetoAprovado/projetosAprovados.php';</script>";
     } else
     {
         echo "<script> alert('Erro na atualização!'); "
-        . "window.location='alterarUsuario.php';</script>";
+        . "window.location='../../pages/usuario/alterarUsuario.php';</script>";
     }
 }
 
@@ -268,11 +268,11 @@ function avaliarProjetoCandidato($id, $aval, $desc, $crit1, $crit2, $crit3)
     if (mysql_query($res))
     {
         echo "<script> alert('Projeto Avaliado Com Sucesso!'); "
-        . "window.location='projetosAprovados.php';</script>";
+        . "window.location='../../pages/projetoAprovado/projetosAprovados.php';</script>";
     } else
     {
         echo "<script> alert('Erro na avaliaçao!'); "
-        . "window.location='avaliarProjetoCandidato.php';</script>";
+        . "window.location='../../pages/projetoCandidato/avaliarProjetoCandidato.php';</script>";
     }
 }
 

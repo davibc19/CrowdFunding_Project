@@ -58,7 +58,7 @@ validateHeader();
                                                         ."<br> <br>"
                                                         ."Meta R$ ".number_format($dados['valorTotal'], 2, ',', '.').""
                                                         ."<br> <br>"
-                                                        . "<a href = doacao.php?id=".$_GET['id']."><input type = 'button' class = 'btn btn-primary' value = 'Apoiar Este Projeto'></input></a>"
+                                                        . "<a href = ../doacao/doacao.php?id=".$_GET['id']."><input type = 'button' class = 'btn btn-primary' value = 'Apoiar Este Projeto'></input></a>"
                                                     . "</div>"
                                                 . "</td>"
                                                 . "<td align = center width = '75%'>"

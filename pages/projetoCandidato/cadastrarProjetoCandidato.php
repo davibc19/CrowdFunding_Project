@@ -10,11 +10,11 @@ if (isset($_POST['enviar']))
     {
         $name = $_FILES['imagem']['name'];
         $tmp_name = $_FILES['imagem']['tmp_name'];
-        $location = "Imagens/$name";
+        $location = "../../Imagens/$name";
     } else
     {
         $tmp_name = "SemImagem";
-        $location = "Imagens/NoImage.jpg";
+        $location = "../../Imagens/NoImage.jpg";
     }
     
     print_r($_FILES['imagem']['error']);

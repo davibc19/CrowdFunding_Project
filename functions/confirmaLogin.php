@@ -39,7 +39,7 @@ if ($total)
 // TUDO OK! Agora, passa os dados para a sessão e redireciona o usuário 
         $_SESSION["tipoUsr"] = $dados["tipo"];
         $_SESSION["cpf"] = $dados["cpf"];
-        header("Location: projetosAprovados.php");
+        header("Location: ../pages/projetoAprovado/projetosAprovados.php");
         exit;
     }
 // Senha inválida 
@@ -63,5 +63,5 @@ $_SESSION["tipoUsr"]="gestorProjeto";
 // Atualizar com ID DO USUARIO DO BD!!
 $_SESSION["id"]=1;
 */
-header('Location: pages/projetoAprovado/projetosAprovados.php');
+header('Location: ../pages/projetoAprovado/projetosAprovados.php');
 ?> 
