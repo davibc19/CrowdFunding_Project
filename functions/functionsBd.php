@@ -84,8 +84,6 @@ function cadastrarProjetoCandidato($tipoFinanciamento, $categoria, $titulo, $loc
 {
     $res = null;
 
-    echo $location . " " . $tmp_name;
-
     // ATUALIZAR FUNÇÕES
     // Há Imagem, e há interVal!
     if ($location != null && $tipoFinanciamento == "modular")

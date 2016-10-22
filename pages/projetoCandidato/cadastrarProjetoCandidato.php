@@ -6,7 +6,7 @@ validateGP();
 
 if (isset($_POST['enviar']))
 {
-    if ( isset($_FILES['imagem']['name']) && ($_FILES['imagem']['error'] == 0) )
+    if (isset($_FILES['imagem']['name']) && ($_FILES['imagem']['error'] == 0))
     {
         $name = $_FILES['imagem']['name'];
         $tmp_name = $_FILES['imagem']['tmp_name'];
@@ -16,13 +16,11 @@ if (isset($_POST['enviar']))
         $tmp_name = "SemImagem";
         $location = "../../Imagens/NoImage.jpg";
     }
-    
+
     print_r($_FILES['imagem']['error']);
-    
+
     cadastrarProjetoCandidato(
-            $_POST['tipoFinanciamento'], $_POST['categoria'], $_POST['titulo'], $location, $_POST['descricao'],
-            $_POST['duracao'], $_POST['interVal'], $_POST['dataInicio'], $_POST['status'], $_POST['valorTotal'], 
-            $_SESSION['cpf'], $_POST['resumo'], $tmp_name);
+            $_POST['tipoFinanciamento'], $_POST['categoria'], $_POST['titulo'], $location, $_POST['descricao'], $_POST['duracao'], $_POST['interVal'], $_POST['dataInicio'], $_POST['status'], $_POST['valorTotal'], $_SESSION['cpf'], $_POST['resumo'], $tmp_name);
 }
 ?>
 
@@ -74,10 +72,6 @@ if (isset($_POST['enviar']))
     function mmoney(v)
     {
         v = v.replace(/\D/g, "");//Remove tudo o que não é dígito
-        /*v = v.replace(/(\d)(\d{11})$/, "$1$2");//coloca o ponto dos trilhões
-         v = v.replace(/(\d)(\d{8})$/, "$1.$2");//coloca o ponto dos bilhões
-         v = v.replace(/(\d)(\d{5})$/, "$1.$2");//coloca o ponto dos milhões
-         */
         v = v.replace(/(\d)(\d{2})$/, "$1.$2");//coloca a virgula antes dos 2 últimos dígitos
         return v;
     }
@@ -152,10 +146,10 @@ if (isset($_POST['enviar']))
         <div class="form-group">
             <input type="hidden" name="dataInicio" required class="form-control" id="dataInicio" 
                    value="<?php
-                   date_default_timezone_set('America/Sao_Paulo');
-                   $date = date('Y-m-d');
-                   echo $date;
-                   ?>">
+date_default_timezone_set('America/Sao_Paulo');
+$date = date('Y-m-d');
+echo $date;
+?>">
         </div>
 
         <!-- Status -->
