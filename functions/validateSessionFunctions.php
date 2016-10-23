@@ -30,16 +30,7 @@ function validateHeader()
 // Permite acesso apenas ao Gestor de Projetos e ao Avaliador de Pró Reitoria
 function validateGP_AV()
 {
-    if ((isset($_SESSION['tipoUsr'])) && (strcmp($_SESSION['tipoUsr'], "gestorProjeto") != 0) && (strcmp($_SESSION['tipoUsr'], "avaliadorPR") != 0))
-    {
-        echo "<script>alert('Você não possui permissão para acessar esta página!');"
-        . "window.location='../projetoAprovado/projetosAprovados.php';</script>";
-    }
-}
-
-function validateGP()
-{
-     if ((isset($_SESSION['tipoUsr'])) && (strcmp($_SESSION['tipoUsr'], "gestorProjeto") != 0))
+    if ((isset($_SESSION['tipoUsr'])) && (strcmp($_SESSION['tipoUsr'], "Gestor de Projetos") != 0) && (strcmp($_SESSION['tipoUsr'], "Avaliador") != 0))
     {
         echo "<script>alert('Você não possui permissão para acessar esta página!');"
         . "window.location='../projetoAprovado/projetosAprovados.php';</script>";
