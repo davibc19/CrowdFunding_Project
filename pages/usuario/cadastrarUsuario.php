@@ -5,13 +5,13 @@ validateHeader();
 
 if (isset($_POST['enviar']))
 {
-    cadastrarUsuario($_POST['tipoUsr'], $_POST['cpf'], $_POST['nome'], $_POST['email'], 
-            $_POST['senha'], $_POST['cep'], $_POST['rua'], $_POST['numero'], $_POST['bairro'], 
-            $_POST['cidade'], $_POST['estado'], $_POST['categoria'], $_POST['dataNasc']);
+    cadastrarUsuario($_POST['tipoUsr'], $_POST['cpf'], $_POST['nome'], $_POST['email'], $_POST['senha'], $_POST['cep'], $_POST['rua'], $_POST['numero'], $_POST['bairro'], $_POST['cidade'], $_POST['estado'], $_POST['categoria'], $_POST['dataNasc']);
 } else if (!isset($_POST['enviarCep']))
 {
     ?>
+
     <div class="container">
+        <h4>Por favor, informe o seu CEP abaixo para iniciar o cadastro!</h4>
         <form action="cadastrarUsuario.php" method="post" name="CadastrarUsuario">
             <div class="form-group">
                 <label for="cep">CEP:</label>

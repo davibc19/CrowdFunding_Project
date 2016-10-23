@@ -13,6 +13,7 @@
                 <li><a href="../contato/contato.php">Contato</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
+                <li><a href="../usuario/consultarUsuario.php"><span class="glyphicon glyphicon-search"></span> Consultar Usuários</a></li>
                 <li><a href="../usuario/alterarUsuario.php"><span class="glyphicon glyphicon-edit"></span> Editar Conta</a></li>
                 <li><a href="../../functions/sair.php"><span class="glyphicon glyphicon-log-out"></span> Sair</a></li>
             </ul>

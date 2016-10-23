@@ -248,6 +248,11 @@ function traduzTipoAutor($tipo)
         RETURN "Técnico Administrativo";
 }
 
+function consultaUsuario()
+{
+    RETURN mysql_query("SELECT * FROM usuario ORDER BY nome");
+}
+
 /* ----------------------------------------------------------------------
  *                            AVALIAR PROJETO
  * ---------------------------------------------------------------------- */
