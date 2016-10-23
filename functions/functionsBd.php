@@ -6,14 +6,16 @@ include '../../functions/conexaoBd.php';
  *                    FUNÇÕES DE INSERÇÃO
  * ---------------------------------------------------------------------- */
 
-function cadastrarUsuario($tipo, $cpf, $nome, $email, $senha)
+function cadastrarUsuario($tipo, $cpf, $nome, $email, $senha, $cep, $rua, $numero, $bairro, $cidade, $estado, $categoria, $dataNasc)
 {
-    $res = "INSERT INTO usuario (tipo, cpf, nome, email, senha) VALUES ('$tipo', '$cpf', '$nome', '$email', '$senha')";
+    $res = "INSERT INTO usuario (tipo, cpf, nome, email, senha, cep, rua, numero, bairro, cidade, estado, categoria, dataNasc)"
+            . " VALUES ('$tipo', '$cpf', '$nome', '$email', '$senha', '$cep', '$rua', '$numero', '$bairro', '$cidade', '$estado',"
+            . " '$categoria', '$dataNasc')";
 
     if (mysql_query($res))
     {
         echo "<script> alert('Usuário cadastrado com sucesso!'); "
-        . "window.location='projetosAprovados.php';</script>";
+        . "window.location='../projetoAprovado/projetosAprovados.php';</script>";
     } else
     {
         echo "<script> alert('Erro no cadastro do usuario!');"

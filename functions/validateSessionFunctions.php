@@ -10,28 +10,18 @@ function validateHeader()
     {
         include("../template/headerOF.php");
     }
-    // Usuário Gestor Orçamentário
-    else if (strcmp($_SESSION["tipoUsr"], "gestorOrcamentario") == 0)
-    {
-        include("../template/headerGO.php");
-    }
     // Usuário Avaliador de Pró Reitoria XYZ
-    else if (strcmp($_SESSION["tipoUsr"], "avaliadorPR") == 0)
+    else if (strcmp($_SESSION["tipoUsr"], "Avaliador de Projetos") == 0)
     {
         include("../template/headerAV.php");
     }
     // Usuário Gestor de Projetos
-    else if (strcmp($_SESSION["tipoUsr"], "gestorProjeto") == 0)
+    else if (strcmp($_SESSION["tipoUsr"], "Gestor de Projetos") == 0)
     {
         include("../template/headerGP.php");
     }
-    // Usuário Financiador Técnico
-    else if (strcmp($_SESSION["tipoUsr"], "tecnico") == 0)
-    {
-        include("../template/headerFI.php");
-    }
-    // Usuário Financiador Aluno
-    else if (strcmp($_SESSION["tipoUsr"], "aluno") == 0)
+    // Usuário Financiador Acadêmico/Público
+    else if (strcmp($_SESSION["tipoUsr"], "Financiador Academico") == 0 || strcmp($_SESSION["tipoUsr"], "Financiador Público") == 0)
     {
         include("../template/headerFI.php");
     }

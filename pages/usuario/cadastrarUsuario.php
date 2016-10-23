@@ -5,10 +5,9 @@ validateHeader();
 
 if (isset($_POST['enviar']))
 {
-    cadastrarUsuario($_POST['tipoUsr'], $_POST['cpf'], $_POST['nome'], $_POST['email'], $_POST['senha'], 
-            $_POST['cep'], $_POST['rua'], $_POST['numero'], $_POST['bairro'], $_POST['cidade'], $_POST['estado'], 
-            $_POST['categoria']);
-    
+    cadastrarUsuario($_POST['tipoUsr'], $_POST['cpf'], $_POST['nome'], $_POST['email'], 
+            $_POST['senha'], $_POST['cep'], $_POST['rua'], $_POST['numero'], $_POST['bairro'], 
+            $_POST['cidade'], $_POST['estado'], $_POST['categoria'], $_POST['dataNasc']);
 } else if (!isset($_POST['enviarCep']))
 {
     ?>
@@ -55,24 +54,53 @@ if (isset($_POST['enviar']))
             v = v.replace(/(\d{3})(\d{1,2})$/, "$1-$2") //Coloca um hífen entre o terceiro e o quarto dígitos
             return v
         }
+        function mdate(v)
+        {
+            v = v.replace(/\D/g, "")                    //Remove tudo o que não é dígito
+            v = v.replace(/(\d{4})(\d)/, "$1-$2")       //Coloca um ponto entre o terceiro e o quarto dígitos
+            //de novo (para o segundo bloco de números)
+            v = v.replace(/(\d{2})(\d{1,2})$/, "$1-$2") //Coloca um hífen entre o terceiro e o quarto dígitos
+            return v
+        }
+
+        function mostraDiv(valor)
+        {
+            if (valor == "Avaliador de Projetos")
+            {
+                document.getElementById("categoriaDiv").style.display = "block";
+            }
+            else
+            {
+                document.getElementById("categoriaDiv").style.display = "none";
+            }
+        }
+
     </script>
+
+    <style type="text/css">
+        #categoriaDiv
+        {
+            display:none;
+        }
+    </style>
 
     <div class="container">
         <form action="cadastrarUsuario.php" method="post" name="CadastrarUsuario">
             <div class="form-group">
                 <label for="tipoUsr">Tipo de Usuário</label>
                 <br/>
-                <select class="selectpicker" id="tipoUsr" name="tipoUsr">
+                <select class="selectpicker" id="tipoUsr" name="tipoUsr" onchange='mostraDiv(this.value)'>
                     <option value="Gestor de Projetos">Gestor de Projetos</option>
                     <option value="Avaliador de Projetos">Avaliador de Projetos</option>
                     <option value="Financiador Academico" >Financiador Acadêmico</option>
                     <option value="Financiador Publico" selected>Financiador Público</option>
                 </select>
             </div>
-            <div class="form-group">
+            <div class="form-group" id="categoriaDiv" name="categoriaDiv">
                 <label for="categoria">Categoria</label>
                 <br/>
                 <select class="selectpicker" id="categoria" name="categoria">
+                    <option selected value=""></option>
                     <option value="Pesquisa">Pesquisa</option>
                     <option value="Competição Tecnológica">Competição Tecnológica</option>
                     <option value="Inovação no Ensino">Inovação no Ensino</option>
@@ -82,7 +110,7 @@ if (isset($_POST['enviar']))
             </div>
             <div class="form-group">
                 <label for="cpf">CPF:</label>
-                <input type="text" name="cpf" required class="form-control" id="cpf" onkeypress="mascara(this, mcpf);" maxlength="14">
+                <input type="text" name="cpf" required class="form-control" placeholder="XXX.XXX.XXX-XX" id="cpf" onkeypress="mascara(this, mcpf);" maxlength="14">
             </div>
             <div class="form-group">
                 <label for="pwd">Senha:</label>
@@ -91,10 +119,11 @@ if (isset($_POST['enviar']))
             <div class="form-group">
                 <label for="nome">Nome Completo:</label>
                 <input type="text" name="nome" required class="form-control" id="nome">
-                <div class="form-group">
-                    <label for="dataNasc">Data de Nascimento:</label>
-                    <input type="date" name="dataNasc" required class="form-control" id="dataNasc">
-                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="dataNasc">Data de Nascimento:</label>
+                <input type="date" name="dataNasc" required class="form-control"  placeholder="YYYY-MM-DD" id="dataNasc" onkeypress="mascara(this, mdate);" maxlength="10">
             </div>
             <div class="form-group">
                 <label for="email">Email:</label>
@@ -102,27 +131,27 @@ if (isset($_POST['enviar']))
             </div>
             <div class="form-group">
                 <label for="cep">CEP:</label>
-                <input type="text" name="cep" disabled class="form-control" id="cep" maxlength="8" value="<?php echo $cep ?>">
+                <input type="text" name="cep" readonly class="form-control" id="cep" maxlength="8" value="<?php echo $cep ?>">
             </div>
             <div class="form-group">
                 <label for="rua">Rua:</label>
-                <input type="text" disabled class="form-control" name="rua" id="rua" size="45" value="<?php echo $dados['rua'] ?>" />
+                <input type="text" readonly class="form-control" name="rua" id="rua" size="45" value="<?php echo $dados['rua'] ?>" />
             </div>
             <div class="form-group">
-                <label for="numero">Número:</label><br />
+                <label for="numero">Número:</label>
                 <input type="text" required class="form-control" name="numero" id="numero" size="5" />
             </div>
             <div class="form-group">
-                <label for="bairro">Bairro:</label><br />
-                <input type="text" disabled class="form-control" name="bairro" id="bairro" size="25" value="<?php echo $dados['bairro'] ?>" />
+                <label for="bairro">Bairro:</label>
+                <input type="text" readonly class="form-control" name="bairro" id="bairro" size="25" value="<?php echo $dados['bairro'] ?>" />
             </div>
             <div class="form-group">
-                <label for="cidade">Cidade:</label><br />
-                <input type="text" disabled class="form-control" name="cidade" id="cidade" size="25" value="<?php echo $dados['cidade'] ?>" />
+                <label for="cidade">Cidade:</label>
+                <input type="text" readonly class="form-control" name="cidade" id="cidade" size="25" value="<?php echo $dados['cidade'] ?>" />
             </div>
             <div class="form-group">
-                <label for="estado">Estado:</label><br />
-                <input type="text" disabled class="form-control" name="estado" id="estado" size="2" value="<?php echo $dados['estado'] ?>" />
+                <label for="estado">Estado:</label>
+                <input type="text" readonly class="form-control" name="estado" id="estado" size="2" value="<?php echo $dados['estado'] ?>" />
             </div>
 
             <button type="submit" name="enviar" class="btn btn-success">Cadastrar</button>
