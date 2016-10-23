@@ -21,7 +21,7 @@ function validateHeader()
         include("../template/headerGP.php");
     }
     // Usuário Financiador Acadêmico/Público
-    else if (strcmp($_SESSION["tipoUsr"], "Financiador Academico") == 0 || strcmp($_SESSION["tipoUsr"], "Financiador Público") == 0)
+    else if (strcmp($_SESSION["tipoUsr"], "Financiador Academico") == 0 || strcmp($_SESSION["tipoUsr"], "Financiador Publico") == 0)
     {
         include("../template/headerFI.php");
     }

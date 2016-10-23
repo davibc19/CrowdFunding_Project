@@ -145,42 +145,19 @@ function cadastraDoacao($idProjeto, $idAutor, $valor, $data)
  *                    FUNÇÕES DE ATUALIZAÇÃO
  * ---------------------------------------------------------------------- */
 
-function alterarUsuario($cpf, $nome, $email, $senha)
+function alterarUsuario($cpf, $nome, $email, $senha, $cep, $rua, $bairro, $cidade, $estado)
 {
     $res = null;
 
-    if ($nome != null && $email != null && $senha != null)
+    if ($nome != null && $email != null && $senha != null && $cep != null && $rua != null && $bairro != null && $cidade != null && $estado != null)
     // ATUALIZAR FUNÇÃO
-        $res = "UPDATE usuario SET nome = '" . $nome . "', email = '" . $email . "', senha = '" . $senha . "' "
-                . "WHERE cpf = '" . $cpf . "'";
-
-    else if ($nome != null && $senha != null)
-        $res = "UPDATE usuario SET nome = '" . $nome . "', senha = '" . $senha . "' "
-                . "WHERE cpf = '" . $cpf . "'";
-
-    else if ($email != null && $senha != null)
-        $res = "UPDATE usuario SET email = '" . $email . "', senha = '" . $senha . "' "
-                . "WHERE cpf = '" . $cpf . "'";
-
-    else if ($nome != null && $email != null)
-        $res = "UPDATE usuario SET nome = '" . $nome . "', email = '" . $email . "'"
-                . "WHERE cpf = '" . $cpf . "'";
-
-    else if ($nome != null)
-        $res = "UPDATE usuario SET nome = '" . $nome . "'"
-                . "WHERE cpf = '" . $cpf . "'";
-
-    else if ($email != null)
-        $res = "UPDATE usuario SET email = '" . $email . "'"
-                . "WHERE cpf = '" . $cpf . "'";
-
-    else if ($senha != null)
-        $res = "UPDATE usuario SET senha = '" . $senha . "' "
+        $res = "UPDATE usuario SET nome = '" . $nome . "', email = '" . $email . "', senha = '" . $senha . "', cep = '" . $cep . "', "
+                . "rua = '" . $rua . "', bairro = '" . $bairro . "', cidade = '" . $cidade . "', estado = '" . $estado . "' "
                 . "WHERE cpf = '" . $cpf . "'";
 
     if (mysql_query($res))
     {
-        echo "<script> alert('Usuario atualizada com sucesso!'); "
+        echo "<script> alert('Usuario atualizado com sucesso!'); "
         . "window.location='../../pages/projetoAprovado/projetosAprovados.php';</script>";
     } else
     {
@@ -200,7 +177,7 @@ function consultaEditalOrcamento()
 
 function consultaQtdApoiadores($id)
 {
-    RETURN mysql_query("SELECT COUNT(*) FROM doacoes WHERE idProjeto = '".$id."'");
+    RETURN mysql_query("SELECT COUNT(*) FROM doacoes WHERE idProjeto = '" . $id . "'");
 }
 
 function consultaCotaFinanciameno()
@@ -235,16 +212,16 @@ function procuraAutor($autor)
 
 function consultaDoacaoPorIdProjeto($id)
 {
-    RETURN mysql_query("SELECT * FROM doacoes WHERE idProjeto = '".$id."'");
+    RETURN mysql_query("SELECT * FROM doacoes WHERE idProjeto = '" . $id . "'");
 }
 
 function traduzTipoAutor($tipo)
 {
-    if($tipo == 'gestorProjeto')
+    if ($tipo == 'gestorProjeto')
         RETURN "Gestor de Projetos";
-    else if($tipo == 'aluno')
+    else if ($tipo == 'aluno')
         RETURN "Aluno";
-    else if($tipo == 'tecnico')
+    else if ($tipo == 'tecnico')
         RETURN "Técnico Administrativo";
 }
 
