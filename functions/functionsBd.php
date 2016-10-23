@@ -166,6 +166,40 @@ function alterarUsuario($cpf, $nome, $email, $senha, $cep, $rua, $bairro, $cidad
     }
 }
 
+function desativaUsuario($cpf)
+{
+    $res = "UPDATE usuario SET status = 'desativo'"
+                . "WHERE cpf = '" . $cpf . "'";
+
+    if (mysql_query($res))
+    {
+        echo "<script> alert('Usuario desativado com sucesso!'); "
+        . "window.location='../../pages/projetoAprovado/projetosAprovados.php';</script>";
+    } else
+    {
+        echo "<script> alert('Erro na desativação!'); "
+        . "window.location='../../pages/usuario/alterarUsuario.php';</script>";
+    }
+}
+
+function ativaUsuario($cpf)
+{
+    $res = "UPDATE usuario SET status = 'ativo'"
+                . "WHERE cpf = '" . $cpf . "'";
+
+    if (mysql_query($res))
+    {
+        echo "<script> alert('Usuario ativado com sucesso!'); "
+        . "window.location='../../pages/usuario/alterarUsuario.php';</script>";
+    } else
+    {
+        echo "<script> alert('Erro na desativação!'); "
+        . "window.location='../../pages/usuario/alterarUsuario.php';</script>";
+    }
+}
+
+
+
 /* ----------------------------------------------------------------------
  *                    FUNÇÕES DE CONSULTA
  * ---------------------------------------------------------------------- */
@@ -230,6 +264,15 @@ function consultaUsuario()
     RETURN mysql_query("SELECT * FROM usuario ORDER BY nome");
 }
 
+function procuraProjetoAtivodeAtor($cpf)
+{
+    $query = mysql_query("SELECT * FROM projeto WHERE autor = '".$cpf."' AND status <> 'concluido'");
+    if(mysql_fetch_array($query))
+        return 0;
+    else
+        return 1;
+}
+
 /* ----------------------------------------------------------------------
  *                            AVALIAR PROJETO
  * ---------------------------------------------------------------------- */
@@ -257,5 +300,11 @@ function avaliarProjetoCandidato($id, $aval, $desc, $crit1, $crit2, $crit3)
         . "window.location='../../pages/projetoCandidato/avaliarProjetoCandidato.php';</script>";
     }
 }
+
+/* ----------------------------------------------------------------------
+ *                                 EXCLUSÕES
+ * ---------------------------------------------------------------------- */
+
+
 
 ?>

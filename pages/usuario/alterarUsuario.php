@@ -20,6 +20,41 @@ if (isset($_POST['enviar']))
 
 $query = procuraAutor($_SESSION['cpf']);
 $dados = mysql_fetch_array($query);
+
+if(isset($_POST['desativar']))
+{
+        echo "<script>var option =  confirm('Deseja realmente desativar sua conta do sistema ".$dados['nome']." ?');"
+        . "if(option != true)"
+        . "window.location='alterarUsuario.php';</script>";
+        
+        if(strcmp($dados['tipo'], "Gestor de Projetos") == 0)    
+        {
+            $result = procuraProjetoAtivodeAtor($_SESSION['cpf']);
+            if($result == 0)
+                echo "<script>alert('Você possui projetos registrados em seu nome, logo não poderá desativar sua conta!');"
+                . "window.location='alterarUsuario.php';</script>";
+            else
+            {
+                echo "<script>window.location='desativarUsuario.php';</script>";
+            }
+        }
+}
+
+if(isset($_POST['ativar']))
+{
+    ativaUsuario($_SESSION['cpf']);
+}
+    
+if(strcmp($dados['status'], "desativo") == 0)
+{?>
+    <form action="alterarUsuario.php" method="post" name="AlterarUsuario">
+        <center>
+            <button type="submit" name="ativar" class="btn btn-success">Ativar Perfil</button>
+        </center>
+    </form>
+<?php
+} else {
+
 ?>
 
 
@@ -63,8 +98,9 @@ $dados = mysql_fetch_array($query);
         </div>
 
         <button type="submit" name="enviar" class="btn btn-success">Alterar</button>
-        <button type="reset" class="btn btn-warning">Limpar</button>
+        <button type="submit" name="desativar" class="btn btn-danger">Desativar Perfil</button>
     </form>
 </div>
 
-<?php include("../template/footer.php") ?>
+<?php } 
+include("../template/footer.php") ?>
