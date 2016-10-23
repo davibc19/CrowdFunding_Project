@@ -82,25 +82,13 @@ function cadastrarEditalOrcamento($ano, $valTotal, $cotaAluno, $cotaProf, $cotaS
     }
 }
 
-function cadastrarProjetoCandidato($tipoFinanciamento, $categoria, $titulo, $location, $descricao, $duracao, $interValores, $dataInicio, $status, $valTotal, $autor, $resumo, $tmp_name)
+function cadastrarProjetoCandidato($categoria, $titulo, $location, $descricao, $duracao, $dataInicio, $status, $valTotal, $autor, $resumo, $tmp_name)
 {
     $res = null;
 
-    // ATUALIZAR FUNÇÕES
-    // Há Imagem, e há interVal!
-    if ($location != null && $tipoFinanciamento == "modular")
-    {
-        $res = "INSERT INTO projeto (tipo, categoria, titulo, imagem, descricao, duracao, interValores, dataInicio, status, valorTotal, autor, resumo)"
-                . " VALUES ('$tipoFinanciamento', '$categoria', '$titulo', '$location', '$descricao',"
-                . "'$duracao', '$interValores', '$dataInicio', '$status', '$valTotal', '$autor', '$resumo')";
-    }
-    // Há Imagem, e NÃO há interVal!
-    else if ($location != null && $tipoFinanciamento == "integral")
-    {
-        $res = "INSERT INTO projeto (tipo, categoria, titulo, imagem, descricao, duracao, dataInicio, status, valorTotal, autor, resumo)"
-                . " VALUES ('$tipoFinanciamento', '$categoria', '$titulo', '$location', '$descricao',"
+        $res = "INSERT INTO projeto (categoria, titulo, imagem, descricao, duracao, dataInicio, status, valorTotal, autor, resumo)"
+                . " VALUES ('$categoria', '$titulo', '$location', '$descricao',"
                 . "'$duracao', '$dataInicio', '$status', '$valTotal', '$autor', '$resumo')";
-    }
 
     if (mysql_query($res) and move_uploaded_file($tmp_name, $location))
     {

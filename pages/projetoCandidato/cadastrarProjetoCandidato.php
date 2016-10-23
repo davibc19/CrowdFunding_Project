@@ -17,10 +17,8 @@ if (isset($_POST['enviar']))
         $location = "../../Imagens/NoImage.jpg";
     }
 
-    print_r($_FILES['imagem']['error']);
-
     cadastrarProjetoCandidato(
-            $_POST['tipoFinanciamento'], $_POST['categoria'], $_POST['titulo'], $location, $_POST['descricao'], $_POST['duracao'], $_POST['interVal'], $_POST['dataInicio'], $_POST['status'], $_POST['valorTotal'], $_SESSION['cpf'], $_POST['resumo'], $tmp_name);
+            $_POST['categoria'], $_POST['titulo'], $location, $_POST['descricao'], $_POST['duracao'], $_POST['dataInicio'], $_POST['status'], $_POST['valorTotal'], $_SESSION['cpf'], $_POST['resumo'], $tmp_name);
 }
 ?>
 
@@ -37,19 +35,6 @@ if (isset($_POST['enviar']))
                 x = "Projeto Submetido com Sucesso. Assim que possível, seu projeto será avaliado!";
                 submit();
             }
-        }
-    }
-
-    function mostraDiv(valor)
-    {
-        if (valor == "modular")
-        {
-            document.getElementById("interVal").style.display = "block";
-            document.getElementById("interValTitle").style.display = "block";
-        } else
-        {
-            document.getElementById("interVal").style.display = "none";
-            document.getElementById("interValTitle").style.display = "none";
         }
     }
 
@@ -77,32 +62,17 @@ if (isset($_POST['enviar']))
     }
 </script>
 
-<style type="text/css">
-    #interVal, #interValTitle
-    {
-        display:none;
-    }
-</style>
-
-
 <div class="container">
     <form name="cadastroEditalCota" enctype="multipart/form-data" onSubmit="Submeter();">
-        <div class="form-group">
-            <label for="tipoFinanciamento">Tipo de Financiamento</label>
-            <br/>
-            <select class="selectpicker" id="tipoFinanciamento" name="tipoFinanciamento" onchange="mostraDiv(this.value)">
-                <option value="integral" selected>Integral</option>
-                <option value="modular">Modular</option>
-            </select>
-        </div>
-
         <div class="form-group">
             <label for="categoria">Categoria</label>
             <br/>
             <select class="selectpicker" id="categoria" name="categoria">
-                <option value="extensao" selected>Extensão</option>
-                <option value="pesquisa">Pesquisa</option>
-                <option value="ensino">Ensino</option>
+                <option value="Pesquisa" selected>Pesquisa</option>
+                <option value="Competição Tecnológica">Competição Tecnológica</option>
+                <option value="Inovação no Ensino">Inovação no Ensino</option>
+                <option value="Manutenção e Reforma">Manutenção e Reforma</option>
+                <option value="Pequenas Obras">Pequenas Obras</option>
             </select>
         </div>
 
@@ -132,24 +102,18 @@ if (isset($_POST['enviar']))
         </div>
 
         <div class="form-group">
-            <label for="duracao">Duração (em dias):</label>
+            <label for="duracao">Duração Prevista(em dias):</label>
             <input type="text" name="duracao" required class="form-control" id="duracao"  onkeypress="mascara(this, mnum);">
         </div>
 
-        <!-- Exibida SE for selecionada a opção "Por Módulos -->
-        <div class="form-group">
-            <label for="interVal" id="interValTitle">Intervalo de Valores:</label>
-            <textarea name=interVal class="form-control" cols=8 rows=3 id="interVal" maxlength="100"></textarea>
-        </div>
-
-        <!-- Data de Inicio -->
+       <!-- Data de Inicio -->
         <div class="form-group">
             <input type="hidden" name="dataInicio" required class="form-control" id="dataInicio" 
                    value="<?php
-date_default_timezone_set('America/Sao_Paulo');
-$date = date('Y-m-d');
-echo $date;
-?>">
+                            date_default_timezone_set('America/Sao_Paulo');
+                            $date = date('Y-m-d');
+                            echo $date;
+                            ?>">
         </div>
 
         <!-- Status -->

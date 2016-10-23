@@ -22,7 +22,6 @@ validateGP();
             <table id="listarProjetosCandidatos" class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Tipo</th>
                         <th>Titulo</th>
                         <th>Autor</th>
                         <th>Valor</th>
@@ -42,7 +41,6 @@ validateGP();
                         $autorQuery = procuraAutor($dados['autor']);
                         $autor = mysql_fetch_array($autorQuery);
                         echo "<tr>"
-                            . "<td> " . $dados['tipo'] . "</td>"
                             . "<td> " . $dados['titulo'] . "</td>"
                             . "<td> " . $autor['nome'] . "</td>"
                             . "<td> R$ " . number_format($dados['valorTotal'], 2, ',', '.') . "</td>"
@@ -80,7 +78,7 @@ validateGP();
     </div>
     <hr/>
     <?php
-    if (strcmp($_SESSION["tipoUsr"], "gestorProjeto") == 0)
+    if (strcmp($_SESSION["tipoUsr"], "Gestor de Projetos") == 0)
     {
         echo " 
         <br/><br/>
