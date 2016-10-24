@@ -170,6 +170,27 @@ function desativaUsuario($cpf)
     }
 }
 
+function alterarProjeto($id, $titulo, $categoria, $valorTotal, $resumo, $descricao, $duracao)
+{
+    $res = null;
+
+    if ($id != null && $titulo != null && $categoria != null && $valorTotal != null && $resumo != null && $descricao != null && $duracao != null)
+    // ATUALIZAR FUNÇÃO
+        $res = "UPDATE projeto SET titulo = '" . $titulo . "', categoria = '" . $categoria . "', valorTotal = '" . $valorTotal . "', resumo = '" . $resumo . "', "
+                . "descricao = '" . $descricao . "', duracao = '" . $duracao . "' "
+                . "WHERE id = '" . $id . "'";
+
+    if (mysql_query($res))
+    {
+        echo "<script> alert('Projeto atualizado com sucesso!'); "
+        . "window.location='../../pages/projetoCandidato/infoProjetosCandidatos.php';</script>";
+    } else
+    {
+        echo "<script> alert('Erro na atualização!'); "
+        . "window.location='../../pages/projetoCandidato/infoProjetosCandidatos.php';</script>";
+    }
+}
+
 function ativaUsuario($cpf)
 {
     $res = "UPDATE usuario SET status = 'ativo'"
@@ -293,6 +314,19 @@ function avaliarProjetoCandidato($id, $aval, $desc, $crit1, $crit2, $crit3)
  *                                 EXCLUSÕES
  * ---------------------------------------------------------------------- */
 
+function excluirProjetoCandidato($id)
+{
+    $res = "DELETE FROM projeto WHERE id = '" . $id . "'";
 
+    if (mysql_query($res))
+    {
+        echo "<script> alert('Projeto Excluido com sucesso!'); "
+        . "window.location='../../pages/projetoCandidato/infoProjetosCandidatos.php';</script>";
+    } else
+    {
+        echo "<script> alert('Erro na exclusão!'); "
+        . "window.location='../../pages/projetoCandidato/infoProjetosCandidatos.php';</script>";
+    }
+}
 
 ?>
