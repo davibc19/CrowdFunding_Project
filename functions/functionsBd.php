@@ -82,25 +82,13 @@ function cadastrarEditalOrcamento($ano, $valTotal, $cotaAluno, $cotaProf, $cotaS
     }
 }
 
-function cadastrarProjetoCandidato($tipoFinanciamento, $categoria, $titulo, $location, $descricao, $duracao, $interValores, $dataInicio, $status, $valTotal, $autor, $resumo, $tmp_name)
+function cadastrarProjetoCandidato($categoria, $titulo, $location, $descricao, $duracao, $dataInicio, $status, $valTotal, $autor, $resumo, $tmp_name)
 {
     $res = null;
 
-    // ATUALIZAR FUNÇÕES
-    // Há Imagem, e há interVal!
-    if ($location != null && $tipoFinanciamento == "modular")
-    {
-        $res = "INSERT INTO projeto (tipo, categoria, titulo, imagem, descricao, duracao, interValores, dataInicio, status, valorTotal, autor, resumo)"
-                . " VALUES ('$tipoFinanciamento', '$categoria', '$titulo', '$location', '$descricao',"
-                . "'$duracao', '$interValores', '$dataInicio', '$status', '$valTotal', '$autor', '$resumo')";
-    }
-    // Há Imagem, e NÃO há interVal!
-    else if ($location != null && $tipoFinanciamento == "integral")
-    {
-        $res = "INSERT INTO projeto (tipo, categoria, titulo, imagem, descricao, duracao, dataInicio, status, valorTotal, autor, resumo)"
-                . " VALUES ('$tipoFinanciamento', '$categoria', '$titulo', '$location', '$descricao',"
+        $res = "INSERT INTO projeto (categoria, titulo, imagem, descricao, duracao, dataInicio, status, valorTotal, autor, resumo)"
+                . " VALUES ('$categoria', '$titulo', '$location', '$descricao',"
                 . "'$duracao', '$dataInicio', '$status', '$valTotal', '$autor', '$resumo')";
-    }
 
     if (mysql_query($res) and move_uploaded_file($tmp_name, $location))
     {
@@ -179,6 +167,27 @@ function desativaUsuario($cpf)
     {
         echo "<script> alert('Erro na desativação!'); "
         . "window.location='../../pages/usuario/alterarUsuario.php';</script>";
+    }
+}
+
+function alterarProjeto($id, $titulo, $categoria, $valorTotal, $resumo, $descricao, $duracao)
+{
+    $res = null;
+
+    if ($id != null && $titulo != null && $categoria != null && $valorTotal != null && $resumo != null && $descricao != null && $duracao != null)
+    // ATUALIZAR FUNÇÃO
+        $res = "UPDATE projeto SET titulo = '" . $titulo . "', categoria = '" . $categoria . "', valorTotal = '" . $valorTotal . "', resumo = '" . $resumo . "', "
+                . "descricao = '" . $descricao . "', duracao = '" . $duracao . "' "
+                . "WHERE id = '" . $id . "'";
+
+    if (mysql_query($res))
+    {
+        echo "<script> alert('Projeto atualizado com sucesso!'); "
+        . "window.location='../../pages/projetoCandidato/infoProjetosCandidatos.php';</script>";
+    } else
+    {
+        echo "<script> alert('Erro na atualização!'); "
+        . "window.location='../../pages/projetoCandidato/infoProjetosCandidatos.php';</script>";
     }
 }
 
@@ -305,6 +314,19 @@ function avaliarProjetoCandidato($id, $aval, $desc, $crit1, $crit2, $crit3)
  *                                 EXCLUSÕES
  * ---------------------------------------------------------------------- */
 
+function excluirProjetoCandidato($id)
+{
+    $res = "DELETE FROM projeto WHERE id = '" . $id . "'";
 
+    if (mysql_query($res))
+    {
+        echo "<script> alert('Projeto Excluido com sucesso!'); "
+        . "window.location='../../pages/projetoCandidato/infoProjetosCandidatos.php';</script>";
+    } else
+    {
+        echo "<script> alert('Erro na exclusão!'); "
+        . "window.location='../../pages/projetoCandidato/infoProjetosCandidatos.php';</script>";
+    }
+}
 
 ?>

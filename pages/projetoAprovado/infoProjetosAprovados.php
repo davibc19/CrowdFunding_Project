@@ -68,13 +68,6 @@ validateHeader();
                                                         . "<br/>"
                                                         . "<div style = 'text-align: justify;'>".$dados['descricao']."</div>"
                                                             . "<br/><br/>";
-                                                            if($dados['interValores'] != null)
-                                                            {
-                                                                echo "<label class = 'lbl'><b>VALORES PARA DOAÇÃO</b></label>"
-                                                                . "<br/>"
-                                                                . $dados['interValores'].""
-                                                                . " <br/><br/>";
-                                                            }
                                                         echo "</div>"
                                                     ."</div>"
                                                 . "</td>"

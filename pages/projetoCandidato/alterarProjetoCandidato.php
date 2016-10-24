@@ -6,20 +6,14 @@ validateGP();
 
 if (isset($_POST['enviar']))
 {
-    if (isset($_FILES['imagem']['name']) && ($_FILES['imagem']['error'] == 0))
-    {
-        $name = $_FILES['imagem']['name'];
-        $tmp_name = $_FILES['imagem']['tmp_name'];
-        $location = "../../Imagens/$name";
-    } else
-    {
-        $tmp_name = "SemImagem";
-        $location = "../../Imagens/NoImage.jpg";
-    }
-
-    cadastrarProjetoCandidato(
-            $_POST['categoria'], $_POST['titulo'], $location, $_POST['descricao'], $_POST['duracao'], $_POST['dataInicio'], $_POST['status'], $_POST['valorTotal'], $_SESSION['cpf'], $_POST['resumo'], $tmp_name);
+    
+    alterarProjeto($_SESSION['id'], $_POST['titulo'], $_POST['categoria'], $_POST['valTotal'], $_POST['resumo'],
+            $_POST['descricao'], $_POST['duracao']);
 }
+
+$query = consultaProjetoPorId($_SESSION['id']);
+$dados = mysql_fetch_array($query);
+
 ?>
 
 <script type="text/javascript">
@@ -63,67 +57,46 @@ if (isset($_POST['enviar']))
 </script>
 
 <div class="container">
-    <form name="cadastroEditalCota" enctype="multipart/form-data" onSubmit="Submeter();">
+    <form action="alterarProjetoCandidato.php" method="post" name="alterarProjetoCandidato">
         <div class="form-group">
             <label for="categoria">Categoria</label>
             <br/>
             <select class="selectpicker" id="categoria" name="categoria">
-                <option value="Pesquisa" selected>Pesquisa</option>
+                <option value="<?php echo $dados['categoria']?>" selected><?php echo $dados['categoria']?></option>
+                <option value="Pesquisa">Pesquisa</option>
                 <option value="Competição Tecnológica">Competição Tecnológica</option>
                 <option value="Inovação no Ensino">Inovação no Ensino</option>
                 <option value="Manutenção e Reforma">Manutenção e Reforma</option>
                 <option value="Pequenas Obras">Pequenas Obras</option>
             </select>
         </div>
-
+        
         <div class="form-group">
             <label for="titulo">Título:</label>
-            <input type="text" name="titulo" required class="form-control" id="titulo">
+            <input type="text" name="titulo" class="form-control" id="titulo" value="<?php echo $dados['titulo'] ?>">
         </div>
-
         <div class="form-group">
-            <label for="valorTotal">Valor Total:</label>
-            <input type="text" name="valorTotal" required class="form-control" id="valorTotal" onkeypress="mascara(this, mmoney);">
+            <label for="valTotal">Valor Total:</label>
+            <input type="text" name="valTotal" class="form-control" id="valTotal" value="<?php echo $dados['valorTotal'] ?>">
         </div>
-
-        <div class="form-group">
-            <label for="imagem">Arquivo</label>
-            <input type="file" name="imagem" id="uploadedfile"/><br />
-        </div>
-
         <div class="form-group">
             <label for="resumo">Resumo:</label>
-            <textarea name=resumo required class="form-control" cols=8 rows=3 maxlength="100"></textarea>
+            <textarea name=resumo class="form-control" cols=8 rows=3 maxlength="100"><?php echo $dados['resumo'] ?></textarea>
         </div>
 
         <div class="form-group">
             <label for="descricao">Descrição Completa:</label>
-            <textarea name=descricao required class="form-control" cols=8 rows=3></textarea>
+            <textarea name=descricao class="form-control" cols=8 rows=3><?php echo $dados['descricao'] ?></textarea>
         </div>
 
         <div class="form-group">
             <label for="duracao">Duração Prevista(em dias):</label>
-            <input type="text" name="duracao" required class="form-control" id="duracao"  onkeypress="mascara(this, mnum);">
+            <input type="text" name="duracao" class="form-control" id="duracao"  onkeypress="mascara(this, mnum);" value="<?php echo $dados['duracao'] ?>">
         </div>
 
-       <!-- Data de Inicio -->
-        <div class="form-group">
-            <input type="hidden" name="dataInicio" required class="form-control" id="dataInicio" 
-                   value="<?php
-                            date_default_timezone_set('America/Sao_Paulo');
-                            $date = date('Y-m-d');
-                            echo $date;
-                            ?>">
-        </div>
-
-        <!-- Status -->
-        <div class="form-group">
-            <input type="hidden" id="status" name="status" value="candidato">
-        </div>
-
-        <button type="submit" name="enviar" class="btn btn-success">Cadastrar</button>
-        <button type="reset" class="btn btn-warning">Limpar</button>
+        <button type="submit" name="enviar" class="btn btn-success">Alterar</button>
     </form>
 </div>
 
-<?php include("../template/footer.php") ?>
+<?php 
+include("../template/footer.php") ?>
