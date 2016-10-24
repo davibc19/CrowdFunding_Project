@@ -26,13 +26,13 @@ validateGP();
                         <th>Autor</th>
                         <th>Valor</th>
                         <th>Duração (em dias)</th>
-                        <?php if($_SESSION['tipoUsr'] == 'avaliadorPR') echo "<th></th>" ?>
-                        <?php if($_SESSION['tipoUsr'] == 'gestorProjeto') echo "<th></th>" ?>
+                        <?php if($_SESSION['tipoUsr'] == 'Avaliador de Projetos') echo "<th></th>" ?>
+                        <?php if($_SESSION['tipoUsr'] == 'Gestor de Projetos') echo "<th></th>" ?>
                     </tr>
                 </thead>
                 <tbody>
                     <?php 
-                    if($_SESSION['tipoUsr'] == 'avaliadorPR')
+                    if($_SESSION['tipoUsr'] == 'Avaliador de Projetos')
                         $query = consultaProjeto("candidato");
                     else
                         $query = consultaProjetoPorAutor("candidato", $_SESSION['cpf']);
@@ -45,15 +45,17 @@ validateGP();
                             . "<td> " . $autor['nome'] . "</td>"
                             . "<td> R$ " . number_format($dados['valorTotal'], 2, ',', '.') . "</td>"
                             . "<td> " . $dados['duracao'] . "</td>";
-                             if($_SESSION['tipoUsr'] == "avaliadorPR") 
+                             if($_SESSION['tipoUsr'] == "Avaliador de Projetos") 
                                  echo "<td style='text-align: center'><a href='avaliarProjetoCandidato.php'>"
                                  . "<input type='button' value='Avaliar' class='btn-success' onclick=(".$_SESSION['id'] = $dados['id'].")></a></td>";
+                             else
+                                 echo "<td>";
                         echo "</tr>";
                     }
                     ?>
                     
                     <?php
-                    if($_SESSION['tipoUsr'] == 'gestorProjeto')
+                    if($_SESSION['tipoUsr'] == 'Gestor de Projetos')
                     {
                         $query = consultaProjetoPorAutor("aprovado", $_SESSION['cpf']);
                         while ($dados = mysql_fetch_array(($query)))
@@ -61,7 +63,6 @@ validateGP();
                             $autorQuery = procuraAutor($dados['autor']);
                             $autor = mysql_fetch_array($autorQuery);
                             echo "<tr>"
-                                . "<td> " . $dados['tipo'] . "</td>"
                                 . "<td> " . $dados['titulo'] . "</td>"
                                 . "<td> " . $autor['nome'] . "</td>"
                                 . "<td> R$ " . number_format($dados['valorTotal'], 2, ',', '.') . "</td>"
