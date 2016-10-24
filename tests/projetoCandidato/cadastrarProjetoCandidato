@@ -3,13 +3,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://localhost/CrowdFunding_Project/pages/usuario/" />
-<title>alterarUsuario</title>
+<link rel="selenium.base" href="http://localhost/CrowdFunding_Project/pages/projetoCandidato/" />
+<title>cadastrarProjetoCandidato</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">alterarUsuario</td></tr>
+<tr><td rowspan="1" colspan="3">cadastrarProjetoCandidato</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -45,48 +45,59 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Editar Conta</td>
+	<td>link=Projetos</td>
+	<td></td>
+</tr>
+<!--Verificar se o navegador está na página correta-->
+<tr>
+	<td>assertText</td>
+	<td>css=h2.sub-header</td>
+	<td>Projetos</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input.btn-primary</td>
 	<td></td>
 </tr>
 <!--Verificar se o navegador está na página correta-->
 <tr>
 	<td>assertElementPresent</td>
-	<td>css=form[name='AlterarUsuario']</td>
+	<td>css=form[name='cadastroEditalCota']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=rua</td>
-	<td>Av Pricesa do oeste</td>
+	<td>id=titulo</td>
+	<td>Projeto 1</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=numero</td>
-	<td>900</td>
+	<td>id=valorTotal</td>
+	<td>120.00</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=bairro</td>
-	<td>Cambuí</td>
+	<td>name=resumo</td>
+	<td>Meu primeiro projeto</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=cidade</td>
-	<td>Campinas</td>
+	<td>name=descricao</td>
+	<td>Meu primeiro projeto</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=estado</td>
-	<td>SP</td>
+	<td>id=duracao</td>
+	<td>10</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>name=enviar</td>
 	<td></td>
 </tr>
-<!--Verificar se o teste teve sucesso-->
+<!--Verificar se o navegador está na página correta-->
 <tr>
-	<td>verifyText</td>
+	<td>assertText</td>
 	<td>css=h1</td>
 	<td>Projetos Atuais</td>
 </tr>

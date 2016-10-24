@@ -22,7 +22,6 @@
 	<td>css=h4</td>
 	<td>Por favor, informe o seu CEP abaixo para iniciar o cadastro!</td>
 </tr>
-<!--Buscar endereço por CEP-->
 <tr>
 	<td>type</td>
 	<td>id=cep</td>
@@ -33,7 +32,12 @@
 	<td>name=enviarCep</td>
 	<td></td>
 </tr>
-<!--Preencher formulário de cadastro de usuário-->
+<!--Verificar se o navegador está na página correta-->
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=form[name='CadastrarUsuario']</td>
+	<td></td>
+</tr>
 <tr>
 	<td>select</td>
 	<td>id=tipoUsr</td>
@@ -74,13 +78,12 @@
 	<td>name=enviar</td>
 	<td></td>
 </tr>
-<!--Verificar se a página redirecionada é a correta-->
+<!--Verificar se o teste teve sucesso-->
 <tr>
-	<td>assertText</td>
+	<td>verifyText</td>
 	<td>css=h1</td>
 	<td>Projetos Atuais</td>
 </tr>
-
 </tbody></table>
 </body>
 </html>

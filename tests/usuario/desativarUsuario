@@ -16,11 +16,16 @@
 	<td>/CrowdFunding_Project/pages/login/login.php</td>
 	<td></td>
 </tr>
-<!--Preencher formulário de login-->
+<!--Verificar se o navegador está na página correta-->
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=form[name='formLogin']</td>
+	<td></td>
+</tr>
 <tr>
 	<td>type</td>
 	<td>name=cpf</td>
-	<td>115.726.956-76</td>
+	<td>418.417.478-74</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -32,15 +37,32 @@
 	<td>css=button.btn.btn-success</td>
 	<td></td>
 </tr>
+<!--Verificar se o navegador está na página correta-->
+<tr>
+	<td>assertText</td>
+	<td>css=h1</td>
+	<td>Projetos Atuais</td>
+</tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Editar Conta</td>
 	<td></td>
 </tr>
-<!--Desativar usuário-->
+<!--Verificar se o navegador está na página correta-->
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=form[name='AlterarUsuario']</td>
+	<td></td>
+</tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>name=desativar</td>
+	<td></td>
+</tr>
+<!--Verificar se o teste teve sucesso-->
+<tr>
+	<td>verifyElementPresent</td>
+	<td>css=form[name='AlterarUsuario']</td>
 	<td></td>
 </tr>
 </tbody></table>

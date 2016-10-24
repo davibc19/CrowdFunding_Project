@@ -8,11 +8,10 @@
 <body>
 <table id="suiteTable" cellpadding="1" cellspacing="1" border="1" class="selenium"><tbody>
 <tr><td><b>Test Suite</b></td></tr>
-<tr><td><a href="cadastrarUsuario">cadastrarUsuario</a></td></tr>
-<tr><td><a href="consultarUsuario">consultarUsuario</a></td></tr>
-<tr><td><a href="alterarUsuario">alterarUsuario</a></td></tr>
-<tr><td><a href="desativarUsuario">desativarUsuario</a></td></tr>
-<tr><td><a href="ativarUsuario">ativarUsuario</a></td></tr>
+<tr><td><a href="cadastrarProjetoCandidato">cadastrarProjetoCandidato</a></td></tr>
+<tr><td><a href="infoPeojetosCandidatos">infoProjetosCandidatos</a></td></tr>
+<tr><td><a href="alterarProjetoCandidato">alterarProjetoCandidato</a></td></tr>
+<tr><td><a href="excluirProjetoCandidato">excluirProjetoCandidato</a></td></tr>
 </tbody></table>
 </body>
 </html>

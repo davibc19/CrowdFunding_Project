@@ -4,12 +4,12 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://localhost/CrowdFunding_Project/pages/usuario/" />
-<title>alterarUsuario</title>
+<title>ativarUsuario</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">alterarUsuario</td></tr>
+<tr><td rowspan="1" colspan="3">ativarUsuario</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -55,40 +55,15 @@
 	<td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>id=rua</td>
-	<td>Av Pricesa do oeste</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=numero</td>
-	<td>900</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=bairro</td>
-	<td>Cambuí</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=cidade</td>
-	<td>Campinas</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=estado</td>
-	<td>SP</td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
-	<td>name=enviar</td>
+	<td>name=ativar</td>
 	<td></td>
 </tr>
-<!--Verificar se o teste teve sucesso-->
+<!--Verificar se o navegador está na página correta-->
 <tr>
-	<td>verifyText</td>
-	<td>css=h1</td>
-	<td>Projetos Atuais</td>
+	<td>assertElementPresent</td>
+	<td>css=form[name='AlterarUsuario']</td>
+	<td></td>
 </tr>
 </tbody></table>
 </body>
