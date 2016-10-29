@@ -2,7 +2,7 @@
 require_once '../../functions/validateSessionFunctions.php';
 require_once '../../functions/functionsBd.php';
 validateHeader();
-validateGP();
+validateGP_AV();
 ?>
 
 <section id="infoProjetosCandidatos" class="container">

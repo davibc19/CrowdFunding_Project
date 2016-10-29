@@ -86,9 +86,9 @@ function cadastrarProjetoCandidato($categoria, $titulo, $location, $descricao, $
 {
     $res = null;
 
-        $res = "INSERT INTO projeto (categoria, titulo, imagem, descricao, duracao, dataInicio, status, valorTotal, autor, resumo)"
-                . " VALUES ('$categoria', '$titulo', '$location', '$descricao',"
-                . "'$duracao', '$dataInicio', '$status', '$valTotal', '$autor', '$resumo')";
+    $res = "INSERT INTO projeto (categoria, titulo, imagem, descricao, duracao, dataInicio, status, valorTotal, autor, resumo)"
+            . " VALUES ('$categoria', '$titulo', '$location', '$descricao',"
+            . "'$duracao', '$dataInicio', '$status', '$valTotal', '$autor', '$resumo')";
 
     if (mysql_query($res) and move_uploaded_file($tmp_name, $location))
     {
@@ -129,6 +129,23 @@ function cadastraDoacao($idProjeto, $idAutor, $valor, $data)
     }
 }
 
+function cadastrarCriterio($categoria, $criterio, $descricao, $status, $peso)
+{
+    $res = "INSERT INTO criterios (categoria, criterio, descricao, status, peso)"
+            . " VALUES ('$categoria', '$criterio', '$descricao', '$status', '$peso')";
+
+
+    if (mysql_query($res))
+    {
+        echo "<script> confirm('Doação realizada com sucesso!'); "
+        . "window.location='../../pages/criterios/infoCriterios.php';</script>";
+    } else
+    {
+        echo "<script> alert('Erro na doação!'); "
+        . "window.location='../../pages/criterios/infoCriterios.php';</script>";
+    }
+}
+
 /* ----------------------------------------------------------------------
  *                    FUNÇÕES DE ATUALIZAÇÃO
  * ---------------------------------------------------------------------- */
@@ -157,7 +174,7 @@ function alterarUsuario($cpf, $nome, $email, $senha, $cep, $rua, $bairro, $cidad
 function desativaUsuario($cpf)
 {
     $res = "UPDATE usuario SET status = 'desativo'"
-                . "WHERE cpf = '" . $cpf . "'";
+            . "WHERE cpf = '" . $cpf . "'";
 
     if (mysql_query($res))
     {
@@ -167,6 +184,38 @@ function desativaUsuario($cpf)
     {
         echo "<script> alert('Erro na desativação!'); "
         . "window.location='../../pages/usuario/alterarUsuario.php';</script>";
+    }
+}
+
+function ativaCriterio($id)
+{
+    $res = "UPDATE criterios SET status = 'ativado'"
+            . "WHERE id = '" . $id . "'";
+
+    if (mysql_query($res))
+    {
+        echo "<script> confirm('Criterio ativado com sucesso!'); "
+        . "window.location='../../pages/criterios/infoCriterios.php';</script>";
+    } else
+    {
+        echo "<script> alert('Erro na ativação!'); "
+        . "window.location='../../pages/criterios/infoCriterios.php';</script>";
+    }
+}
+
+function desativaCriterio($id)
+{
+    $res = "UPDATE criterios SET status = 'desativado'"
+            . "WHERE id = '" . $id . "'";
+
+    if (mysql_query($res))
+    {
+        echo "<script> confirm('Criterio desativado com sucesso!'); "
+        . "window.location='../../pages/criterios/infoCriterios.php';</script>";
+    } else
+    {
+        echo "<script> alert('Erro na desativação!'); "
+        . "window.location='../../pages/criterios/infoCriterios.php';</script>";
     }
 }
 
@@ -194,7 +243,7 @@ function alterarProjeto($id, $titulo, $categoria, $valorTotal, $resumo, $descric
 function ativaUsuario($cpf)
 {
     $res = "UPDATE usuario SET status = 'ativo'"
-                . "WHERE cpf = '" . $cpf . "'";
+            . "WHERE cpf = '" . $cpf . "'";
 
     if (mysql_query($res))
     {
@@ -207,7 +256,21 @@ function ativaUsuario($cpf)
     }
 }
 
+function alterarCriterio($id, $criterio, $peso)
+{
+     $res = "UPDATE criterios SET criterio = '".$criterio."', peso = '".$peso."' "
+            . "WHERE id = '" . $id . "'";
 
+    if (mysql_query($res))
+    {
+        echo "<script> confirm('Critério alterado com sucesso!'); "
+        . "window.location='../../pages/criterios/infoCriterios.php';</script>";
+    } else
+    {
+        echo "<script> alert('Erro na alteração!'); "
+        . "window.location='../../pages/criterios/infoCriterios.php';</script>";
+    }
+}
 
 /* ----------------------------------------------------------------------
  *                    FUNÇÕES DE CONSULTA
@@ -231,6 +294,11 @@ function consultaCotaFinanciameno()
 function consultaCriterios()
 {
     RETURN mysql_query("SELECT * FROM criterios");
+}
+
+function consultaCriterioPorId($id)
+{
+    RETURN mysql_query("SELECT * FROM criterios WHERE id = '" . $id . "'");
 }
 
 function consultaProjeto($status)
@@ -275,8 +343,8 @@ function consultaUsuario()
 
 function procuraProjetoAtivodeAtor($cpf)
 {
-    $query = mysql_query("SELECT * FROM projeto WHERE autor = '".$cpf."' AND status <> 'concluido'");
-    if(mysql_fetch_array($query))
+    $query = mysql_query("SELECT * FROM projeto WHERE autor = '" . $cpf . "' AND status <> 'concluido'");
+    if (mysql_fetch_array($query))
         return 0;
     else
         return 1;
