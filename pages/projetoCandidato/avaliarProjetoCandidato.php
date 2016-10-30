@@ -6,14 +6,19 @@ validateAV();
 
 if (isset($_POST['enviar']))
 {
-    if((int)$_POST['notaFinal']<1 || (int)$_POST['notaFinal']>10)
+    if ((int) $_POST['notaFinal'] < 1 || (int) $_POST['notaFinal'] > 10)
         echo"<script>alert('Valor inválido para a Nota!!');</script>";
-    
-    if(isset($_POST['criterio']))
+
+    $criterios = "";    
+    foreach ($_POST['criterio'] as $check)
     {
-        avaliarProjetoCandidato($_SESSION['id'], $_SESSION['cpf'], $_POST['enviar'], $_POST['criterio'], $_POST['notaFinal']);
+        $criterios = $criterios . ", ". $check;
     }
-    else
+
+    if (isset($_POST['criterio']))
+    {
+        avaliarProjetoCandidato($_SESSION['id'], $_SESSION['cpf'], $criterios, $_POST['notaFinal'], $_POST['descricao']);
+    } else
         echo "<script>alert('Você deve selecionar ao menos um critério!');</script>";
 }
 ?>
@@ -45,22 +50,22 @@ if (isset($_POST['enviar']))
                     $query = consultaCriterioPorCategoria($projeto['categoria']);
                     while ($dados = mysql_fetch_array(($query)))
                     {
-                    ?>
-                    <tr>
-                        <td>
-                            <input type='checkbox' class='form-control' id='criterio' name='criterio' value='<?php echo $dados['criterio']?>'>
-                        </td>
-                        <td> 
-                            &nbsp;<?php echo $dados['criterio']?>
-                        </td>
-                    </tr>
-                    <?php
+                        ?>
+                        <tr>
+                            <td>
+                                <input type='checkbox' class='form-control' id='criterio' name='criterio[]' value='<?php echo $dados['criterio'] ?>'>
+                            </td>
+                            <td> 
+                                &nbsp;<?php echo $dados['criterio'] ?>
+                            </td>
+                        </tr>
+                        <?php
                     }
                     ?> 
                 </table>
             </center>
             <br/>
-            
+
             <div class='form-group'>
                 <label for='notaFinal'>Nota Final</label>
                 <input type="text" name="notaFinal" required class="form-control" id="notaFinal" onkeypress="mascara(this, mnumber);">
@@ -68,8 +73,7 @@ if (isset($_POST['enviar']))
             <div class='form-group'>
                 <textarea  name='descricao' required class='form-control' rows='6' id='descricao'></textarea>
             </div>
-            <button type="submit" name="enviar" value="aprovado" class="btn btn-success">Aprovar</button>
-            <button type="submit" name="enviar" value="reprovado" class="btn btn-danger">Reprovar</button>
+            <button type="submit" name="enviar" value="avaliar" class="btn btn-success">Avaliar</button>
     </form>
 </div>
 

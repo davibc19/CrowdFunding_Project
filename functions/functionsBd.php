@@ -311,7 +311,7 @@ function consultaProjeto($status)
     RETURN mysql_query("SELECT * FROM projeto WHERE status = '" . $status . "'");
 }
 
-function consultaProjetoPorCategoria($status, $cpf)
+function consultaProjetoPorCategoria($cpf)
 {
     $query = consultaUsuarioPorCPF($cpf);
     $dados = mysql_fetch_array($query);
@@ -323,9 +323,9 @@ function consultaProjetoPorId($id)
     RETURN mysql_query("SELECT * FROM projeto WHERE id = '" . $id . "'");
 }
 
-function consultaProjetoPorAutor($status, $autor)
+function consultaProjetoPorAutor($autor)
 {
-    RETURN mysql_query(("SELECT * FROM projeto WHERE status = '" . $status . "' AND autor = '" . $autor . "'"));
+    RETURN mysql_query(("SELECT * FROM projeto WHERE autor = '" . $autor . "'"));
 }
 
 function procuraAutor($autor)
@@ -367,13 +367,18 @@ function procuraProjetoAtivodeAtor($cpf)
         return 1;
 }
 
+function consultaAvaliacaoPorId($id)
+{
+    RETURN mysql_query("SELECT * FROM avaliacao WHERE idProjeto = '$id'");
+}
+
 /* ----------------------------------------------------------------------
  *                            AVALIAR PROJETO
  * ---------------------------------------------------------------------- */
 
-function avaliarProjetoCandidato($idProj, $cpfAvaliador, $aval, $criterios, $notaFinal)
+function avaliarProjetoCandidato($idProj, $cpfAvaliador, $criterios, $notaFinal, $descricao)
 {
-    if ($aval == 'aprovado')
+    if ((int)$notaFinal >= 6)
     {
         $query = consultaProjetoPorId($idProj);
         $dados = mysql_fetch_array($query);
@@ -386,21 +391,65 @@ function avaliarProjetoCandidato($idProj, $cpfAvaliador, $aval, $criterios, $not
         
         $sqlProjeto = "UPDATE projeto SET status='aprovado', dataFim='$dataFinal' WHERE id='$idProj'";
     }
-    else if($aval == 'reprovado')
+    else if((int)$notaFinal < 6)
     {
         $sqlProjeto = "UPDATE projeto SET status='reprovado' WHERE id='$idProj'";
     }
     
-        $sqlAvaliacao = "INSERT INTO avaliacao (idProjeto, cpfAval, criterios, notaFinal) VALUES ('$idProj', '$cpfAvaliador', '$criterios', '$notaFinal')";
+        $sqlAvaliacao = "INSERT INTO avaliacao (idProjeto, cpfAval, criterios, notaFinal, descricao) "
+                . "VALUES ('$idProj', '$cpfAvaliador', '$criterios', '$notaFinal', '$descricao')";
         
     if (mysql_query($sqlProjeto) && mysql_query($sqlAvaliacao))
     {
         echo "<script> confirm('Projeto Avaliado Com Sucesso!'); "
-        . "window.location='../../pages/projetoAprovado/projetosAprovados.php';</script>";
+        . "window.location='../../pages/projetoCandidato/infoProjetosCandidatos.php';</script>";
     } else
     {
         echo "<script> alert('Erro na avaliaçao!'); "
         . "window.location='../../pages/projetoCandidato/avaliarProjetoCandidato.php';</script>";
+    }
+}
+
+function requisitarRevisao($id)
+{
+    $res = "UPDATE projeto SET status = 'revisar' WHERE id = '$id'";
+
+    if (mysql_query($res))
+    {
+        echo "<script> confirm('Revisão Requisitada com sucesso!'); "
+        . "window.location='../../pages/projetoCandidato/infoProjetosCandidatos.php';</script>";
+    } else
+    {
+        echo "<script> alert('Erro na requisição!'); "
+        . "window.location='../../pages/projetoCandidato/infoProjetosCandidatos.php';</script>";
+    }
+}
+
+function revisarProjetoCandidato($id, $notaFinal, $descricao)
+{
+    if ((int)$notaFinal >= 6)
+    {
+        $query = consultaProjetoPorId($id);
+        $dados = mysql_fetch_array($query);
+        
+        $sqlProjeto = "UPDATE projeto SET status='aprovado' WHERE id='$id'";
+    }
+    else if((int)$notaFinal < 6)
+    {
+        $sqlProjeto = "UPDATE projeto SET status='reprovado' WHERE id='$id'";
+    }
+    
+        $sqlAvaliacao = "UPDATE avaliacao SET notaFinal = '$notaFinal', descricao = '$descricao' "
+                . "WHERE idProjeto = '$id'";
+        
+    if (mysql_query($sqlProjeto) && mysql_query($sqlAvaliacao))
+    {
+        echo "<script> confirm('Revisão Confirmada com sucesso!'); "
+        . "window.location='../../pages/projetoCandidato/infoProjetosCandidatos.php';</script>";
+    } else
+    {
+        echo "<script> alert('Erro na revisão!'); "
+        . "window.location='../../pages/projetoCandidato/infoProjetosCandidatos.php';</script>";
     }
 }
 

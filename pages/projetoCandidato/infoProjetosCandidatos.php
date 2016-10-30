@@ -18,7 +18,6 @@ validateGP_AV();
                 });
             </script>
             <!-- FIM DA CRIAÇÃO -->
-
             <table id="listarProjetosCandidatos" class="table table-striped">
                 <thead>
                     <tr>
@@ -35,35 +34,62 @@ validateGP_AV();
                 <tbody>
                     <?php
                     if ($_SESSION['tipoUsr'] == 'Avaliador de Projetos')
-                        $query = consultaProjetoPorCategoria("candidato", $_SESSION['cpf']);
+                        $query = consultaProjetoPorCategoria($_SESSION['cpf']);
                     else
-                        $query = consultaProjetoPorAutor("candidato", $_SESSION['cpf']);
+                        $query = consultaProjetoPorAutor($_SESSION['cpf']);
 
                     while ($dados = mysql_fetch_array(($query)))
                     {
-                        $autorQuery = procuraAutor($dados['autor']);
-                        $autor = mysql_fetch_array($autorQuery);
-                        echo "<tr>"
-                        . "<td> " . $dados['id'] . "</td>"
-                        . "<td> " . $dados['titulo'] . "</td>"
-                        . "<td> " . $dados['categoria'] . "</td>"
-                        . "<td> " . $autor['nome'] . "</td>"
-                        . "<td> R$ " . number_format($dados['valorTotal'], 2, ',', '.') . "</td>"
-                        . "<td> " . $dados['duracao'] . "</td>";
-                        if ($_SESSION['tipoUsr'] == "Avaliador de Projetos")
-                            echo "<td style='text-align: center'><a href='avaliarProjetoCandidato.php'>"
-                            . "<input type='button' value='Avaliar' class='btn-success' onclick=(" . $_SESSION['id'] = $dados['id'] . ")></a>";
-                        else
+                        if($_SESSION['tipoUsr'] == 'Avaliador de Projetos' && ($dados['status'] != "reprovado" && $dados['status'] != "aprovado") || $_SESSION['tipoUsr'] == 'Gestor de Projetos')
                         {
-                            echo "<td style='text-align: center'>"
-                            . "<a href='alterarProjetoCandidato.php'>"
-                            . "<input type='button' value='Editar' class='btn-warning' onclick=(" . $_SESSION['id'] = $dados['id'] . ")></a>";
-                            echo "<br/><br/>";
-                            echo "<a href='excluirProjetoCandidato.php'>"
-                            . "<input type='button' value='Excluir' class='btn-danger' onclick=(" . $_SESSION['id'] = $dados['id'] . ")></a>"
-                            . "</td>";
+                            $autorQuery = procuraAutor($dados['autor']);
+                            $autor = mysql_fetch_array($autorQuery);
+                            echo "<tr>"
+                            . "<td> " . $dados['id'] . "</td>"
+                            . "<td> " . $dados['titulo'] . "</td>"
+                            . "<td> " . $dados['categoria'] . "</td>"
+                            . "<td> " . $autor['nome'] . "</td>"
+                            . "<td> R$ " . number_format($dados['valorTotal'], 2, ',', '.') . "</td>"
+                            . "<td> " . $dados['duracao'] . "</td>";
+                            if ($_SESSION['tipoUsr'] == "Avaliador de Projetos" && $dados['status'] == 'candidato')
+                                echo "<td style='text-align: center'><a href='avaliarProjetoCandidato.php'>"
+                                . "<input type='button' value='Avaliar' class='btn-success' onclick=(" . $_SESSION['id'] = $dados['id'] . ")></a>";
+                            else if ($_SESSION['tipoUsr'] == "Avaliador de Projetos" && $dados['status'] == 'revisar')
+                            {
+                                echo "<td style='text-align: center'><a href='alterarProjetoAvaliado.php'>"
+                                . "<input type='button' value='Iniciar Revisão' class='btn-warning' onclick=(" . $_SESSION['id'] = $dados['id'] . ")></a>";
+                            } 
+                            else if($_SESSION['tipoUsr'] == "Gestor de Projetos" && $dados['status'] == 'candidato')
+                            {
+                                echo "<td style='text-align: center'>"
+                                . "<a href='alterarProjetoCandidato.php'>"
+                                . "<input type='button' value='Editar' class='btn-warning' onclick=(" . $_SESSION['id'] = $dados['id'] . ")></a>";
+                                echo "<br/><br/>";
+                                echo "<a href='excluirProjetoCandidato.php'>"
+                                . "<input type='button' value='Excluir' class='btn-danger' onclick=(" . $_SESSION['id'] = $dados['id'] . ")></a>"
+                                . "</td>";
+                            }
+                            else if($_SESSION['tipoUsr'] == "Gestor de Projetos" && $dados['status'] == 'aprovado')
+                            {
+                                echo "<td style='text-align: center'>"
+                                . "<a href='../projetoAprovado/infoProjetosAprovados.php?id=".$dados['id']."'>"
+                                . "<input type='button' value='Ver Detalhes' class='btn-warning')></a>";
+                                echo "<br/><br/>";
+                                echo "<a href='infoAvaliacao.php'>"
+                                . "<input type='button' value='Ver Avaliação' class='btn-primary' onclick=(" . $_SESSION['id'] = $dados['id'] . ")></a>"
+                                . "</td>";
+                            }
+                            else if($_SESSION['tipoUsr'] == "Gestor de Projetos" && $dados['status'] == 'reprovado')
+                            {
+                                echo "<td style='text-align: center'>"
+                                ."<a href='infoAvaliacao.php'>"
+                                . "<input type='button' value='Ver Avaliação' class='btn-primary' onclick=(" . $_SESSION['id'] = $dados['id'] . ")></a>"
+                                . "</td>";
+                            }
+                            else if($_SESSION['tipoUsr'] == "Gestor de Projetos" && $dados['status'] == 'revisar')
+                                echo "<td>Aguardando Revisão</td>";
+                            echo "</tr>";
                         }
-                        echo "</tr>";
                     }
                     ?>
 
