@@ -301,9 +301,21 @@ function consultaCriterioPorId($id)
     RETURN mysql_query("SELECT * FROM criterios WHERE id = '" . $id . "'");
 }
 
+function consultaCriterioPorCategoria($categoria)
+{
+    RETURN mysql_query("SELECT * FROM criterios WHERE categoria = '" . $categoria . "' AND status = 'ativado'");
+}
+
 function consultaProjeto($status)
 {
     RETURN mysql_query("SELECT * FROM projeto WHERE status = '" . $status . "'");
+}
+
+function consultaProjetoPorCategoria($status, $cpf)
+{
+    $query = consultaUsuarioPorCPF($cpf);
+    $dados = mysql_fetch_array($query);
+    RETURN mysql_query("SELECT * FROM projeto WHERE categoria = '" . $dados['categoria'] . "'");
 }
 
 function consultaProjetoPorId($id)
@@ -341,6 +353,11 @@ function consultaUsuario()
     RETURN mysql_query("SELECT * FROM usuario ORDER BY nome");
 }
 
+function consultaUsuarioPorCPF($cpf)
+{
+    RETURN mysql_query("SELECT * FROM usuario WHERE cpf = '$cpf'");
+}
+
 function procuraProjetoAtivodeAtor($cpf)
 {
     $query = mysql_query("SELECT * FROM projeto WHERE autor = '" . $cpf . "' AND status <> 'concluido'");
@@ -354,11 +371,11 @@ function procuraProjetoAtivodeAtor($cpf)
  *                            AVALIAR PROJETO
  * ---------------------------------------------------------------------- */
 
-function avaliarProjetoCandidato($id, $aval, $desc, $crit1, $crit2, $crit3)
+function avaliarProjetoCandidato($idProj, $cpfAvaliador, $aval, $criterios, $notaFinal)
 {
     if ($aval == 'aprovado')
     {
-        $query = consultaProjetoPorId($id);
+        $query = consultaProjetoPorId($idProj);
         $dados = mysql_fetch_array($query);
         date_default_timezone_set('America/Sao_Paulo');
         $dataInicio = date('Y-m-d');
@@ -366,10 +383,19 @@ function avaliarProjetoCandidato($id, $aval, $desc, $crit1, $crit2, $crit3)
         $dataFim = new DateTime($dataInicio);
         $dataFim->add(new DateInterval('P' . $duracao . 'D'));
         $dataFinal = $dataFim->format('Y-m-d');
+        
+        $sqlProjeto = "UPDATE projeto SET status='aprovado', dataFim='$dataFinal' WHERE id='$idProj'";
     }
-    if (mysql_query($res))
+    else if($aval == 'reprovado')
     {
-        echo "<script> alert('Projeto Avaliado Com Sucesso!'); "
+        $sqlProjeto = "UPDATE projeto SET status='reprovado' WHERE id='$idProj'";
+    }
+    
+        $sqlAvaliacao = "INSERT INTO avaliacao (idProjeto, cpfAval, criterios, notaFinal) VALUES ('$idProj', '$cpfAvaliador', '$criterios', '$notaFinal')";
+        
+    if (mysql_query($sqlProjeto) && mysql_query($sqlAvaliacao))
+    {
+        echo "<script> confirm('Projeto Avaliado Com Sucesso!'); "
         . "window.location='../../pages/projetoAprovado/projetosAprovados.php';</script>";
     } else
     {

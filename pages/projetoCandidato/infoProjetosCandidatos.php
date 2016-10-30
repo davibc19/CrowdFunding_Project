@@ -35,7 +35,7 @@ validateGP_AV();
                 <tbody>
                     <?php
                     if ($_SESSION['tipoUsr'] == 'Avaliador de Projetos')
-                        $query = consultaProjeto("candidato");
+                        $query = consultaProjetoPorCategoria("candidato", $_SESSION['cpf']);
                     else
                         $query = consultaProjetoPorAutor("candidato", $_SESSION['cpf']);
 

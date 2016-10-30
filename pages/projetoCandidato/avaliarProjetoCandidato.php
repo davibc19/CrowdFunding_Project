@@ -2,103 +2,74 @@
 require_once '../../functions/validateSessionFunctions.php';
 require_once '../../functions/functionsBd.php';
 validateHeader();
+validateAV();
 
 if (isset($_POST['enviar']))
 {
-    avaliarProjetoCandidato($_SESSION['id'], $_POST['enviar'], $_POST['descricao'], $_POST['criterio1'], $_POST['criterio2'], $_POST['criterio3']);
+    if((int)$_POST['notaFinal']<1 || (int)$_POST['notaFinal']>10)
+        echo"<script>alert('Valor inválido para a Nota!!');</script>";
+    
+    if(isset($_POST['criterio']))
+    {
+        avaliarProjetoCandidato($_SESSION['id'], $_SESSION['cpf'], $_POST['enviar'], $_POST['criterio'], $_POST['notaFinal']);
+    }
+    else
+        echo "<script>alert('Você deve selecionar ao menos um critério!');</script>";
 }
 ?>
 
 <script>
-    function mostraDiv(valor)
+    function mascara(o, f) {
+        v_obj = o;
+        v_fun = f;
+        setTimeout("execmascara()", 1);
+    }
+    function execmascara() {
+        v_obj.value = v_fun(v_obj.value);
+    }
+    function mnumber(v)
     {
-        if (valor == "2") {
-            document.getElementById("criterio2").style.display = "block";
-            document.getElementById("criterio3").style.display = "none";
-        } else if (valor == "3") {
-            document.getElementById("criterio2").style.display = "block";
-            document.getElementById("criterio3").style.display = "block";
-        }
-        else if (valor == "1")
-        {
-            document.getElementById("criterio2").style.display = "none";
-            document.getElementById("criterio3").style.display = "none";
-        }
+        v = v.replace(/\D/g, "");                  //Remove tudo o que não é dígito
+        return v;
     }
 </script>
 
-<style type="text/css">
-    #criterio2, #criterio3
-    {
-        display:none;
-    }
-</style>
-
 <div class="container">
     <form action="avaliarProjetoCandidato.php" method="post" name="avaliarProjetoCandidato">
-
-        <br/>
         <div class='form-group'>
-            <br/>
-            <label for="qtdCriterio">Selecione a quantidade de criterios: </label>
-            <select class='selectpicker' id='qtdCriterio' name='qtdCriterio' onchange='mostraDiv(this.value)'>
-                <option selected value='1'>Um</option>
-                <option value='2'>Dois</option>
-                <option value='3'>Três</option>
-            </select>
-            <br/><br/>
             <center>
                 <label for="criterios">Criterios</label>
-                <table border='1 '>
+                <table>
+                    <?php
+                    $projeto = mysql_fetch_array(consultaProjetoPorId($_SESSION['id']));
+                    $query = consultaCriterioPorCategoria($projeto['categoria']);
+                    while ($dados = mysql_fetch_array(($query)))
+                    {
+                    ?>
                     <tr>
                         <td>
-                            <!-- Criterio 1 -->
-                            <select class='selectpicker' required id='criterio1' name='criterio1'>
-                                <?php
-                                $query = consultaCriterios();
-                                while ($dados = mysql_fetch_array(($query)))
-                                {
-                                    echo "<option value='" . $dados['id'] . "'> " . $dados['criterio'] . "</option>";
-                                }
-                                echo "</select>";
-                                ?> 
+                            <input type='checkbox' class='form-control' id='criterio' name='criterio' value='<?php echo $dados['criterio']?>'>
                         </td>
-                        <td>
-                            <!-- Criterio 2 -->
-                            <select class='selectpicker' id='criterio2' name='criterio2'>
-                                <option value='nenhum' selected>Nenhum</option>
-                                <?php
-                                $query = consultaCriterios();
-                                while ($dados = mysql_fetch_array(($query)))
-                                {
-                                    echo "<option value='" . $dados['id'] . "'> " . $dados['criterio'] . "</option>";
-                                }
-                                echo "</select>";
-                                ?>
-                        </td>
-                        <td>
-                            <!-- Criterio 3 -->
-                            <select class='selectpicker' id='criterio3' name='criterio3'>
-                                <option value='nenhum' selected>Nenhum</option>
-                                <?php
-                                $query = consultaCriterios();
-                                while ($dados = mysql_fetch_array(($query)))
-                                {
-                                    echo "<option value='" . $dados['id'] . "'> " . $dados['criterio'] . "</option>";
-                                }
-                                echo "</select>";
-                                ?>
+                        <td> 
+                            &nbsp;<?php echo $dados['criterio']?>
                         </td>
                     </tr>
+                    <?php
+                    }
+                    ?> 
                 </table>
             </center>
-            <?php echo "<br/><div class='form-group'>
-                    <textarea  name='descricao' required class='form-control' rows='6' id='descricao'></textarea>
-                    <br/><br/>";
-            ?>
+            <br/>
+            
+            <div class='form-group'>
+                <label for='notaFinal'>Nota Final</label>
+                <input type="text" name="notaFinal" required class="form-control" id="notaFinal" onkeypress="mascara(this, mnumber);">
+            </div>
+            <div class='form-group'>
+                <textarea  name='descricao' required class='form-control' rows='6' id='descricao'></textarea>
+            </div>
             <button type="submit" name="enviar" value="aprovado" class="btn btn-success">Aprovar</button>
             <button type="submit" name="enviar" value="reprovado" class="btn btn-danger">Reprovar</button>
-            <button type="reset" class="btn btn-warning">Limpar</button>
     </form>
 </div>
 
