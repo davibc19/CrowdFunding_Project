@@ -45,16 +45,10 @@
 	<td>Projetos Atuais</td>
 </tr>
 <tr>
-	<td>selectWindow</td>
-	<td>name=_e_0mJV</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>link=Projetos Candidatos</td>
 	<td></td>
 </tr>
-
 </tbody></table>
 </body>
 </html>
