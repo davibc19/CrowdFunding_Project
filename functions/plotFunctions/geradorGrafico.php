@@ -11,7 +11,7 @@ function pickcolor($img, $ignore, $row, $col)
 $queryDoacoes = consultaDoacaoPorIdProjeto($_GET['id']);
 
 $totalAluno = 0;
-$totalGestorProjeto = 0;
+$totalGestorProjeto = 0; 
 $totalTecnico = 0;
 
 while ($dadosDoacoes = mysql_fetch_array($queryDoacoes))
