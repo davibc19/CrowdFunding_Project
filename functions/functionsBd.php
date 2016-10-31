@@ -449,7 +449,7 @@ function revisarProjetoCandidato($id, $notaFinal, $descricao)
     } else
     {
         echo "<script> alert('Erro na revisão!'); "
-        . "window.location='../../pages/projetoCandidato/infoProjetosCandidatos.php';</script>";
+        . "window.location='../../pages/projetoCandidato/infoProjetosCandidatos.php';</script>"; 
     }
 }
 
