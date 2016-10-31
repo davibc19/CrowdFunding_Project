@@ -56,7 +56,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>css=input.btn-danger</td>
+	<td>css=css=input[value='Exluir']</td>
 	<td></td>
 </tr>
 </tbody></table>

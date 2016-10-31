@@ -56,7 +56,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>css=input.btn-warning</td>
+	<td>css=input[value='Alterar']</td>
 	<td></td>
 </tr>
 <!--Verificar se o navegador está na página correta-->

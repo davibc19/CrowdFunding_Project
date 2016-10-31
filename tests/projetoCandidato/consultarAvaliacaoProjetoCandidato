@@ -2,14 +2,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://localhost/CrowdFunding_Project/pages/projetoCandidato/" />
-<title>alterarProjetoCandidato</title>
+<title>consultarAvaliacaoProjetoCandidato</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">alterarProjetoCandidato</td></tr>
+<tr><td rowspan="1" colspan="3">consultarAvaliacaoProjetoCandidato</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -22,6 +22,7 @@
 	<td>css=form[name='formLogin']</td>
 	<td></td>
 </tr>
+<!--Teste deve ser realizado com um Gestor de Projetos-->
 <tr>
 	<td>type</td>
 	<td>name=cpf</td>
@@ -56,23 +57,13 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>css=input[value='Editar']</td>
+	<td>css=input[value='Ver Avaliação']</td>
 	<td></td>
 </tr>
 <!--Verificar se o navegador está na página correta-->
 <tr>
 	<td>assertElementPresent</td>
-	<td>css=form[name='alterarProjetoCandidato']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=duracao</td>
-	<td>200</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>name=enviar</td>
+	<td>css=form[name='visualizarAvaliacao']</td>
 	<td></td>
 </tr>
 </tbody></table>
