@@ -25,7 +25,7 @@
 <tr>
 	<td>type</td>
 	<td>name=cpf</td>
-	<td>418.417.478-74</td>
+	<td>111.111.111-11</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -59,13 +59,6 @@
 	<td>css=input.btn-danger</td>
 	<td></td>
 </tr>
-<!--Verificar sucesso do teste-->
-<tr>
-	<td>verifyText</td>
-	<td>css=h2.sub-header</td>
-	<td>Projetos</td>
-</tr>
-
 </tbody></table>
 </body>
 </html>

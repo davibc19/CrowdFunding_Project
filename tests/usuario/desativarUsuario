@@ -25,7 +25,7 @@
 <tr>
 	<td>type</td>
 	<td>name=cpf</td>
-	<td>418.417.478-74</td>
+	<td>111.111.111-11</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -57,12 +57,6 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>name=desativar</td>
-	<td></td>
-</tr>
-<!--Verificar se o teste teve sucesso-->
-<tr>
-	<td>verifyElementPresent</td>
-	<td>css=form[name='AlterarUsuario']</td>
 	<td></td>
 </tr>
 </tbody></table>

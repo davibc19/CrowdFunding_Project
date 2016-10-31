@@ -3,13 +3,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://localhost/CrowdFunding_Project/pages/projetoCandidato/" />
-<title>cadastrarProjetoCandidato</title>
+<link rel="selenium.base" href="http://localhost/CrowdFunding_Project/pages/usuario/" />
+<title>cadastrarCriterio</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">cadastrarProjetoCandidato</td></tr>
+<tr><td rowspan="1" colspan="3">cadastrarCriterio</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -25,7 +25,7 @@
 <tr>
 	<td>type</td>
 	<td>name=cpf</td>
-	<td>111.111.111-11</td>
+	<td>444.444.444-44</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -45,14 +45,14 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Projetos</td>
+	<td>link=Criterios</td>
 	<td></td>
 </tr>
 <!--Verificar se o navegador está na página correta-->
 <tr>
 	<td>assertText</td>
 	<td>css=h2.sub-header</td>
-	<td>Projetos</td>
+	<td>Critérios</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -66,32 +66,32 @@
 	<td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>id=titulo</td>
-	<td>Projeto 1</td>
+	<td>select</td>
+	<td>id=categoria</td>
+	<td>label=Competição Tecnológica</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=valorTotal</td>
-	<td>120.00</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>name=resumo</td>
-	<td>Meu primeiro projeto</td>
+	<td>id=criterio</td>
+	<td>Pertinência para a universidade</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>name=descricao</td>
-	<td>Meu primeiro projeto</td>
+	<td>Validar a pertinência deste projeto para o renome da universidade</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=status</td>
+	<td>label=Ativado</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=duracao</td>
-	<td>10</td>
+	<td>id=peso</td>
+	<td>5</td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
+	<td>click</td>
 	<td>name=enviar</td>
 	<td></td>
 </tr>

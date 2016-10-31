@@ -4,12 +4,12 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://localhost/CrowdFunding_Project/pages/usuario/" />
-<title>cadastrarUsuario</title>
+<title>cadastrarFinanciadorPublico</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">cadastrarUsuario</td></tr>
+<tr><td rowspan="1" colspan="3">cadastrarFinanciadorPublico</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -25,7 +25,7 @@
 <tr>
 	<td>type</td>
 	<td>id=cep</td>
-	<td>37501150</td>
+	<td>37501151</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -41,12 +41,12 @@
 <tr>
 	<td>select</td>
 	<td>id=tipoUsr</td>
-	<td>label=Gestor de Projetos</td>
+	<td>label=Financiador Público</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>id=cpf</td>
-	<td>418.417.478-74</td>
+	<td>222.222.222-22</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -56,33 +56,27 @@
 <tr>
 	<td>type</td>
 	<td>id=nome</td>
-	<td>Vitor Pio</td>
+	<td>Davi Cruz</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>id=dataNasc</td>
-	<td>1994-05-28</td>
+	<td>1993-10-12</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>id=email</td>
-	<td>vitormarquespio@gmail.com</td>
+	<td>davi@gmail.com</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>id=numero</td>
-	<td>485</td>
+	<td>122</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>name=enviar</td>
 	<td></td>
-</tr>
-<!--Verificar se o teste teve sucesso-->
-<tr>
-	<td>verifyText</td>
-	<td>css=h1</td>
-	<td>Projetos Atuais</td>
 </tr>
 </tbody></table>
 </body>

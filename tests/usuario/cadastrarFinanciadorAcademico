@@ -4,80 +4,74 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://localhost/CrowdFunding_Project/pages/usuario/" />
-<title>alterarUsuario</title>
+<title>cadastrarFinanciadorAcademico</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">alterarUsuario</td></tr>
+<tr><td rowspan="1" colspan="3">cadastrarFinanciadorAcademico</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
-	<td>/CrowdFunding_Project/pages/login/login.php</td>
-	<td></td>
-</tr>
-<!--Verificar se o navegador está na página correta-->
-<tr>
-	<td>assertElementPresent</td>
-	<td>css=form[name='formLogin']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>name=cpf</td>
-	<td>111.111.111-11</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>name=senha</td>
-	<td>1234</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>css=button.btn.btn-success</td>
+	<td>cadastrarUsuario.php</td>
 	<td></td>
 </tr>
 <!--Verificar se o navegador está na página correta-->
 <tr>
 	<td>assertText</td>
-	<td>css=h1</td>
-	<td>Projetos Atuais</td>
+	<td>css=h4</td>
+	<td>Por favor, informe o seu CEP abaixo para iniciar o cadastro!</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cep</td>
+	<td>37501152</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Editar Conta</td>
+	<td>name=enviarCep</td>
 	<td></td>
 </tr>
 <!--Verificar se o navegador está na página correta-->
 <tr>
 	<td>assertElementPresent</td>
-	<td>css=form[name='AlterarUsuario']</td>
+	<td>css=form[name='CadastrarUsuario']</td>
 	<td></td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>id=tipoUsr</td>
+	<td>label=Financiador Acadêmico</td>
+</tr>
+<tr>
 	<td>type</td>
-	<td>id=rua</td>
-	<td>Av Pricesa do oeste</td>
+	<td>id=cpf</td>
+	<td>333.333.333-33</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=pwd</td>
+	<td>1234</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=nome</td>
+	<td>Pedro Henrique</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=dataNasc</td>
+	<td>1990-01-01</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=email</td>
+	<td>pedro@gmail.com</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>id=numero</td>
-	<td>900</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=bairro</td>
-	<td>Cambuí</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=cidade</td>
-	<td>Campinas</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=estado</td>
-	<td>SP</td>
+	<td>57</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
