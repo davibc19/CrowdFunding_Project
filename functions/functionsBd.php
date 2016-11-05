@@ -139,12 +139,29 @@ function cadastrarCriterio($categoria, $criterio, $descricao, $status, $peso)
 
     if (mysql_query($res))
     {
-        echo "<script> confirm('Doação realizada com sucesso!'); "
+        echo "<script> confirm('Critério cadastrado com sucesso!'); "
         . "window.location='../../pages/criterios/infoCriterios.php';</script>";
     } else
     {
-        echo "<script> alert('Erro na doação!'); "
+        echo "<script> alert('Erro no cadastro do Critério!'); "
         . "window.location='../../pages/criterios/infoCriterios.php';</script>";
+    }
+}
+
+function cadastraRepasse($idProjeto, $valor, $necessidade, $data, $status)
+{
+     $res = "INSERT INTO repassefinanceiro (idProjeto, valor, necessidade, date, status)"
+            . " VALUES ('$idProjeto', '$valor', '$necessidade', '$data', '$status')";
+
+
+    if (mysql_query($res))
+    {
+        echo "<script> confirm('Repasse realizada com sucesso!'); "
+        . "window.location='../../pages/projetoCandidato/infoProjetosCandidatos.php';</script>";
+    } else
+    {
+        echo "<script> alert('Erro no cadastro do Repasse!'); "
+        . "window.location='../../pages/projetoCandidato/infoProjetosCandidatos.php';</script>";
     }
 }
 
@@ -274,6 +291,22 @@ function alterarCriterio($id, $criterio, $peso)
     }
 }
 
+function alterarRepasse($id, $valor, $date)
+{
+     $res = "UPDATE repassefinanceiro SET valor = '".$valor."', date = '".$date."' "
+            . "WHERE id = '" . $id . "'";
+
+    if (mysql_query($res))
+    {
+        echo "<script> confirm('Repasse Financeiro alterado com sucesso!'); "
+        . "window.location='../../pages/projetoCandidato/infoProjetosCandidatos.php';</script>";
+    } else
+    {
+        echo "<script> alert('Erro na alteração!'); "
+        . "window.location='../../pages/projetoCandidato/infoProjetosCandidatos.php';</script>";
+    }
+}
+
 /* ----------------------------------------------------------------------
  *                    FUNÇÕES DE CONSULTA
  * ---------------------------------------------------------------------- */
@@ -373,6 +406,17 @@ function consultaAvaliacaoPorId($id)
 {
     RETURN mysql_query("SELECT * FROM avaliacao WHERE idProjeto = '$id'");
 }
+
+function consultaRepassePorIdProjeto($idProjeto)
+{
+    RETURN mysql_query("SELECT * FROM repassefinanceiro WHERE idProjeto = '$idProjeto'");
+}
+
+function consultaRepassePorId($id)
+{
+    RETURN mysql_query("SELECT * FROM repassefinanceiro WHERE id = '$id'");
+}
+
 
 /* ----------------------------------------------------------------------
  *                            AVALIAR PROJETO
