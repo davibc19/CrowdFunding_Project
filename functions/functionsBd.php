@@ -90,13 +90,15 @@ function cadastrarProjetoCandidato($categoria, $titulo, $location, $descricao, $
             . " VALUES ('$categoria', '$titulo', '$location', '$descricao',"
             . "'$duracao', '$dataInicio', '$status', '$valTotal', '$autor', '$resumo')";
 
-    if (mysql_query($res) and move_uploaded_file($tmp_name, $location))
+    if (mysql_query($res))
     {
+        move_uploaded_file($tmp_name, $location);
+        
         echo "<script> alert('Projeto Candidato cadastrado com sucesso!'); "
         . "window.location='../../pages/projetoAprovado/projetosAprovados.php';</script>";
     } else
     {
-        echo "<script> alert('Erro no cadastro da Cota de Financiamento!');"
+        echo "<script> alert('Erro no cadastro de Projeto Candidato!');"
         . " window.location='../../pages/projetoCandidato/cadastrarProjetoCandidato.php';</script>";
     }
 }
