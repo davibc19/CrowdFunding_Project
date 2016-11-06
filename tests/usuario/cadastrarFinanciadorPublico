@@ -16,12 +16,6 @@
 	<td>cadastrarUsuario.php</td>
 	<td></td>
 </tr>
-<!--Verificar se o navegador está na página correta-->
-<tr>
-	<td>assertText</td>
-	<td>css=h4</td>
-	<td>Por favor, informe o seu CEP abaixo para iniciar o cadastro!</td>
-</tr>
 <tr>
 	<td>type</td>
 	<td>id=cep</td>
@@ -30,12 +24,6 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>name=enviarCep</td>
-	<td></td>
-</tr>
-<!--Verificar se o navegador está na página correta-->
-<tr>
-	<td>assertElementPresent</td>
-	<td>css=form[name='CadastrarUsuario']</td>
 	<td></td>
 </tr>
 <tr>

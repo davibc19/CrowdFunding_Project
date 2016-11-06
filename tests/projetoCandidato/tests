@@ -11,9 +11,9 @@
 <tr><td><a href="cadastrarProjetoCandidato">cadastrarProjetoCandidato</a></td></tr>
 <tr><td><a href="infoPeojetosCandidatos">infoProjetosCandidatos</a></td></tr>
 <tr><td><a href="alterarProjetoCandidato">alterarProjetoCandidato</a></td></tr>
-<tr><td><a href="excluirProjetoCandidato">excluirProjetoCandidato</a></td></tr>
 <tr><td><a href="avaliarProjetoCandidato">avaliarProjetoCandidato</a></td></tr>
 <tr><td><a href="consultarAvaliacaoProjetoCandidato">consultarAvaliacaoProjetoCandidato</a></td></tr>
+<tr><td><a href="excluirProjetoCandidato">excluirProjetoCandidato</a></td></tr>
 </tbody></table>
 </body>
 </html>

@@ -43,13 +43,6 @@ CrowdFunding_Project/tests/usuario/consultarUsuario
 	<td>consultarUsuario.php</td>
 	<td></td>
 </tr>
-<!--Verificar se o navegador está na página correta-->
-<tr>
-	<td>assertText</td>
-	<td>css=h2.sub-header</td>
-	<td>Usuários</td>
-</tr>
-<!--Verificar se a tabela contém ao menos um registro-->
 <tr>
 	<td>verifyElementPresent</td>
 	<td>css=td.sorting_1</td>

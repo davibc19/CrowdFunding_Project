@@ -16,12 +16,6 @@
 	<td>/CrowdFunding_Project/pages/login/login.php</td>
 	<td></td>
 </tr>
-<!--Verificar se o navegador está na página correta-->
-<tr>
-	<td>assertElementPresent</td>
-	<td>css=form[name='formLogin']</td>
-	<td></td>
-</tr>
 <tr>
 	<td>type</td>
 	<td>name=cpf</td>
@@ -37,22 +31,10 @@
 	<td>css=button.btn.btn-success</td>
 	<td></td>
 </tr>
-<!--Verificar se o navegador está na página correta-->
-<tr>
-	<td>assertText</td>
-	<td>css=h1</td>
-	<td>Projetos Atuais</td>
-</tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Criterios</td>
 	<td></td>
-</tr>
-<!--Verificar se o navegador está na página correta-->
-<tr>
-	<td>assertText</td>
-	<td>css=h2.sub-header</td>
-	<td>Critérios</td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
