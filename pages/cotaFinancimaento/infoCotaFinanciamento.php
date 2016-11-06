@@ -21,7 +21,7 @@ validateHeader();
             <table id="listarCotaFinanciamento" class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Ano</th>
+                        <th>Nome</th>
                         <th>Valor Total</th>
                         <th>Cota do Aluno</th>
                         <th>Cota do Professor</th>
@@ -37,7 +37,7 @@ validateHeader();
                     while ($dados = mysql_fetch_array(($query)))
                     {
                         echo "<tr style='text-align: center'>"
-                        . "<td> " . $dados['ano'] . "</td>
+                        . "<td> " . $dados['nome'] . "</td>
                                       <td width='15%'> R$ " . number_format($dados['valTotal'], 2, ',', '.') . "</td>
                                       <td> " . $dados['cotaAluno'] . "</td>
                                       <td> " . $dados['cotaProfessor'] . "</td>

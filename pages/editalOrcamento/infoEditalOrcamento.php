@@ -21,8 +21,11 @@ validateHeader();
             <table id="listarEditalOrcamento" class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Ano</th>
+                        <th>Data de Publicação</th>
+                        <th>Nome</th>
                         <th>Valor Total</th>
+                        <?php if (isset($_SESSION["tipoUsr"]) && (strcmp($_SESSION["tipoUsr"], "Avaliador de Projetos") == 0))
+                                echo "<th>Ação</th>";?>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,9 +34,12 @@ validateHeader();
                     while ($dados = mysql_fetch_array(($query)))
                     {
                         echo "<tr>"
-                        . "<td> " . $dados['ano'] . "</td>
-                                       <td> R$ " . number_format($dados['valTotal'], 2, ',', '.') . "</td>"
-                        . "</tr>";
+                        . "<td> " . $dados['dataPublicacao'] . "</td>"
+                        . "<td> " . $dados['nome'] . "</td>
+                                       <td> R$ " . number_format($dados['valTotal'], 2, ',', '.') . "</td>";
+                        if (isset($_SESSION["tipoUsr"]) && (strcmp($_SESSION["tipoUsr"], "Avaliador de Projetos") == 0))
+                                echo "<td><a href='../editalCota/alterarEditalCota.php?id=".$dados['id']."'><input type='button' class='btn-warning' value='Alterar Edital de Orçamento'></a></td>";
+                        echo "</tr>";
                     }
                     ?>
                 </tbody>
@@ -42,7 +48,7 @@ validateHeader();
     </div>
     <hr/>
     <?php
-    if (isset($_SESSION["tipoUsr"]) && (strcmp($_SESSION["tipoUsr"], "gestorOrcamentario") == 0))
+    if (isset($_SESSION["tipoUsr"]) && (strcmp($_SESSION["tipoUsr"], "Avaliador de Projetos") == 0))
     {
         echo " 
         <br/><br/>

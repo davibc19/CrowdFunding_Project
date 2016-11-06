@@ -55,6 +55,15 @@ function validateAV()
     }
 }
 
+function validateFA()
+{
+    if ((isset($_SESSION['tipoUsr']) && (strcmp($_SESSION['tipoUsr'], "Financiador Academico") != 0)))
+    {
+        echo "<script>alert('Você não possui permissão para acessar esta página!');"
+        . "window.location='../projetoAprovado/projetosAprovados.php';</script>";
+    }
+}
+
 function validateDonation()
 {
     if ((!isset($_SESSION['tipoUsr'])) || (strcmp($_SESSION['tipoUsr'], "Gestor de Projetos") != 0) 

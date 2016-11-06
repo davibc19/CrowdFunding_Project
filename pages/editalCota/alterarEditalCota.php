@@ -10,34 +10,26 @@ if (isset($_POST['enviar']))
         echo "<script>alert('Erro nos Valores Mínimo ou Máximo')</script>";
     else
     {
-        if (isset($_FILES['imagem']['name']) && ($_FILES['imagem']['error'] == 0))
-        {
-            $name = $_FILES['imagem']['name'];
-            $tmp_name = $_FILES['imagem']['tmp_name'];
-            $location = "../../Arquivos/$name";
-        } else
-        {
-            $tmp_name = "SemArquivo";
-            $location = "nda";
-        }
-        cadastrarEditalOrcamento($_POST['nome'], $_POST['dataPublicacao'], $_POST['dataTermino'], $_POST['valTotal'], 
-                $_POST['valMin'], $_POST['valMax'], $_POST['cotaAluno'], $_POST['cotaProf'], $_POST['cotaServ'], 
-                $tmp_name, $location);
+        alterarEditalOrcamento($_GET['id'], $_POST['nome'], $_POST['dataPublicacao'], $_POST['dataTermino'], $_POST['valTotal'], 
+                $_POST['valMin'], $_POST['valMax'], $_POST['cotaAluno'], $_POST['cotaProf'], $_POST['cotaServ']);
     }
 }
+
+$query = consultaCotaFinanciamenoPorId($_GET['id']);
+$dadosCotaFinanciamento = mysql_fetch_array($query);
+
 ?>
 
 <script>
     function Submeter()
     {
-        with (document.cadastroEditalCota)
+        with (document.alterarEditalCota)
         {
-            var option = confirm("Deseja realmente realizar o cadastro do Edital de Orçamento?");
+            var option = confirm("Deseja realmente realizar a atualização do Edital de Orçamento?");
             if (option == true)
             {
                 method = "POST";
-                action = "cadastrarEditalCota.php";
-                x = "Usuário Cadastrado com Sucesso";
+                action = "alterarEditalCota.php?id=<?php echo $_GET['id']?>";
                 submit();
             }
         }
@@ -71,58 +63,48 @@ if (isset($_POST['enviar']))
 
 
 <div class="container">
-    <form name="cadastroEditalCota" onSubmit="Submeter();">
+    <form name="cadastroEditalCota?id=<?php echo $_GET['id'] ?>" onSubmit="Submeter();" method="post">
         <div class="form-group">
             <label for="nome">Nome:</label>
-            <input type="text" name="nome" required class="form-control" id="nome" maxlength="50">
+            <input type="text" name="nome" required class="form-control" id="nome" maxlength="50" value="<?php echo $dadosCotaFinanciamento['nome'] ?>">
         </div>
         <div class="form-group">
             <label for="dataPublicacao">Data de Publicação do Edital:</label>
-            <input type="text" name="dataPublicacao" required class="form-control" id="dataPublicacao" value="<?php
-date_default_timezone_set('America/Sao_Paulo');
-$date = date('Y-m-d');
-echo $date;
-?>">
+            <input type="text" name="dataPublicacao" required class="form-control" id="dataPublicacao" value="<?php echo $dadosCotaFinanciamento['dataPublicacao'] ?>">
         </div>
         <div class="form-group">
             <label for="dataTermino">Data de Término do Edital:</label>
-            <input type="text" name="dataTermino" required class="form-control" id="dataTermino"value="<?php
-            echo $date;
-?>">
+            <input type="text" name="dataTermino" required class="form-control" id="dataTermino" value="<?php echo $dadosCotaFinanciamento['dataTermino'] ?>">
         </div>
         <div class="form-group">
             <label for="valTotal">Valor Total do Orçamento:</label>
-            <input type="text" name="valTotal" required class="form-control" id="valTotal" onkeypress="mascara(this, mmoney);">
+            <input type="text" name="valTotal" required class="form-control" id="valTotal" onkeypress="mascara(this, mmoney);" value="<?php echo $dadosCotaFinanciamento['valTotal'] ?>">
         </div>
         <div class="form-group">
             <label for="valMin">Valor Mínimo:</label>
-            <input type="text" name="valMin" required class="form-control" id="valMin" onkeypress="mascara(this, mmoney);">
+            <input type="text" name="valMin" required class="form-control" id="valMin" onkeypress="mascara(this, mmoney);" value="<?php echo $dadosCotaFinanciamento['valMin'] ?>">
         </div>
         <div class="form-group">
             <label for="valMax">Valor Máximo:</label>
-            <input type="text" name="valMax" required class="form-control" id="valMax" onkeypress="mascara(this, mmoney);">
-        </div>
-        <div class="form-group">
-            <label for="arquivo">Arquivo:</label>
-            <input type="file" name="arquivo" class="form-control" id="arquivo">
+            <input type="text" name="valMax" required class="form-control" id="valMax" onkeypress="mascara(this, mmoney);"  value="<?php echo $dadosCotaFinanciamento['valMax'] ?>">
         </div>
         <div class="form-group">
             <label for="cotaAluno">Cota do Orçamento para Aluno (0,..):</label>
-            <input type="text" name="cotaAluno" required class="form-control" onkeypress="mascara(this, mtaxa);" id="cotaAluno">
+            <input type="text" name="cotaAluno" required class="form-control" onkeypress="mascara(this, mtaxa);" id="cotaAluno" value="<?php echo $dadosCotaFinanciamento['cotaAluno'] ?>">
         </div>
 
         <div class="form-group">
             <label for="cotaProf">Cota do Orçamento para Professor (0,..):</label>
-            <input type="text" name="cotaProf" required class="form-control" onkeypress="mascara(this, mtaxa);" id="cotaProf">
+            <input type="text" name="cotaProf" required class="form-control" onkeypress="mascara(this, mtaxa);" id="cotaProf" value="<?php echo $dadosCotaFinanciamento['cotaProfessor'] ?>">
         </div>
 
         <div class="form-group">
             <label for="cotaServ">Cota do Orçamento para Servidores Técnicos (0,..):</label>
-            <input type="text" name="cotaServ" required class="form-control" onkeypress="mascara(this, mtaxa);" id="cotaServ">
+            <input type="text" name="cotaServ" required class="form-control" onkeypress="mascara(this, mtaxa);" id="cotaServ" value="<?php echo $dadosCotaFinanciamento['cotaServ'] ?>">
         </div>
 
 
-        <button type="submit" name="enviar" class="btn btn-success">Cadastrar</button>
+        <button type="submit" name="enviar" class="btn btn-success">Salvar Alterações</button>
         <button type="reset" class="btn btn-warning">Limpar</button>
     </form>
 </div>

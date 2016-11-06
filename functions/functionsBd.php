@@ -23,7 +23,7 @@ function cadastrarUsuario($tipo, $cpf, $nome, $email, $senha, $cep, $rua, $numer
     }
 }
 
-function cadastrarEditalOrcamento($ano, $valTotal, $cotaAluno, $cotaProf, $cotaServ)
+function cadastrarEditalOrcamento($nome, $dataPublicacao, $dataTermino, $valTotal, $valMin, $valMAx, $cotaAluno, $cotaProf, $cotaServ, $tmp_name, $location)
 {
 
     if (($cotaAluno + $cotaProf + $cotaServ) != 1)
@@ -33,11 +33,11 @@ function cadastrarEditalOrcamento($ano, $valTotal, $cotaAluno, $cotaProf, $cotaS
     } else
     {
         // Pega QTD de usuários
-        $SQL = mysql_query("SELECT COUNT(*) FROM usuario WHERE tipo = 'aluno'");
+        $SQL = mysql_query("SELECT COUNT(*) FROM usuario WHERE tipo = 'Financiador Academico'");
         $qtdAluno = mysql_result($SQL, 0);
-        $SQL = mysql_query("SELECT COUNT(*) FROM usuario WHERE tipo = 'gestorProjeto'");
+        $SQL = mysql_query("SELECT COUNT(*) FROM usuario WHERE tipo = 'Gestor de Projetos'");
         $qtdProfessor = mysql_fetch_array($SQL);
-        $SQL = mysql_query("SELECT COUNT(*) FROM usuario WHERE tipo = 'tecnico'");
+        $SQL = mysql_query("SELECT COUNT(*) FROM usuario WHERE tipo = 'Financiador Academico'");
         $qtdServ = mysql_fetch_array($SQL);
 
         // Realiza contas
@@ -61,23 +61,25 @@ function cadastrarEditalOrcamento($ano, $valTotal, $cotaAluno, $cotaProf, $cotaS
             $valIndAluno = 0;
 
         // ATUALIZAR FUNÇÃO
-        $res = "INSERT INTO editalorcamento (ano, valTotal, cotaAluno, cotaProfessor, cotaServ, "
+        $res = "INSERT INTO editalorcamento (nome, dataPublicacao, dataTermino, valTotal, valMin, valMax, arquivo, cotaAluno, cotaProfessor, cotaServ, "
                 . "qtdAluno, qtdProfessor, qtdServ, "
                 . "valTotalAluno, valTotalProfessor, valTotalServ,"
                 . "valIndAluno, valIndProfessor, valIndServ) VALUES "
-                . "('$ano', '$valTotal', '$cotaAluno', '$cotaProf', '$cotaServ', "
+                . "('$nome', '$dataPublicacao', '$dataTermino', '$valTotal', '$valMin', '$valMax', '$arquivo', "
+                . "'$cotaAluno', '$cotaProf', '$cotaServ', "
                 . "'[$qtdAluno[0]', '$qtdProfessor[0]', '$qtdServ[0]', "
                 . "'$valTotalAluno', '$valTotalProfessor', '$valTotalServ',"
                 . "'$valIndAluno', '$valIndProfessor', '$valIndServ')";
 
         if (mysql_query($res))
         {
-            echo "<script> alert('Edital de Orçamento cadastrado com sucesso!'); "
-            . "window.location='projetosAprovados.php';</script>";
+            move_uploaded_file($tmp_name, $location);
+            echo "<script> confirm('Edital de Orçamento cadastrado com sucesso!'); "
+            . "window.location='../editalOrcamento/infoEditalOrcamento.php';</script>";
         } else
         {
             echo "<script> alert('Erro no cadastro do Edital de Orçamento!');"
-            . " window.location='cadastrarEditalCota.php';</script>";
+            . " window.location='../editalOrcamento/infoEditalOrcamento.php';</script>";
         }
     }
 }
@@ -93,7 +95,7 @@ function cadastrarProjetoCandidato($categoria, $titulo, $location, $descricao, $
     if (mysql_query($res))
     {
         move_uploaded_file($tmp_name, $location);
-        
+
         echo "<script> alert('Projeto Candidato cadastrado com sucesso!'); "
         . "window.location='../../pages/projetoAprovado/projetosAprovados.php';</script>";
     } else
@@ -150,7 +152,7 @@ function cadastrarCriterio($categoria, $criterio, $descricao, $status, $peso)
 
 function cadastraRepasse($idProjeto, $valor, $necessidade, $data, $status)
 {
-     $res = "INSERT INTO repassefinanceiro (idProjeto, valor, necessidade, date, status)"
+    $res = "INSERT INTO repassefinanceiro (idProjeto, valor, necessidade, date, status)"
             . " VALUES ('$idProjeto', '$valor', '$necessidade', '$data', '$status')";
 
 
@@ -277,7 +279,7 @@ function ativaUsuario($cpf)
 
 function alterarCriterio($id, $criterio, $peso)
 {
-     $res = "UPDATE criterios SET criterio = '".$criterio."', peso = '".$peso."' "
+    $res = "UPDATE criterios SET criterio = '" . $criterio . "', peso = '" . $peso . "' "
             . "WHERE id = '" . $id . "'";
 
     if (mysql_query($res))
@@ -293,7 +295,7 @@ function alterarCriterio($id, $criterio, $peso)
 
 function alterarRepasse($id, $valor, $date)
 {
-     $res = "UPDATE repassefinanceiro SET valor = '".$valor."', date = '".$date."' "
+    $res = "UPDATE repassefinanceiro SET valor = '" . $valor . "', date = '" . $date . "' "
             . "WHERE id = '" . $id . "'";
 
     if (mysql_query($res))
@@ -309,7 +311,7 @@ function alterarRepasse($id, $valor, $date)
 
 function finalizarProjetoAprovado($id)
 {
-     $res = "UPDATE projeto SET status = 'concluido' WHERE id = '" . $id . "'";
+    $res = "UPDATE projeto SET status = 'concluido' WHERE id = '" . $id . "'";
 
     if (mysql_query($res))
     {
@@ -322,13 +324,70 @@ function finalizarProjetoAprovado($id)
     }
 }
 
+function alterarEditalOrcamento($id, $nome, $dataPublicacao, $dataTermino, $valTotal, $valMin, $valMax, $cotaAluno, $cotaProf, $cotaServ)
+{
+
+    if (($cotaAluno + $cotaProf + $cotaServ) != 1)
+    {
+        echo "<script> alert('Erro no cadastro das cotas do Edital de Orçamento!');"
+        . " window.location='cadastrarEditalCota.php';</script>";
+    } else
+    {
+        // Pega QTD de usuários
+        $SQL = mysql_query("SELECT COUNT(*) FROM usuario WHERE tipo = 'Financiador Academico'");
+        $qtdAluno = mysql_result($SQL, 0);
+        $SQL = mysql_query("SELECT COUNT(*) FROM usuario WHERE tipo = 'Gestor de Projetos'");
+        $qtdProfessor = mysql_fetch_array($SQL);
+        $SQL = mysql_query("SELECT COUNT(*) FROM usuario WHERE tipo = 'Financiador Academico'");
+        $qtdServ = mysql_fetch_array($SQL);
+
+        // Realiza contas
+        $valTotalAluno = $valTotal * $cotaAluno;
+        $valTotalProfessor = $valTotal * $cotaProf;
+        $valTotalServ = $valTotal * $cotaServ;
+
+        if ($qtdAluno[0] != 0)
+            $valIndAluno = $valTotalAluno / $qtdAluno[0];
+        else
+            $valIndAluno = 0;
+
+        if ($qtdProfessor[0] != 0)
+            $valIndProfessor = $valTotalProfessor / $qtdProfessor[0];
+        else
+            $valIndAluno = 0;
+
+        if ($qtdServ[0] != 0)
+            $valIndServ = $valTotalServ / $qtdServ[0];
+        else
+            $valIndAluno = 0;
+
+        // ATUALIZAR FUNÇÃO
+        $res = "UPDATE editalorcamento SET nome = '" . $nome . "', dataPublicacao = '" . $dataPublicacao . "', dataTermino = '" . $dataTermino . "', "
+                . "valTotal = '" . $valTotal . "', valMin = '" . $valMin . "', valMax = '" . $valMax . "', cotaAluno = '" . $cotaAluno . "', "
+                . "cotaProfessor = '" . $cotaProf . "', cotaServ = '" . $cotaServ . "', qtdAluno = '" . $qtdAluno[0] . "', qtdProfessor = '" . $qtdProfessor[0] . "', "
+                . "qtdServ = '" . $qtdServ[0] . "', valTotalAluno = '" . $valTotalAluno . "', "
+                . "valTotalProfessor = '" . $valTotalProfessor . "', valTotalServ = '" . $valTotalServ . "', "
+                . "valIndAluno = '" . $valIndAluno . "', valIndProfessor = '" . $valIndProfessor . "', valIndServ = '" . $valIndServ . "' WHERE id = '" . $id . "'";
+
+        if (mysql_query($res))
+        {
+            echo "<script> confirm('Edital de Orçamento atualizado com sucesso!'); "
+            . "window.location='../editalOrcamento/infoEditalOrcamento.php';</script>";
+        } else
+        {
+            echo "<script> alert('Erro na atualização do Edital de Orçamento!');"
+            . " window.location='../editalOrcamento/infoEditalOrcamento.php';</script>";
+        }
+    }
+}
+
 /* ----------------------------------------------------------------------
  *                    FUNÇÕES DE CONSULTA
  * ---------------------------------------------------------------------- */
 
 function consultaEditalOrcamento()
 {
-    RETURN mysql_query("SELECT ano, valTotal FROM editalorcamento");
+    RETURN mysql_query("SELECT * FROM editalorcamento ORDER BY nome");
 }
 
 function consultaQtdApoiadores($id)
@@ -339,6 +398,11 @@ function consultaQtdApoiadores($id)
 function consultaCotaFinanciameno()
 {
     RETURN mysql_query("SELECT * FROM editalorcamento");
+}
+
+function consultaCotaFinanciamenoPorId($id)
+{
+    RETURN mysql_query("SELECT * FROM editalorcamento WHERE id = $id");
 }
 
 function consultaCriterios()
@@ -437,14 +501,13 @@ function consultaRepassePorId($id)
     RETURN mysql_query("SELECT * FROM repassefinanceiro WHERE id = '$id'");
 }
 
-
 /* ----------------------------------------------------------------------
  *                            AVALIAR PROJETO
  * ---------------------------------------------------------------------- */
 
 function avaliarProjetoCandidato($idProj, $cpfAvaliador, $criterios, $notaFinal, $descricao)
 {
-    if ((int)$notaFinal >= 6)
+    if ((int) $notaFinal >= 6)
     {
         $query = consultaProjetoPorId($idProj);
         $dados = mysql_fetch_array($query);
@@ -454,17 +517,16 @@ function avaliarProjetoCandidato($idProj, $cpfAvaliador, $criterios, $notaFinal,
         $dataFim = new DateTime($dataInicio);
         $dataFim->add(new DateInterval('P' . $duracao . 'D'));
         $dataFinal = $dataFim->format('Y-m-d');
-        
+
         $sqlProjeto = "UPDATE projeto SET status='aprovado', dataFim='$dataFinal' WHERE id='$idProj'";
-    }
-    else if((int)$notaFinal < 6)
+    } else if ((int) $notaFinal < 6)
     {
         $sqlProjeto = "UPDATE projeto SET status='reprovado' WHERE id='$idProj'";
     }
-    
-        $sqlAvaliacao = "INSERT INTO avaliacao (idProjeto, cpfAval, criterios, notaFinal, descricao) "
-                . "VALUES ('$idProj', '$cpfAvaliador', '$criterios', '$notaFinal', '$descricao')";
-        
+
+    $sqlAvaliacao = "INSERT INTO avaliacao (idProjeto, cpfAval, criterios, notaFinal, descricao) "
+            . "VALUES ('$idProj', '$cpfAvaliador', '$criterios', '$notaFinal', '$descricao')";
+
     if (mysql_query($sqlProjeto) && mysql_query($sqlAvaliacao))
     {
         echo "<script> confirm('Projeto Avaliado Com Sucesso!'); "
@@ -493,21 +555,20 @@ function requisitarRevisao($id)
 
 function revisarProjetoCandidato($id, $notaFinal, $descricao)
 {
-    if ((int)$notaFinal >= 6)
+    if ((int) $notaFinal >= 6)
     {
         $query = consultaProjetoPorId($id);
         $dados = mysql_fetch_array($query);
-        
+
         $sqlProjeto = "UPDATE projeto SET status='aprovado' WHERE id='$id'";
-    }
-    else if((int)$notaFinal < 6)
+    } else if ((int) $notaFinal < 6)
     {
         $sqlProjeto = "UPDATE projeto SET status='reprovado' WHERE id='$id'";
     }
-    
-        $sqlAvaliacao = "UPDATE avaliacao SET notaFinal = '$notaFinal', descricao = '$descricao' "
-                . "WHERE idProjeto = '$id'";
-        
+
+    $sqlAvaliacao = "UPDATE avaliacao SET notaFinal = '$notaFinal', descricao = '$descricao' "
+            . "WHERE idProjeto = '$id'";
+
     if (mysql_query($sqlProjeto) && mysql_query($sqlAvaliacao))
     {
         echo "<script> confirm('Revisão Confirmada com sucesso!'); "
@@ -515,7 +576,7 @@ function revisarProjetoCandidato($id, $notaFinal, $descricao)
     } else
     {
         echo "<script> alert('Erro na revisão!'); "
-        . "window.location='../../pages/projetoCandidato/infoProjetosCandidatos.php';</script>"; 
+        . "window.location='../../pages/projetoCandidato/infoProjetosCandidatos.php';</script>";
     }
 }
 
