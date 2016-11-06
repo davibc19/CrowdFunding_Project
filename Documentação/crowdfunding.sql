@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 30-Out-2016 às 19:13
+-- Generation Time: 06-Nov-2016 às 06:23
 -- Versão do servidor: 10.1.9-MariaDB
 -- PHP Version: 5.6.15
 
@@ -41,7 +41,8 @@ CREATE TABLE `avaliacao` (
 
 INSERT INTO `avaliacao` (`idAvaliacao`, `idProjeto`, `cpfAval`, `criterios`, `notaFinal`, `descricao`) VALUES
 (3, 2, '115.726.956-76', 'Viabilidade Financeira', 5, ''),
-(12, 9, '115.726.956-76', ', Aspectos Tecnicos, Utilidade', 8, 'OK');
+(12, 9, '115.726.956-76', ', Aspectos Tecnicos, Utilidade', 8, 'OK'),
+(15, 19, '444.444.444-44', ', Viabilidade Financeira', 8, 'AvaliaÃ§Ã£o ');
 
 -- --------------------------------------------------------
 
@@ -64,10 +65,11 @@ CREATE TABLE `criterios` (
 
 INSERT INTO `criterios` (`id`, `categoria`, `criterio`, `descricao`, `status`, `peso`) VALUES
 (1, 'Pesquisa', 'Viabilidade Financeira', 'Analisa a viabilidade financeira do projeto proposto', 'ativado', 5),
-(2, 'Pequenas Obras', 'Viabilidade Espacial', 'Analisa se e possivel aplicar o projeto no local especificado', 'desativado', 10),
-(3, 'CompetiÃ§Ã£o TecnolÃ³gica', 'Aspectos Tecnicos', 'Informa se os aspectos tecnicos apresentados sao coerentes com a realidade', 'ativado', 7),
+(2, 'Pequenas Obras', 'Viabilidade Espacial', 'Analisa se e possivel aplicar o projeto no local especificado', 'ativado', 10),
+(3, 'CompetiÃ§Ã£o TecnolÃ³gica', 'Aspectos Tecnicos', 'Informa se os aspectos tecnicos apresentados sao coerentes com a realidade', 'ativado', 3),
 (4, 'CompetiÃ§Ã£o TecnolÃ³gica', 'Utilidade', 'Analisa a utilidade do projeto', 'ativado', 6),
-(7, 'Pesquisa', 'CritÃ©rio Teste de AvaliaÃ§Ã£o', '13', 'desativado', 7);
+(7, 'Pesquisa', 'CritÃ©rio Teste de AvaliaÃ§Ã£o', '13', 'desativado', 7),
+(9, 'CompetiÃ§Ã£o TecnolÃ³gica', 'PertinÃªncia para a universidade', 'Validar a pertinÃªncia deste projeto para o renome da universidade', 'ativado', 5);
 
 -- --------------------------------------------------------
 
@@ -90,8 +92,14 @@ CREATE TABLE `doacoes` (
 --
 
 CREATE TABLE `editalorcamento` (
-  `ano` int(4) NOT NULL,
+  `id` int(11) NOT NULL,
+  `nome` varchar(50) NOT NULL,
+  `dataPublicacao` date NOT NULL,
+  `dataTermino` date NOT NULL,
   `valTotal` float NOT NULL,
+  `valMin` float NOT NULL,
+  `valMax` float NOT NULL,
+  `arquivo` varchar(30) NOT NULL,
   `cotaAluno` float NOT NULL,
   `cotaProfessor` float NOT NULL,
   `cotaServ` float NOT NULL,
@@ -110,9 +118,8 @@ CREATE TABLE `editalorcamento` (
 -- Extraindo dados da tabela `editalorcamento`
 --
 
-INSERT INTO `editalorcamento` (`ano`, `valTotal`, `cotaAluno`, `cotaProfessor`, `cotaServ`, `qtdAluno`, `qtdProfessor`, `qtdServ`, `valTotalAluno`, `valTotalProfessor`, `valTotalServ`, `valIndAluno`, `valIndProfessor`, `valIndServ`) VALUES
-(2015, 10000000, 0, 0.7, 0.3, 0, 1, 1, 0, 7000000, 3000000, 0, 7000000, 3000000),
-(2016, 100000, 0.1, 0.8, 0.1, 0, 1, 1, 10000, 80000, 10000, 0, 80000, 10000);
+INSERT INTO `editalorcamento` (`id`, `nome`, `dataPublicacao`, `dataTermino`, `valTotal`, `valMin`, `valMax`, `arquivo`, `cotaAluno`, `cotaProfessor`, `cotaServ`, `qtdAluno`, `qtdProfessor`, `qtdServ`, `valTotalAluno`, `valTotalProfessor`, `valTotalServ`, `valIndAluno`, `valIndProfessor`, `valIndServ`) VALUES
+(2017, 'Cadastro Teste de Edital 2016', '2016-11-06', '2016-12-25', 1000, 10, 100, '', 0.1, 0.5, 0.4, 1, 2, 1, 100, 500, 400, 100, 250, 400);
 
 -- --------------------------------------------------------
 
@@ -142,8 +149,32 @@ CREATE TABLE `projeto` (
 
 INSERT INTO `projeto` (`id`, `status`, `titulo`, `autor`, `valorTotal`, `duracao`, `dataInicio`, `dataFim`, `descricao`, `categoria`, `valArrecadado`, `resumo`, `imagem`) VALUES
 (2, 'aprovado', 'TituloTeste', '418.417.478-74', 100, 123, '2016-09-16', '0000-00-00', 'rem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi gravida libero nec velit. Morbi scelerisque luctus velit. Etiam dui sem, fermentum vitae, sagittis id, malesuada in, quam. Proin mattis lacinia justo. Vestibulum facilisis auctor urna. Aliquam in lorem sit amet leo accumsan lacinia. Integer rutrum, orci vestibulum ullamcorper ultricies, lacus quam ultricies odio, vitae placerat pede sem sit amet enim. Phasellus et lorem id felis nonummy placerat.rem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi gravida libero nec velit. Morbi scelerisque luctus velit. Etiam dui sem, fermentum vitae, sagittis id, malesuada in, quam. Proin mattis lacinia justo. Vestibulum facilisis auctor urna. Aliquam in lorem sit amet leo accumsan lacinia. Integer rutrum, orci vestibulum ullamcorper ultricies, lacus quam ultricies odio, vitae placerat pede sem sit amet enim. Phasellus et lorem id felis nonummy placerat.rem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi gravida libero nec velit. Morbi scelerisque luctus velit. Etiam dui sem, fermentum vitae, sagittis id, malesuada in, quam. Proin mattis lacinia justo. Vestibulum facilisis auctor urna. Aliquam in lorem sit amet leo accumsan lacinia. Integer rutrum, orci vestibulum ullamcorper ultricies, lacus quam ultricies odio, vitae placerat pede sem sit amet enim. Phasellus et lorem id felis nonummy placerat.', 'Pesquisa', 0, 'rem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi gravida libero nec velit. Morbi scelerisque luctus velit. Etiam dui sem, fermentum vitae, sagittis id, malesuada in, quam. Proin mattis lacinia justo. Vestibulum facilisis auctor urna. Aliquam in lorem sit amet leo accumsan lacinia. Integer rutrum, orci vestibulum ullamcorper ultricies, lacus quam ultricies odio, vitae placerat pede sem sit amet enim. Phasellus et lorem id felis nonummy placerat.', '../../Imagens/img01.jpg'),
-(3, 'candidato', 'Teste3', '418.417.478-74', 1200.5, 100, '2016-09-16', '2017-02-07', 'rem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi gravida libero nec velit. Morbi scelerisque luctus velit. Etiam dui sem, fermentum vitae, sagittis id, malesuada in, quam. Proin mattis lacinia justo. Vestibulum facilisis auctor urna. Aliquam in lorem sit amet leo accumsan lacinia. Integer rutrum, orci vestibulum ullamcorper ultricies, lacus quam ultricies odio, vitae placerat pede sem sit amet enim. Phasellus et lorem id felis nonummy placerat.rem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi gravida libero nec velit. Morbi scelerisque luctus velit. Etiam dui sem, fermentum vitae, sagittis id, malesuada in, quam. Proin mattis lacinia justo. Vestibulum facilisis auctor urna. Aliquam in lorem sit amet leo accumsan lacinia. Integer rutrum, orci vestibulum ullamcorper ultricies, lacus quam ultricies odio, vitae placerat pede sem sit amet enim. Phasellus et lorem id felis nonummy placerat.', 'Pesquisa', 793, 'rem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi gravida libero nec velit. Morbi scelerisque luctus velit. Etiam dui sem, fermentum vitae, sagittis id, malesuada in, quam. Proin mattis lacinia justo. Vestibulum facilisis auctor urna. Aliquam in lorem sit amet leo accumsan lacinia. Integer rutrum, orci vestibulum ullamcorper ultricies, lacus quam ultricies odio, vitae placerat pede sem sit amet enim. Phasellus et lorem id felis nonummy placerat.', '../../Imagens/img02.jpg'),
-(9, 'aprovado', 'Projeto de CompetiÃ§Ã£o TecnolÃ³gica', '115.726.956-76', 1000, 100, '2016-10-23', '2017-02-07', 'Blablabla Resumo Balbalblblabla Blablabla Resumo Balbalblblabla Blablabla Resumo Balbalblblabla Blablabla Resumo Balbalblblabla Blablabla Resumo Balbalblblabla Blablabla Resumo Balbalblblabla Blablabla Resumo Balbalblblabla Blablabla Resumo Balbalblblabla Blablabla Resumo Balbalblblabla Blablabla Resumo Balbalblblabla Blablabla Resumo Balbalblblabla Blablabla Resumo Balbalblblabla ', 'CompetiÃ§Ã£o TecnolÃ³gica', 0, 'Blablabla Resumo Balbalblblabla Blablabla Resumo Balbalblblabla Blablabla Resumo Balbalblblabla ', '../../Imagens/NoImage.jpg');
+(3, 'aprovado', 'Teste3', '418.417.478-74', 1200.5, 100, '2016-09-16', '2017-02-08', 'rem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi gravida libero nec velit. Morbi scelerisque luctus velit. Etiam dui sem, fermentum vitae, sagittis id, malesuada in, quam. Proin mattis lacinia justo. Vestibulum facilisis auctor urna. Aliquam in lorem sit amet leo accumsan lacinia. Integer rutrum, orci vestibulum ullamcorper ultricies, lacus quam ultricies odio, vitae placerat pede sem sit amet enim. Phasellus et lorem id felis nonummy placerat.rem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi gravida libero nec velit. Morbi scelerisque luctus velit. Etiam dui sem, fermentum vitae, sagittis id, malesuada in, quam. Proin mattis lacinia justo. Vestibulum facilisis auctor urna. Aliquam in lorem sit amet leo accumsan lacinia. Integer rutrum, orci vestibulum ullamcorper ultricies, lacus quam ultricies odio, vitae placerat pede sem sit amet enim. Phasellus et lorem id felis nonummy placerat.', 'Pesquisa', 793, 'rem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi gravida libero nec velit. Morbi scelerisque luctus velit. Etiam dui sem, fermentum vitae, sagittis id, malesuada in, quam. Proin mattis lacinia justo. Vestibulum facilisis auctor urna. Aliquam in lorem sit amet leo accumsan lacinia. Integer rutrum, orci vestibulum ullamcorper ultricies, lacus quam ultricies odio, vitae placerat pede sem sit amet enim. Phasellus et lorem id felis nonummy placerat.', '../../Imagens/img02.jpg'),
+(9, 'aprovado', 'Projeto de CompetiÃ§Ã£o TecnolÃ³gica', '115.726.956-76', 1000, 100, '2016-10-23', '2017-02-07', 'Blablabla Resumo Balbalblblabla Blablabla Resumo Balbalblblabla Blablabla Resumo Balbalblblabla Blablabla Resumo Balbalblblabla Blablabla Resumo Balbalblblabla Blablabla Resumo Balbalblblabla Blablabla Resumo Balbalblblabla Blablabla Resumo Balbalblblabla Blablabla Resumo Balbalblblabla Blablabla Resumo Balbalblblabla Blablabla Resumo Balbalblblabla Blablabla Resumo Balbalblblabla ', 'CompetiÃ§Ã£o TecnolÃ³gica', 0, 'Blablabla Resumo Balbalblblabla Blablabla Resumo Balbalblblabla Blablabla Resumo Balbalblblabla ', '../../Imagens/NoImage.jpg'),
+(19, 'aprovado', 'Projeto 1', '111.111.111-11', 120, 200, '2016-10-31', '2017-05-19', 'Meu primeiro projeto', 'Pesquisa', 0, 'Meu primeiro projeto', '../../Imagens/NoImage.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `repassefinanceiro`
+--
+
+CREATE TABLE `repassefinanceiro` (
+  `id` int(11) NOT NULL,
+  `idProjeto` int(11) NOT NULL,
+  `valor` float NOT NULL,
+  `necessidade` text COLLATE utf8_unicode_ci NOT NULL,
+  `date` date NOT NULL,
+  `status` varchar(15) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Extraindo dados da tabela `repassefinanceiro`
+--
+
+INSERT INTO `repassefinanceiro` (`id`, `idProjeto`, `valor`, `necessidade`, `date`, `status`) VALUES
+(1, 9, 10, 'Compra de Materiais', '2016-11-05', 'NÃ£o Quitado'),
+(3, 9, 80.25, 'Compra de Computador', '2016-11-05', 'Quitado');
 
 -- --------------------------------------------------------
 
@@ -173,8 +204,11 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`cpf`, `tipo`, `nome`, `email`, `senha`, `cep`, `rua`, `numero`, `bairro`, `cidade`, `estado`, `categoria`, `dataNasc`, `status`) VALUES
-('115.726.956-76', 'Avaliador de Projetos', 'Davi Braga da Cruz', 'davibc19@hotmail.com', '1234', 37505122, 'Rua Belo Horizonte', 69, 'Boa Vista', 'ItajubÃ¡', 'MG', 'CompetiÃ§Ã£o TecnolÃ³gica', '1996-04-19', 'ativo'),
-('418.417.478-74', 'Gestor de Projetos', 'Vitor Pio', 'vitormarquespio@gmail.com', '1234', 37501150, 'Avenida Henriqueto Cardinali', 485, 'Varginha', 'ItajubÃ¡', 'MG', '', '1994-05-28', 'ativo');
+('111.111.111-11', 'Gestor de Projetos', 'Vitor Pio', 'vitor@gmail.com', '1234', 37501150, 'Avenida Henriqueto Cardinali', 485, 'Varginha', 'ItajubÃ¡', 'MG', '', '1994-05-28', 'ativo'),
+('115.726.956-76', 'Gestor de Projetos', 'Davi Braga da Cruz', 'davibc19@hotmail.com', '1234', 37505122, 'Rua Belo Horizonte', 69, 'Boa Vista', 'ItajubÃ¡', 'MG', 'CompetiÃ§Ã£o TecnolÃ³gica', '1996-04-19', 'ativo'),
+('222.222.222-22', 'Financiador Publico', 'Davi Cruz', 'davi@gmail.com', '1234', 37501151, 'Rua JosÃ© Nogueira Leite', 122, 'VarginhaÂ ', 'ItajubÃ¡', 'MG', '', '1993-10-12', ''),
+('333.333.333-33', 'Financiador Academico', 'Pedro Henrique', 'pedro@gmail.com', '1234', 37501152, 'Rua Euclides Miranda', 57, 'Varginha', 'ItajubÃ¡', 'MG', '', '1990-01-01', ''),
+('444.444.444-44', 'Avaliador de Projetos', 'Vagner Marques', 'vagner@gmail.com', '1234', 37501153, 'Avenida Henriqueto Cardinali - de 259/260 a 5', 91, 'VarginhaÂ ', 'ItajubÃ¡', 'MG', 'Pesquisa', '1995-05-28', '');
 
 --
 -- Indexes for dumped tables
@@ -206,12 +240,18 @@ ALTER TABLE `doacoes`
 -- Indexes for table `editalorcamento`
 --
 ALTER TABLE `editalorcamento`
-  ADD PRIMARY KEY (`ano`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `projeto`
 --
 ALTER TABLE `projeto`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `repassefinanceiro`
+--
+ALTER TABLE `repassefinanceiro`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -228,22 +268,32 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT for table `avaliacao`
 --
 ALTER TABLE `avaliacao`
-  MODIFY `idAvaliacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `idAvaliacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `criterios`
 --
 ALTER TABLE `criterios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `doacoes`
 --
 ALTER TABLE `doacoes`
   MODIFY `idDoacao` int(11) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT for table `editalorcamento`
+--
+ALTER TABLE `editalorcamento`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2019;
+--
 -- AUTO_INCREMENT for table `projeto`
 --
 ALTER TABLE `projeto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+--
+-- AUTO_INCREMENT for table `repassefinanceiro`
+--
+ALTER TABLE `repassefinanceiro`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- Constraints for dumped tables
 --
