@@ -307,6 +307,21 @@ function alterarRepasse($id, $valor, $date)
     }
 }
 
+function finalizarProjetoAprovado($id)
+{
+     $res = "UPDATE projeto SET status = 'concluido' WHERE id = '" . $id . "'";
+
+    if (mysql_query($res))
+    {
+        echo "<script> confirm('Projeto Concluido com sucesso!'); "
+        . "window.location='../../pages/projetoCandidato/infoProjetosCandidatos.php';</script>";
+    } else
+    {
+        echo "<script> alert('Erro na conclusão do projeto!'); "
+        . "window.location='../../pages/projetoCandidato/infoProjetosCandidatos.php';</script>";
+    }
+}
+
 /* ----------------------------------------------------------------------
  *                    FUNÇÕES DE CONSULTA
  * ---------------------------------------------------------------------- */
@@ -342,6 +357,11 @@ function consultaCriterioPorCategoria($categoria)
 }
 
 function consultaProjeto($status)
+{
+    RETURN mysql_query("SELECT * FROM projeto WHERE status = '" . $status . "' ORDER BY dataInicio DESC LIMIT 4");
+}
+
+function consultaTodosProjetos($status)
 {
     RETURN mysql_query("SELECT * FROM projeto WHERE status = '" . $status . "'");
 }

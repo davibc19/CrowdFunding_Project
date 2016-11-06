@@ -76,7 +76,10 @@ validateGP_AV();
                                 . "<input type='button' value='Ver Detalhes' class='btn-warning')></a>";
                                 echo "<br/><br/>";
                                 echo "<a href='infoAvaliacao.php'>"
-                                . "<input type='button' value='Ver Avaliação' class='btn-primary' onclick=(" . $_SESSION['id'] = $dados['id'] . ")></a>"
+                                . "<input type='button' value='Ver Avaliação' class='btn-primary' onclick=(" . $_SESSION['id'] = $dados['id'] . ")></a>";
+                                echo "<br/><br/>";
+                                echo "<a href='../projetoAprovado/finalizarProjetoAprovado.php'>"
+                                . "<input type='button' value='Finalizar Projeto' class='btn-danger' onclick=(" . $_SESSION['id'] = $dados['id'] . ")></a>"
                                 . "</td>";
                             }
                             else if($_SESSION['tipoUsr'] == "Gestor de Projetos" && $dados['status'] == 'reprovado')
@@ -88,6 +91,7 @@ validateGP_AV();
                             }
                             else if($_SESSION['tipoUsr'] == "Gestor de Projetos" && $dados['status'] == 'revisar')
                                 echo "<td>Aguardando Revisão</td>";
+                            else echo "<td>Projeto Finalizado</td>";
                             echo "</tr>";
                         }
                     }
