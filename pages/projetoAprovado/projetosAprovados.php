@@ -136,7 +136,7 @@ validateHeader();
                     ?>
 
                     <?php
-                    if ($_SESSION['tipoUsr'] == 'Gestor de Projetos')
+                    if (isset($_SESSION['tipoUsr']) && $_SESSION['tipoUsr'] == 'Gestor de Projetos')
                     {
                         $query = consultaProjetoPorAutor("aprovado", $_SESSION['cpf']);
                         while ($dados = mysql_fetch_array(($query)))

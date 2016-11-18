@@ -9,7 +9,7 @@ $dadosAutor = mysql_fetch_array($queryAutor);
 $queryProjeto = consultaProjetoPorId($_GET['id']);
 $dadosProjeto = mysql_fetch_array($queryProjeto);
 
-if (($dadosProjeto['autor'] == $_SESSION['cpf']))
+if (($dadosProjeto['autor'] != $_SESSION['cpf']))
 {
     echo "<script>alert('Você não pode visualizar este relatório!');"
     . "window.location='projetosAprovados.php';</script>";
@@ -27,10 +27,10 @@ if (($dadosProjeto['autor'] == $_SESSION['cpf']))
             <div class='row' align="center">
                 <div class="row placeholders">
                     <div class="col-xs-6 col-sm-6 placeholder">
-                        <img src="plotFunctions/geradorGrafico.php?id=<?php echo $_GET['id']?>" width="500" height="500" class="img-responsive" alt="Grafico de Valores por Tempo">
+                        <img src="../../functions/plotFunctions/geradorGrafico.php?id=<?php echo $_GET['id']?>" width="500" height="500" class="img-responsive" alt="Grafico de Valores por Tempo">
                     </div>
                     <div class="col-xs-6 col-sm-6 placeholder">
-                        <img src="plotFunctions/geradorGraficoPizza.php?id=<?php echo $_GET['id']?>" width="500" height="500" class="img-responsive" alt="Grafico de Pizza">
+                        <img src="../../functions/plotFunctions/geradorGraficoPizza.php?id=<?php echo $_GET['id']?>" width="500" height="500" class="img-responsive" alt="Grafico de Pizza">
                     </div>
                 </div>
                 <h2 class="sub-header">Usuários Doadores</h2>

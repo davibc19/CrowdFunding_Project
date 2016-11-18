@@ -10,6 +10,7 @@
                 <li><a href="../editalOrcamento/infoEditalOrcamento.php">Edital de Orçamento</a></li> 
                 <li><a href="../cotaFinancimaento/infoCotaFinanciamento.php">Cota de Financiamento</a></li>
                 <li><a href="../projetoCandidato/infoProjetosCandidatos.php">Projetos</a></li>
+                <li><a href="../doacao/infoDoacoes.php">Doações</a></li>
                 <li><a href="../contato/contato.php">Contato</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
