@@ -7,7 +7,8 @@ validateHeader();
 <!-- CRIAÇÃO DA TABELA DINÂMICA -->
 <script>$(document).ready(function ()
     {
-        $('#listarCriterios').DataTable();
+        $('#repasseFinanceiro').DataTable();
+        $('#recompensa').DataTable();
     });
 </script>
 <!-- FIM DA CRIAÇÃO -->
@@ -75,12 +76,12 @@ validateHeader();
                                             . "<label class = 'lbl'><b>DESCRIÇÃO</b></label>"
                                             . "<br/>"
                                             . "<div style = 'text-align: justify;'>" . $dados['descricao'] . "</div>"
-                                            . "<br/><br/>"
+                                            . "<br/><br/><hr/>"
                                             . "<label class = 'lbl'><b>REPASSE FINANCEIRO</b></label>"
                                             . "<br/>"
                                             . "<div class='table-responsive'>";
                                             ?>
-                                            <table id = "listarCriterios" class="table table-striped">
+                                            <table id = "repasseFinanceiro" class="table table-striped">
                                                 <thead>
                                                     <tr style="text-align: center">
                                                         <th>Repasse</th>
@@ -105,7 +106,35 @@ validateHeader();
                                                             . "<td>" . $dadosRepasse['status'] . "</td>"
                                                             . "<td>" . $dadosRepasse['date']. "</td>";
                                                             if(isset($_SESSION["tipoUsr"]) && (strcmp($_SESSION["tipoUsr"], "Gestor de Projetos") == 0) && (strcmp($_SESSION['cpf'], $dados['autor'])) == 0)
-                                                                echo "<td><a href='../repasseFinanceiro/alterarRepasse.php?id=" . $dadosRepasse['id'] . "&idProjeto=".$dadosRepasse['idProjeto']."'><input type='button' class='btn-warning' value ='Alterar'></input></a></td>";   
+                                                                echo "<td><a href='../repasseFinanceiro/alterarRepasse.php?id=" . $dadosRepasse['id'] . "&idProjeto=".$dadosRepasse['idProjeto']."'><input type='button' class='btn-warning' value ='Alterar'></input></a></td>";
+                                                        echo "</tr>";
+                                                    }
+                                                    ?>
+                                                </tbody>
+                                            </table>
+                                            <hr/>
+                                            <label class = 'lbl'><b>RECOMPENSAS</b></label>
+                                            <br/>
+                                            <table id = "recompensa" class="table table-striped">
+                                                <thead>
+                                                    <tr style="text-align: center">
+                                                        <th>Descricao</th>
+                                                        <th>Valor Minimo</th>
+                                                        <th>Valor Máximo</th>
+                                                        <th>Quantidade Total</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php
+                                                    // Aqui entra um LOOP para inserir os valores de repasse financeiro
+                                                    $queryRecompensa = consultaRecompensaPorIdProjeto($_GET['id']);
+                                                    while ($dadosRecompensa = mysql_fetch_array(($queryRecompensa)))
+                                                    {
+                                                        echo "<tr style='text-align: center'>"
+                                                            . "<td> " . $dadosRecompensa['descricao'] . "</td>"
+                                                            . "<td>R$ " . number_format($dadosRecompensa['valMin'], 2, ',', '.') . "</td>"
+                                                            . "<td>R$ " . number_format($dadosRecompensa['valMax'], 2, ',', '.') . "</td>"
+                                                            . "<td> " . $dadosRecompensa['limite'] . "</td>";
                                                         echo "</tr>";
                                                     }
                                                     ?>
@@ -124,13 +153,19 @@ validateHeader();
                                                                 <div style='margin-left:30px;'>
                                                                     <label class='lbl'><h3>Painel Administrativo</h3></label>
                                                                     <br/>
-                                                                    <a href='relatorioDoacoes.php?id=" . $_GET['id'] . "'><input type='button' class='btn-success' value ='Exibir Relatório'></input></a>
+                                                                    <a href='../doacao/relatorioDoacoes.php?id=" . $_GET['id'] . "'><input type='button' class='btn-success' value ='Exibir Relatório'></input></a>
                                                                 </div>
                                                             </div>
                                                             <br/>
                                                             <div style='text-align: center; border-top-width: 100px'>
                                                                 <div style='margin-left:30px;'>
                                                                     <a href='../repasseFinanceiro/cadastrarRepasse.php?id=" . $_GET['id'] . "'><input type='button' class='btn-success' value ='Cadastrar Repasse Financeiro'></input></a>
+                                                                </div>
+                                                            </div>
+                                                            <br/>
+                                                            <div style='text-align: center; border-top-width: 100px'>
+                                                                <div style='margin-left:30px;'>
+                                                                    <a href='cadastrarRecompensa.php?id=" . $_GET['id'] . "'><input type='button' class='btn-success' value ='Cadastrar Recompensa'></input></a>
                                                                 </div>
                                                             </div>
                                                         </td>

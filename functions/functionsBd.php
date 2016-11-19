@@ -105,26 +105,24 @@ function cadastrarProjetoCandidato($categoria, $titulo, $location, $descricao, $
     }
 }
 
-function cadastraDoacao($idProjeto, $idAutor, $valor, $data)
+function cadastraDoacao($idProjeto, $idAutor, $valor, $forma, $data)
 {
 
     $queryAutor = procuraAutor($idAutor);
     $dadoAutor = mysql_fetch_array($queryAutor);
-    $saldoAutor = $dadoAutor['saldo'] - $valor;
 
     $queryProjeto = consultaProjetoPorId($idProjeto);
     $dadoProjeto = mysql_fetch_array($queryProjeto);
     $saldoProjeto = $dadoProjeto['valArrecadado'] + $valor;
 
-    $regDoacao = "INSERT INTO doacoes (idProjeto, idUsr, valor, data)"
-            . " VALUES ('$idProjeto', '$idAutor', '$valor', '$data')";
+    $regDoacao = "INSERT INTO doacoes (idProjeto, idUsr, valor, formaPgto, data)"
+            . " VALUES ('$idProjeto', '$idAutor', '$valor', '$forma', '$data')";
 
-    $atualizaSaldoProjeto = "UPDATE usuario SET saldo = '" . $saldoAutor . "' WHERE cpf = '" . $idAutor . "'";
-    $atualizaSaldoUsr = "UPDATE projeto SET valArrecadado = '" . $saldoProjeto . "' WHERE id = '" . $idProjeto . "'";
+    $atualizaSaldoProjeto = "UPDATE projeto SET valArrecadado = '" . $saldoProjeto . "' WHERE id = '" . $idProjeto . "'";
 
-    if (mysql_query($regDoacao) && (mysql_query($atualizaSaldoProjeto)) && (mysql_query($atualizaSaldoUsr)))
+    if (mysql_query($regDoacao) && (mysql_query($atualizaSaldoProjeto)))
     {
-        echo "<script> alert('Doação realizada com sucesso!'); "
+        echo "<script> confirm('Doação realizada com sucesso!'); "
         . "window.location='../../pages/projetoAprovado/projetosAprovados.php';</script>";
     } else
     {
@@ -164,6 +162,23 @@ function cadastraRepasse($idProjeto, $valor, $necessidade, $data, $status)
     {
         echo "<script> alert('Erro no cadastro do Repasse!'); "
         . "window.location='../../pages/projetoCandidato/infoProjetosCandidatos.php';</script>";
+    }
+}
+
+function cadastrarRecompensa($idProjeto, $descricao, $valMin, $valMax, $limite)
+{
+    $res = "INSERT INTO recompensa (idProjeto, descricao, valMin, valMax, limite)"
+            . " VALUES ('$idProjeto', '$descricao', '$valMin', '$valMax', '$limite')";
+
+
+    if (mysql_query($res))
+    {
+        echo "<script> confirm('Recompensa cadastrada com sucesso!'); "
+        . "window.location='../../pages/projetoAprovado/projetosAprovados.php';</script>";
+    } else
+    {
+        echo "<script> alert('Erro no cadastro da recompensa!'); "
+        . "window.location='../../pages/projetoAprovado/projetosAprovados.php';</script>";
     }
 }
 
@@ -430,6 +445,11 @@ function consultaTodosProjetos($status)
     RETURN mysql_query("SELECT * FROM projeto WHERE status = '" . $status . "'");
 }
 
+function consultaProjetosPorCategoria($categoria)
+{
+    RETURN mysql_query("SELECT * FROM projeto WHERE status = 'aprovado' and categoria = '" . $categoria . "'");
+}
+
 function consultaProjetoPorCategoria($cpf)
 {
     $query = consultaUsuarioPorCPF($cpf);
@@ -445,6 +465,11 @@ function consultaProjetoPorId($id)
 function consultaProjetoPorAutor($autor)
 {
     RETURN mysql_query(("SELECT * FROM projeto WHERE autor = '" . $autor . "'"));
+}
+
+function procuraDoacaoPorCPF($cpf)
+{
+    RETURN mysql_query("SELECT * FROM doacoes WHERE idUsr = '" . $cpf . "'");
 }
 
 function procuraAutor($autor)
@@ -494,6 +519,11 @@ function consultaAvaliacaoPorId($id)
 function consultaRepassePorIdProjeto($idProjeto)
 {
     RETURN mysql_query("SELECT * FROM repassefinanceiro WHERE idProjeto = '$idProjeto'");
+}
+
+function consultaRecompensaPorIdProjeto($idProjeto)
+{
+    RETURN mysql_query("SELECT * FROM recompensa WHERE idProjeto = '$idProjeto'");
 }
 
 function consultaRepassePorId($id)
@@ -595,7 +625,7 @@ function excluirProjetoCandidato($id)
     } else
     {
         echo "<script> alert('Erro na exclusão!'); "
-        . "window.location='../../pages/projetoCandidato/infoProjetosCandidatos.php';</script>";
+        . "window.location='../../pages / projetoCandidato / infoProjetosCandidatos . php';</script>";
     }
 }
 

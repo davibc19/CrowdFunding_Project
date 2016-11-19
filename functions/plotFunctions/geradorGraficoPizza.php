@@ -5,28 +5,28 @@
     // $_GET["id"] -> Permite utilizar o identificador do projeto/doações para plotar o gráfico
     $queryDoacoes = consultaDoacaoPorIdProjeto($_GET['id']);
     
-    $totalAluno = 0;
+    $totalPublico = 0;
     $totalGestorProjeto = 0;
-    $totalTecnico = 0;
+    $totalAcademico = 0;
     
     while($dadosDoacoes = mysql_fetch_array($queryDoacoes))
     {
         $queryAutorDoacao = procuraAutor($dadosDoacoes['idUsr']);
         $dadosAutorDoacao = mysql_fetch_array($queryAutorDoacao);
         
-        if($dadosAutorDoacao['tipo'] == "aluno")
-            $totalAluno += $dadosDoacoes['valor'];
-        if($dadosAutorDoacao['tipo'] == "gestorProjeto")
+        if($dadosAutorDoacao['tipo'] == "Financiador Publico")
+            $totalPublico += $dadosDoacoes['valor'];
+        if($dadosAutorDoacao['tipo'] == "Gestor de Projetos")
             $totalGestorProjeto += $dadosDoacoes['valor'];
-        if($dadosAutorDoacao['tipo'] == "tecnico")
-            $totalTecnico += $dadosDoacoes['valor'];
+        if($dadosAutorDoacao['tipo'] == "Financiador Academico")
+            $totalAcademico += $dadosDoacoes['valor'];
         
     }
     
     $data = array(
-        array('Aluno', $totalAluno),
+        array('Financiador Publico', $totalPublico),
         array('Gestor de Projetos', $totalGestorProjeto),
-        array('Tecnico Administrativo', $totalTecnico)
+        array('Financiador Academico', $totalAcademico)
         );
     $plot = new PHPlot();
     $plot->SetDataType('text-data-single');

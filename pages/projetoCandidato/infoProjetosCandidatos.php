@@ -127,11 +127,14 @@ validateGP_AV();
     if (strcmp($_SESSION["tipoUsr"], "Gestor de Projetos") == 0)
     {
         echo " 
-        <br/><br/>
+        <br/>
         <div style='text-align: center; border-top-width: 100px'>
             <div style='margin-left:30px;'>
-                <!-- Caso exista, o sistema de recompensas será demonstrado aqui -->
+                <label class='lbl'><h3>Painel Administrativo</h3></label>
+                <br/>
                 <a href='cadastrarProjetoCandidato.php'><input type='button' class='btn-primary' value='Cadastrar Novo Projeto Candidato'></a>
+                <br/><br/>
+                <a href='../projetoAprovado/relatorioProjetos.php'><input type='button' class='btn-primary' value='Relatório de Projetos por Categoria'></a>
             </div>
         </div>
     ";

@@ -17,14 +17,11 @@ if ($dadosProjeto['autor'] == $_SESSION['cpf'])
 
 if (isset($_POST['enviar']))
 {
-    if ($_POST['valor'] <= $dadosAutor['saldo'])
-    {
+    
         echo "<script>var option =  confirm('Você deseja doar " . $_POST['valor'] . "?');"
         . "if(option != true)"
         . "window.location='projetosAprovados.php';</script>";
-        cadastraDoacao($_POST['projeto'], $_POST['autor'], $_POST['valor'], $_POST['data']);
-    } else
-        echo "<script>alert('Você não possui esta quantia!');</script>";
+        cadastraDoacao($_POST['projeto'], $_POST['autor'], $_POST['valor'], $_POST['formaPgto'], $_POST['data']);
 }
 ?>
 
@@ -64,6 +61,18 @@ if (isset($_POST['enviar']))
         <div class="form-group">
             <label for="valor">Valor para Doação:</label>
             <input type="text" name="valor" required class="form-control" id="valor" onkeypress="mascara(this, mmoney);">
+        </div>
+        
+        <div class="form-group">
+            <label for="formaPgto">Forma de Pagamento</label>
+            <br/>
+            <select class="selectpicker form-control" id="formaPgto" name="formaPgto">
+                <option value="Boleto Bancário">Boleto Bancário</option>
+                <option value="Cartão de Crédito">Cartão de Crédito</option>
+                <option value="Cartão de Débito">Cartão de Débito</option>
+                <option value="Cheque">Cheque</option>
+                <option value="Transferência Bancária">Transferência Bancária</option>
+            </select>
         </div>
 
         <div class="form-group">
