@@ -445,6 +445,11 @@ function consultaTodosProjetos($status)
     RETURN mysql_query("SELECT * FROM projeto WHERE status = '" . $status . "'");
 }
 
+function consultaProjetosPorCategoria($categoria)
+{
+    RETURN mysql_query("SELECT * FROM projeto WHERE status = 'aprovado' and categoria = '" . $categoria . "'");
+}
+
 function consultaProjetoPorCategoria($cpf)
 {
     $query = consultaUsuarioPorCPF($cpf);
@@ -466,6 +471,7 @@ function procuraDoacaoPorCPF($cpf)
 {
     RETURN mysql_query("SELECT * FROM doacoes WHERE idUsr = '" . $cpf . "'");
 }
+
 function procuraAutor($autor)
 {
     RETURN mysql_query("SELECT * FROM usuario WHERE cpf = '" . $autor . "'");
