@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 06-Nov-2016 às 06:23
+-- Generation Time: 19-Nov-2016 às 03:44
 -- Versão do servidor: 10.1.9-MariaDB
 -- PHP Version: 5.6.15
 
@@ -82,8 +82,16 @@ CREATE TABLE `doacoes` (
   `idProjeto` int(11) NOT NULL,
   `idUsr` varchar(14) NOT NULL,
   `valor` float NOT NULL,
+  `formaPgto` varchar(30) NOT NULL,
   `data` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `doacoes`
+--
+
+INSERT INTO `doacoes` (`idDoacao`, `idProjeto`, `idUsr`, `valor`, `formaPgto`, `data`) VALUES
+(2, 9, '222.222.222-22', 100, 'Boleto BancÃ¡rio', '2016-11-17');
 
 -- --------------------------------------------------------
 
@@ -119,7 +127,8 @@ CREATE TABLE `editalorcamento` (
 --
 
 INSERT INTO `editalorcamento` (`id`, `nome`, `dataPublicacao`, `dataTermino`, `valTotal`, `valMin`, `valMax`, `arquivo`, `cotaAluno`, `cotaProfessor`, `cotaServ`, `qtdAluno`, `qtdProfessor`, `qtdServ`, `valTotalAluno`, `valTotalProfessor`, `valTotalServ`, `valIndAluno`, `valIndProfessor`, `valIndServ`) VALUES
-(2017, 'Cadastro Teste de Edital 2016', '2016-11-06', '2016-12-25', 1000, 10, 100, '', 0.1, 0.5, 0.4, 1, 2, 1, 100, 500, 400, 100, 250, 400);
+(2017, 'Cadastro Teste de Edital 2016', '2016-11-06', '2016-12-25', 1000, 10, 100, '', 0.1, 0.5, 0.4, 1, 2, 1, 100, 500, 400, 100, 250, 400),
+(2018, 'Edital para 2017, primeiro semestre', '2016-11-07', '2016-11-07', 3000, 1500, 0, '', 0.1, 0.5, 0.4, 0, 2, 1, 300, 1500, 1200, 300, 750, 1200);
 
 -- --------------------------------------------------------
 
@@ -150,8 +159,31 @@ CREATE TABLE `projeto` (
 INSERT INTO `projeto` (`id`, `status`, `titulo`, `autor`, `valorTotal`, `duracao`, `dataInicio`, `dataFim`, `descricao`, `categoria`, `valArrecadado`, `resumo`, `imagem`) VALUES
 (2, 'aprovado', 'TituloTeste', '418.417.478-74', 100, 123, '2016-09-16', '0000-00-00', 'rem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi gravida libero nec velit. Morbi scelerisque luctus velit. Etiam dui sem, fermentum vitae, sagittis id, malesuada in, quam. Proin mattis lacinia justo. Vestibulum facilisis auctor urna. Aliquam in lorem sit amet leo accumsan lacinia. Integer rutrum, orci vestibulum ullamcorper ultricies, lacus quam ultricies odio, vitae placerat pede sem sit amet enim. Phasellus et lorem id felis nonummy placerat.rem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi gravida libero nec velit. Morbi scelerisque luctus velit. Etiam dui sem, fermentum vitae, sagittis id, malesuada in, quam. Proin mattis lacinia justo. Vestibulum facilisis auctor urna. Aliquam in lorem sit amet leo accumsan lacinia. Integer rutrum, orci vestibulum ullamcorper ultricies, lacus quam ultricies odio, vitae placerat pede sem sit amet enim. Phasellus et lorem id felis nonummy placerat.rem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi gravida libero nec velit. Morbi scelerisque luctus velit. Etiam dui sem, fermentum vitae, sagittis id, malesuada in, quam. Proin mattis lacinia justo. Vestibulum facilisis auctor urna. Aliquam in lorem sit amet leo accumsan lacinia. Integer rutrum, orci vestibulum ullamcorper ultricies, lacus quam ultricies odio, vitae placerat pede sem sit amet enim. Phasellus et lorem id felis nonummy placerat.', 'Pesquisa', 0, 'rem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi gravida libero nec velit. Morbi scelerisque luctus velit. Etiam dui sem, fermentum vitae, sagittis id, malesuada in, quam. Proin mattis lacinia justo. Vestibulum facilisis auctor urna. Aliquam in lorem sit amet leo accumsan lacinia. Integer rutrum, orci vestibulum ullamcorper ultricies, lacus quam ultricies odio, vitae placerat pede sem sit amet enim. Phasellus et lorem id felis nonummy placerat.', '../../Imagens/img01.jpg'),
 (3, 'aprovado', 'Teste3', '418.417.478-74', 1200.5, 100, '2016-09-16', '2017-02-08', 'rem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi gravida libero nec velit. Morbi scelerisque luctus velit. Etiam dui sem, fermentum vitae, sagittis id, malesuada in, quam. Proin mattis lacinia justo. Vestibulum facilisis auctor urna. Aliquam in lorem sit amet leo accumsan lacinia. Integer rutrum, orci vestibulum ullamcorper ultricies, lacus quam ultricies odio, vitae placerat pede sem sit amet enim. Phasellus et lorem id felis nonummy placerat.rem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi gravida libero nec velit. Morbi scelerisque luctus velit. Etiam dui sem, fermentum vitae, sagittis id, malesuada in, quam. Proin mattis lacinia justo. Vestibulum facilisis auctor urna. Aliquam in lorem sit amet leo accumsan lacinia. Integer rutrum, orci vestibulum ullamcorper ultricies, lacus quam ultricies odio, vitae placerat pede sem sit amet enim. Phasellus et lorem id felis nonummy placerat.', 'Pesquisa', 793, 'rem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi gravida libero nec velit. Morbi scelerisque luctus velit. Etiam dui sem, fermentum vitae, sagittis id, malesuada in, quam. Proin mattis lacinia justo. Vestibulum facilisis auctor urna. Aliquam in lorem sit amet leo accumsan lacinia. Integer rutrum, orci vestibulum ullamcorper ultricies, lacus quam ultricies odio, vitae placerat pede sem sit amet enim. Phasellus et lorem id felis nonummy placerat.', '../../Imagens/img02.jpg'),
-(9, 'aprovado', 'Projeto de CompetiÃ§Ã£o TecnolÃ³gica', '115.726.956-76', 1000, 100, '2016-10-23', '2017-02-07', 'Blablabla Resumo Balbalblblabla Blablabla Resumo Balbalblblabla Blablabla Resumo Balbalblblabla Blablabla Resumo Balbalblblabla Blablabla Resumo Balbalblblabla Blablabla Resumo Balbalblblabla Blablabla Resumo Balbalblblabla Blablabla Resumo Balbalblblabla Blablabla Resumo Balbalblblabla Blablabla Resumo Balbalblblabla Blablabla Resumo Balbalblblabla Blablabla Resumo Balbalblblabla ', 'CompetiÃ§Ã£o TecnolÃ³gica', 0, 'Blablabla Resumo Balbalblblabla Blablabla Resumo Balbalblblabla Blablabla Resumo Balbalblblabla ', '../../Imagens/NoImage.jpg'),
-(19, 'aprovado', 'Projeto 1', '111.111.111-11', 120, 200, '2016-10-31', '2017-05-19', 'Meu primeiro projeto', 'Pesquisa', 0, 'Meu primeiro projeto', '../../Imagens/NoImage.jpg');
+(9, 'aprovado', 'Projeto de CompetiÃ§Ã£o TecnolÃ³gica', '115.726.956-76', 1000, 100, '2016-10-23', '2017-02-07', 'Blablabla Resumo Balbalblblabla Blablabla Resumo Balbalblblabla Blablabla Resumo Balbalblblabla Blablabla Resumo Balbalblblabla Blablabla Resumo Balbalblblabla Blablabla Resumo Balbalblblabla Blablabla Resumo Balbalblblabla Blablabla Resumo Balbalblblabla Blablabla Resumo Balbalblblabla Blablabla Resumo Balbalblblabla Blablabla Resumo Balbalblblabla Blablabla Resumo Balbalblblabla ', 'CompetiÃ§Ã£o TecnolÃ³gica', 100, 'Blablabla Resumo Balbalblblabla Blablabla Resumo Balbalblblabla Blablabla Resumo Balbalblblabla ', '../../Imagens/NoImage.jpg'),
+(19, 'concluido', 'Projeto 1', '111.111.111-11', 120, 200, '2016-10-31', '2017-05-19', 'Meu primeiro projeto', 'Pesquisa', 0, 'Meu primeiro projeto', '../../Imagens/NoImage.jpg'),
+(20, 'candidato', 'aa', '111.111.111-11', 22.11, 44, '2016-11-07', '0000-00-00', '444444', 'Pesquisa', 0, '4444', '../../Imagens/NoImage.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `recompensa`
+--
+
+CREATE TABLE `recompensa` (
+  `id` int(11) NOT NULL,
+  `idProjeto` int(11) NOT NULL,
+  `descricao` text COLLATE utf8_unicode_ci NOT NULL,
+  `valMin` float NOT NULL,
+  `valMax` float NOT NULL,
+  `limite` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Extraindo dados da tabela `recompensa`
+--
+
+INSERT INTO `recompensa` (`id`, `idProjeto`, `descricao`, `valMin`, `valMax`, `limite`) VALUES
+(1, 9, 'Recompensa GenÃ©rica de Teste', 50, 100, 100);
 
 -- --------------------------------------------------------
 
@@ -249,6 +281,13 @@ ALTER TABLE `projeto`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `recompensa`
+--
+ALTER TABLE `recompensa`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idProjeto` (`idProjeto`);
+
+--
 -- Indexes for table `repassefinanceiro`
 --
 ALTER TABLE `repassefinanceiro`
@@ -278,7 +317,7 @@ ALTER TABLE `criterios`
 -- AUTO_INCREMENT for table `doacoes`
 --
 ALTER TABLE `doacoes`
-  MODIFY `idDoacao` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idDoacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `editalorcamento`
 --
@@ -288,7 +327,12 @@ ALTER TABLE `editalorcamento`
 -- AUTO_INCREMENT for table `projeto`
 --
 ALTER TABLE `projeto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+--
+-- AUTO_INCREMENT for table `recompensa`
+--
+ALTER TABLE `recompensa`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `repassefinanceiro`
 --
@@ -303,6 +347,12 @@ ALTER TABLE `repassefinanceiro`
 --
 ALTER TABLE `avaliacao`
   ADD CONSTRAINT `avaliacao_ibfk_1` FOREIGN KEY (`idProjeto`) REFERENCES `projeto` (`id`);
+
+--
+-- Limitadores para a tabela `recompensa`
+--
+ALTER TABLE `recompensa`
+  ADD CONSTRAINT `recompensa_ibfk_1` FOREIGN KEY (`idProjeto`) REFERENCES `projeto` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
