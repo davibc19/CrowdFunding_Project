@@ -37,8 +37,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>css=td</td>
+	<td>verifyElementNotPresent</td>
+	<td>css=td.dataTables_empty</td>
 	<td></td>
 </tr>
 </tbody></table>

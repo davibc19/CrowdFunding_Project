@@ -37,11 +37,10 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTable</td>
-	<td>id=listarEditalOrcamento.1.1</td>
-	<td>Edital para 2017, primeiro semestre</td>
+	<td>verifyElementNotPresent</td>
+	<td>css=td.dataTables_empty</td>
+	<td></td>
 </tr>
-
 </tbody></table>
 </body>
 </html>
