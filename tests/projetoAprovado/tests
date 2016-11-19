@@ -10,6 +10,7 @@
 <tr><td><b>Test Suite</b></td></tr>
 <tr><td><a href="consultarProjetoAprovado">consultarProjetoAprovado</a></td></tr>
 <tr><td><a href="finalizarProjetoAprovado">finalizarProjetoAprovado</a></td></tr>
+<tr><td><a href="financiarProjetoAprovado">financiarProjetoAprovado</a></td></tr>
 </tbody></table>
 </body>
 </html>
