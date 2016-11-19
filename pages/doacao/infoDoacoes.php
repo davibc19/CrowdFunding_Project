@@ -11,7 +11,7 @@ $queryDoacao = procuraDoacaoPorCPF($_SESSION['cpf']);
 <section id="infoEditalOrcamento" class="container">
     <div class="container">
 
-        <h2 class="sub-header">Editais de Orçamento</h2>
+        <h2 class="sub-header">Doações Realizadas</h2>
         <div class="table-responsive">
 
             <!-- CRIAÇÃO DA TABELA DINÂMICA -->
